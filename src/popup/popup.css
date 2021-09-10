@@ -1,0 +1,73 @@
+@media (prefers-color-scheme: dark) {
+    .Reedable {
+        color: #dddddd;
+        background-color: #333333;
+    }
+
+    .Reedable .Field input[type="text"],
+    .Reedable .Field input[type="number"],
+    .Reedable .Field textarea {
+        color: #dddddd;
+        background-color: #555555;
+        border: 0;
+        box-shadow: 0 0 0 0.0625rem #aaaaaa;
+        border-radius: 0.125rem;
+    }
+}
+
+.Reedable * {
+    /*outline: 1px solid cyan;*/
+}
+
+.Reedable {
+    margin: 0;
+    width: 18em;
+}
+
+.Reedable main {
+    margin: 1em;
+}
+
+.Reedable h1,
+.Reedable [role=heading][aria-level="1"] {
+    margin: 0;
+    font-weight: 700;
+    font-size: 200%;
+}
+
+.Reedable h2,
+.Reedable [role=heading][aria-level="2"] {
+    margin: 1em 0 0 0;
+    font-weight: 700;
+    font-size: 150%;
+}
+
+.Reedable form {
+    width: 100%;
+}
+
+.Reedable .Checkbox {
+    display: flex;
+    align-items: baseline;
+}
+
+.Reedable .Checkbox input[type=checkbox] + label {
+    padding-left: 0.25em;
+}
+
+.Reedable form .Field {
+    margin: 1em 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.Reedable form .Field label {
+    display: block;
+    margin: 0 0 0.5em 0;
+}
+
+.Reedable form .Field input[type=text],
+.Reedable form .Field input[type=number] {
+    width: inherit;
+}

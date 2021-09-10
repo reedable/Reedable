@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Index | Reedable</title>
+    <link type="text/css" rel="stylesheet" href="popup.css">
+    <script src="popup.js"></script>
+    <script src="FocusIndicator.js"></script>
+    <script src="FontOverride.js"></script>
+    <script src="TextSpacing.js"></script>
+</head>
+<body class="Reedable">
+<main>
+    <h1>Reedable</h1>
+
+    <div class="Checkbox">
+        <input id="TextSpacing-isEnabled" type="checkbox">
+        <label for="TextSpacing-isEnabled" role="heading" aria-level="2">Text Spacing</label>
+    </div>
+
+    <form>
+        <div class="Field">
+            <label for="TextSpacing-lineHeight">Line height</label>
+            <input id="TextSpacing-lineHeight" type="text">
+        </div>
+        <div class="Field">
+            <label for="TextSpacing-letterSpacing">Letter spacing</label>
+            <input id="TextSpacing-letterSpacing" type="text">
+        </div>
+        <div class="Field">
+            <label for="TextSpacing-wordSpacing">Word spacing</label>
+            <input id="TextSpacing-wordSpacing" type="text">
+        </div>
+    </form>
+
+    <div class="Checkbox">
+        <input id="FontOverride-isEnabled" type="checkbox">
+        <label for="FontOverride-isEnabled" role="heading" aria-level="2">Font override</label>
+    </div>
+
+    <form>
+        <div class="Field">
+            <label for="FontOverride-fontSizeMin">Minimum font size</label>
+            <input id="FontOverride-fontSizeMin" type="text">
+        </div>
+        <div class="Field">
+            <label for="FontOverride-fontSizeMag">% Font magnification</label>
+            <input id="FontOverride-fontSizeMag" type="number">
+        </div>
+        <div class="Field">
+            <label for="FontOverride-fontFamily">Font family</label>
+            <select id="FontOverride-fontFamily">
+                <option value="">Page default</option>
+                <option value="OpenDyslexic Regular">OpenDyslexic Regular</option>
+            </select>
+        </div>
+    </form>
+
+    <div class="Checkbox">
+        <input id="FocusIndicator-isEnabled" type="checkbox">
+        <label for="FocusIndicator-isEnabled" role="heading" aria-level="2">Focus Indicator</label>
+    </div>
+
+    <form>
+        <div class="Field">
+            <label for="FocusIndicator-boxShadow">Box shadow</label>
+            <textarea id="FocusIndicator-boxShadow" rows="2"></textarea>
+        </div>
+        <div class="Field">
+            <label for="FocusIndicator-borderRadius">Border radius</label>
+            <input id="FocusIndicator-borderRadius" type="text">
+        </div>
+        <div class="Field">
+            <label for="FocusIndicator-transition">Transition</label>
+            <input id="FocusIndicator-transition" type="text">
+        </div>
+    </form>
+
+</main>
+</body>
+</html>

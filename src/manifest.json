@@ -1,0 +1,49 @@
+{
+  "name": "Reedable",
+  "description": "Make the web more readable.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "/popup/popup.html",
+    "default_icon": {
+    }
+  },
+  "icons": {
+  },
+  "options_page": "/options/options.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "/content/DOM.js",
+        "/content/FocusIndicator.js",
+        "/content/FontOverride.js",
+        "/content/TextSpacing.js",
+        "/content/main.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/font/OpenDyslexic-Regular.otf"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
