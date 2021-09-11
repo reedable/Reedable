@@ -82,20 +82,20 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
             const computedFontSize = computedStyle.fontSize || "";
 
             function getFontSize() {
-                const targetFontSizePx =
+                const fontSizeTargetPx =
                     parseFloat(computedFontSize) *
-                    Number(FontOverride.fontSizeMag) / 100;
+                    (Number(FontOverride.fontSizeMag) / 100);
 
                 const fontSizeMinPx =
                     Reedable.DOM.parseSize(
                         FontOverride.fontSizeMin,
                         computedStyle);
 
-                if (targetFontSizePx < fontSizeMinPx) {
+                if (fontSizeTargetPx < fontSizeMinPx) {
                     return [fontSizeMinPx, "px"].join("");
                 }
 
-                return [targetFontSizePx, "px"].join("");
+                return [fontSizeTargetPx, "px"].join("");
             }
 
             function getFontFamily() {

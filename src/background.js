@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
         },
         "FontOverride": {
             "isEnabled": true,
-            "fontSizeMin": "12pt",
+            "fontSizeMin": "10pt",
             "fontSizeMag": "100",
             "fontFamily": "",
         },

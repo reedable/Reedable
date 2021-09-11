@@ -1,73 +1,104 @@
 @media (prefers-color-scheme: dark) {
-    .Reedable {
-        color: #dddddd;
-        background-color: #333333;
-    }
-
-    .Reedable .Field input[type="text"],
-    .Reedable .Field input[type="number"],
-    .Reedable .Field textarea {
-        color: #dddddd;
-        background-color: #555555;
-        border: 0;
-        box-shadow: 0 0 0 0.0625rem #aaaaaa;
-        border-radius: 0.125rem;
-    }
+  .Reedable {
+    color: #dddddd;
+    background-color: #333333;
+  }
+  .Reedable .AccordionGroup .Accordion button {
+    color: #dddddd;
+  }
+  .Reedable .Field input[type="text"],
+  .Reedable .Field input[type=number],
+  .Reedable .Field textarea {
+    color: #dddddd;
+    background-color: #555555;
+    border: 0;
+    box-shadow: 0 0 0 0.0625rem #aaaaaa;
+    border-radius: 0.125rem;
+  }
 }
-
-.Reedable * {
-    /*outline: 1px solid cyan;*/
+html {
+  font-size: 12px;
 }
-
 .Reedable {
-    margin: 0;
-    width: 18em;
+  font-size: 1rem;
+  margin: 0;
+  width: 18em;
 }
-
 .Reedable main {
-    margin: 1em;
+  margin: 1em;
 }
-
 .Reedable h1,
 .Reedable [role=heading][aria-level="1"] {
-    margin: 0;
-    font-weight: 700;
-    font-size: 200%;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5em 0;
 }
-
 .Reedable h2,
 .Reedable [role=heading][aria-level="2"] {
-    margin: 1em 0 0 0;
-    font-weight: 700;
-    font-size: 150%;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.5em 0;
 }
-
-.Reedable form {
-    width: 100%;
+.Reedable h3,
+.Reedable [role=heading][aria-level="3"] {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0.5em 0;
 }
-
-.Reedable .Checkbox {
-    display: flex;
-    align-items: baseline;
+.Reedable h4,
+.Reedable [role=heading][aria-level="4"] {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.5em 0;
 }
-
-.Reedable .Checkbox input[type=checkbox] + label {
-    padding-left: 0.25em;
+.Reedable fieldset {
+  border: 0;
+  margin: 0;
 }
-
-.Reedable form .Field {
-    margin: 1em 0;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+.Reedable .AccordionGroup {
+  border-radius: 0.3rem;
+  box-shadow: 0 0 0 0.15rem #dddddd;
 }
-
-.Reedable form .Field label {
-    display: block;
-    margin: 0 0 0.5em 0;
+.Reedable .AccordionGroup .Accordion {
+  border-bottom: 0.0625rem solid #dddddd;
 }
-
-.Reedable form .Field input[type=text],
-.Reedable form .Field input[type=number] {
-    width: inherit;
+.Reedable .AccordionGroup .Accordion:last-child {
+  border-bottom: 0;
 }
+.Reedable .AccordionGroup .Accordion > [role=heading] {
+  align-items: baseline;
+  display: flex;
+  margin: 0;
+  padding: 0.5rem;
+}
+.Reedable .AccordionGroup .Accordion > [role=heading] input[type=checkbox] {
+  margin: 0 0.5em 0 0;
+}
+.Reedable .AccordionGroup .Accordion > [role=heading] button {
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  font-size: inherit;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+.Reedable .Field {
+  margin: 1em 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.Reedable .Field label {
+  display: block;
+  margin: 0 0 0.5em 0;
+}
+.Reedable .Field input[type=text],
+.Reedable .Field input[type=number] {
+  width: inherit;
+}
+/*# sourceMappingURL=popup.css.map */

@@ -1,0 +1,130 @@
+@border-gray: #dddddd;
+
+@media (prefers-color-scheme: dark) {
+
+  .Reedable {
+    color: #dddddd;
+    background-color: #333333;
+
+    .AccordionGroup {
+
+      .Accordion {
+        button {
+          color: #dddddd;
+        }
+      }
+    }
+
+    .Field {
+
+      input[type="text"], input[type=number], textarea {
+        color: #dddddd;
+        background-color: #555555;
+        border: 0;
+        box-shadow: 0 0 0 0.0625rem #aaaaaa;
+        border-radius: 0.125rem;
+      }
+    }
+  }
+}
+
+html {
+  font-size: 12px;
+}
+
+.Reedable {
+  font-size: 1rem;
+  margin: 0;
+  width: 18em;
+
+  main {
+    margin: 1em;
+  }
+
+  h1, [role=heading][aria-level="1"] {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.5em 0;
+  }
+
+  h2, [role=heading][aria-level="2"] {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0.5em 0;
+  }
+
+  h3, [role=heading][aria-level="3"] {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0.5em 0;
+  }
+
+  h4, [role=heading][aria-level="4"] {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0.5em 0;
+  }
+
+  fieldset {
+    border: 0;
+    margin: 0;
+  }
+
+  .AccordionGroup {
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0 0.15rem @border-gray;
+
+    .Accordion {
+      border-bottom: 0.0625rem solid @border-gray;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      & > [role=heading] {
+        align-items: baseline;
+        display: flex;
+        margin: 0;
+        padding: 0.5rem;
+
+        input[type=checkbox] {
+          margin: 0 0.5em 0 0;
+        }
+
+        button {
+          border: none;
+          background: inherit;
+          cursor: pointer;
+          display: flex;
+          font-family: inherit;
+          font-size: inherit;
+          justify-content: space-between;
+          margin: 0;
+          padding: 0;
+          text-align: left;
+          width: 100%;
+        }
+      }
+
+      & > [role=region] {
+      }
+    }
+  }
+
+  .Field {
+    margin: 1em 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+    label {
+      display: block;
+      margin: 0 0 0.5em 0;
+
+    }
+
+    input[type=text], input[type=number] {
+      width: inherit;
+    }
+  }
+}

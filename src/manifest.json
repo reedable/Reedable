@@ -15,9 +15,15 @@
   "action": {
     "default_popup": "/popup/popup.html",
     "default_icon": {
+      "16": "/images/Reedable-256.png",
+      "48": "/images/Reedable-256.png",
+      "128": "/images/Reedable-256.png"
     }
   },
   "icons": {
+    "16": "/images/Reedable-256.png",
+    "48": "/images/Reedable-256.png",
+    "128": "/images/Reedable-256.png"
   },
   "options_page": "/options/options.html",
   "content_scripts": [
