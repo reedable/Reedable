@@ -43,6 +43,9 @@ window.Reedable.AccordionGroup = window.Reedable.AccordionGroup || (function () 
         }
 
         expand(headerNode) {
+            if (this.opts.isSinglePanel) {
+                this.collapseAll();
+            }
             const panelNode = this.getPanel(headerNode);
             headerNode.setAttribute("aria-expanded", "true");
             panelNode.removeAttribute("hidden");
@@ -66,9 +69,14 @@ window.Reedable.AccordionGroup = window.Reedable.AccordionGroup || (function () 
 
         expandAll() {
             const headerNodeList = this.getHeaders();
-            headerNodeList.forEach(headerNode => {
-                this.expand(headerNode);
-            });
+
+            if (this.opts.isSinglePanel) {
+                this.expand(headerNodeList[0]);
+            } else {
+                headerNodeList.forEach(headerNode => {
+                    this.expand(headerNode);
+                });
+            }
         }
     }
 

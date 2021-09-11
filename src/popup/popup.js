@@ -109,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const accordionGroupNodeList = document.querySelectorAll(".AccordionGroup");
 
     accordionGroupNodeList.forEach(accordionGroupNode => {
-        new Reedable.AccordionGroup(accordionGroupNode);
+        new Reedable.AccordionGroup(accordionGroupNode, {
+            "isSinglePanel": true
+        });
     });
 });
