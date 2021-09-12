@@ -1,42 +1,59 @@
 Reedable Chrome Extension
 =========================
 
-Image icon idea
+- TODO 'splain stuff
 
-    ReeD
-    aBLe
-    
-    - Dark backgground, light text
-    - R and D offset lower to form rectangle
-    - Enclosed in a square with round corner
-        - with a cirlce variant
-        
-- TODO Fontawesome license statement
 
+License and stuff...
+--------------------
+
+Reedable Chrome Extension is a Free and Open Source Software, and its license
+is provided in the accompanying LICENSE file.
+
+Reedable Chrome Extension depends on the following third-party library, which
+may come under their own licenses. Reedable Chrome Extension's licensing terms
+and agreements do not override those of the third-party library licenses.
+
+- TODO Fontawesome link and license
+- TODO https://fontawesome.com/v4.7/license/
+
+- TODO OpenDyslexic link and license
 - TODO https://github.com/antijingoist/web-accessibility
-- TODO https://www.booyagadget.com/2011/05/how-to-package-your-google-chrome-extensions-and-install.html
 
-- TODO Figure out how to manage multiple windows
-- TODO Figure out how to manage tab switches.
 
-- TODO Add description to README.md
+Getting started
+---------------
+
 - TODO Add installation instruction to README.md
-- TODO Add how-to document to README.md
+- TODO Briefly explain the popup and the checkboxes
+
+
+Repository
+----------
+
 - TODO Add repository information
-- TODO Add contribution policy and licence
+- TODO Add contribution policy (Including bug reports)
 - TODO Add author information
 
-- TODO Find out how to package and publish Chrome Extension
+
+Stuff we're going to do
+-----------------------
+
+- TODO Figure out how to package and publish Chrome Extension https://www.booyagadget.com/2011/05/how-to-package-your-google-chrome-extensions-and-install.html
+- TODO Figure out how to manage multiple windows
+- TODO Figure out how to manage tab switches.
+- TODO Figure out how to traverse IFRAME content.
 
 - TODO Make the popup pretty and accessible.
-- TODO Add preview panel on the popup HTML?
-- TODO Add error handling to popup form input.
+- TODO Decide whether preview panel should be added to the popup HTML?
+- TODO Decide whether to add error handling to popup form input.
 
-- TODO Figure out how to traverse IFRAME content.
 - TODO Add web component samples in sample/index.html
-- TODO OpenDyslexic font licensing; Can it be distributed with this package?
-- TODO Underline all link text
-- TODO Minimum text color contrast
-- TODO Add color inversion
-- TODO Consider adding Outliner (injects TOC panel with landmarks/header links).
 
+- TODO Add an option to underline all link text
+- TODO Consider adding minimum text color contrast feature
+- TODO Consider adding color inversion feature
+
+- TODO Add how-to document to the repository?
+
+- TODO Consider building a separate Outliner (injects TOC panel with landmarks/header links).
