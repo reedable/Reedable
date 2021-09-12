@@ -90,3 +90,7 @@ website content, and governed by the following license.
 ### Other
 
 - TODO Consider building a separate Outliner (injects TOC panel with landmarks/header links).
+
+## Useful links
+
+- https://chrome.google.com/webstore/devconsole
