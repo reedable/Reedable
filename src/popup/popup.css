@@ -57,10 +57,10 @@ html {
 }
 .Reedable .AccordionGroup {
   border-radius: 0.3rem;
-  box-shadow: 0 0 0 0.15rem #dddddd;
+  box-shadow: 0 0 0 0.15rem #888888;
 }
 .Reedable .AccordionGroup .Accordion {
-  border-bottom: 0.0625rem solid #dddddd;
+  border-bottom: 0.0625rem solid #888888;
 }
 .Reedable .AccordionGroup .Accordion:last-child {
   border-bottom: 0;
