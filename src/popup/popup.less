@@ -92,6 +92,7 @@ html {
         }
 
         button {
+          align-items: baseline;
           border: none;
           background: inherit;
           cursor: pointer;
@@ -103,6 +104,18 @@ html {
           padding: 0;
           text-align: left;
           width: 100%;
+
+          &[aria-expanded=true] {
+            .Accordion-icon-expand {
+              display: none;
+            }
+          }
+
+          &[aria-expanded=false] {
+            .Accordion-icon-collapse {
+              display: none;
+            }
+          }
         }
       }
 

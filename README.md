@@ -10,6 +10,8 @@ Image icon idea
     - R and D offset lower to form rectangle
     - Enclosed in a square with round corner
         - with a cirlce variant
+        
+- TODO Fontawesome license statement
 
 - TODO https://github.com/antijingoist/web-accessibility
 - TODO https://www.booyagadget.com/2011/05/how-to-package-your-google-chrome-extensions-and-install.html

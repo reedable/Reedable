@@ -75,6 +75,7 @@ html {
   margin: 0 0.5em 0 0;
 }
 .Reedable .AccordionGroup .Accordion > [role=heading] button {
+  align-items: baseline;
   border: none;
   background: inherit;
   cursor: pointer;
@@ -86,6 +87,12 @@ html {
   padding: 0;
   text-align: left;
   width: 100%;
+}
+.Reedable .AccordionGroup .Accordion > [role=heading] button[aria-expanded=true] .Accordion-icon-expand {
+  display: none;
+}
+.Reedable .AccordionGroup .Accordion > [role=heading] button[aria-expanded=false] .Accordion-icon-collapse {
+  display: none;
 }
 .Reedable .Field {
   margin: 1em 0;

@@ -3,6 +3,7 @@
 <head>
     <title>Index | Reedable</title>
     <link type="text/css" rel="stylesheet" href="popup.css">
+    <link type="text/css" rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.css">
     <script src="popup.js"></script>
     <script src="AccordionGroup.js"></script>
     <script src="FocusIndicator.js"></script>
@@ -20,7 +21,8 @@
                 <input id="FontOverride-isEnabled" type="checkbox" aria-labelledby="FontOverride-heading">
                 <button id="FontOverride-heading" aria-expanded="false" aria-controls="FontOverride-panel">
                     <span>Font override</span>
-                    <span class="Accordion-icon">+</span>
+                    <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
+                    <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
                 </button>
             </div>
             <div id="FontOverride-panel" role="region" aria-labelledby="FontOverride-heading">
@@ -49,7 +51,8 @@
                 <input id="TextSpacing-isEnabled" type="checkbox" aria-labelledby="TextSpacing-heading">
                 <button id="TextSpacing-heading" aria-expanded="false" aria-controls="TextSpacing-panel">
                     <span>Text spacing</span>
-                    <span class="Accordion-icon">+</span>
+                    <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
+                    <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
                 </button>
             </div>
             <div id="TextSpacing-panel" role="region" aria-labelledby="TextSpacing-heading">
@@ -75,7 +78,8 @@
                 <input id="FocusIndicator-isEnabled" type="checkbox" aria-labelledby="FocusIndicator-heading">
                 <button id="FocusIndicator-heading" aria-expanded="false" aria-controls="FocusIndicator-panel">
                     <span>Focus indicator</span>
-                    <span class="Accordion-icon">+</span>
+                    <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
+                    <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
                 </button>
             </div>
             <div id="FocusIndicator-panel" role="region" aria-labelledby="FocusIndicator-heading">
