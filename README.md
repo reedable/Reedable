@@ -1,15 +1,14 @@
 # Reedable Chrome Extension
 
-We declare war against the self-centered, self-absorbed, self-whatever
-web designers, and take back the world wide web for the rest of us.
+We declare a thumb war against the self-centered, self-absorbed, 
+self-grrrrr-whatever web designers, and take back the world wide web for the
+rest of us.
 
-Tiny fonts, tightly positioned text, elegant typeface that is impossible
-to see and read... If you have experienced any of these things, we are
-here to help.
+Tiny fonts, tightly positioned text, elegant typeface that is impossible to see
+and read... If you have experienced any of these things, we are here to help.
 
-Override the typeface. Tweak that text space. (Oh, I just rhymed.)
-Reedable Chrome Extension provides the reader (that's you) the freedom
-to choose.
+Override the typeface. Tweak that text space. (Oh, I just rhymed.) Reedable
+Chrome Extension provides the reader (that's you) the freedom to choose.
 
 
 ## Boring stuff...
@@ -39,17 +38,9 @@ website content, and governed by the following license.
 - https://opendyslexic.org/license
 
 
-## Getting started
+## Documentation
 
-- TODO Add installation instruction to README.md
-- TODO Briefly explain the popup and the checkboxes
-
-
-## Contribution
-
-- TODO Add repository information
-- TODO Add contribution policy (Including bug reports)
-- TODO Add author information
+https://reedable.github.io/Reedable/
 
 
 ## Stuff we're going to do
@@ -82,10 +73,6 @@ website content, and governed by the following license.
 
 - TODO Add unit tests
 - TODO Add web component samples in sample/index.html
-
-### Documentation
-
-- TODO Add how-to document to the repository?
 
 ### Other
 

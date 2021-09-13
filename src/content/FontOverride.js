@@ -98,12 +98,15 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
                 return [fontSizeTargetPx, "px"].join("");
             }
 
+            // FIXME This should return a list. https://www.w3schools.com/cssref/pr_font_font-family.asp
             function getFontFamily() {
                 const computedFontFamily = computedStyle.fontFamily;
 
                 if (computedFontFamily !== FontOverride.fontFamily) {
                     return FontOverride.fontFamily;
                 }
+
+                return "";
             }
 
             node.dataset.reedableFontSize = fontSize;

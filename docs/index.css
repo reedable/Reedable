@@ -1,12 +1,41 @@
 .Reedable {
-  margin: 0 1.5em;
+  margin: 1.5em;
+}
+.Reedable p {
+  line-height: 1.25;
 }
 .Reedable footer {
   font-size: 0.75rem;
   margin-bottom: 6rem;
 }
+.Reedable dt {
+  font-weight: 700;
+}
+.Reedable .Banner {
+  display: flex;
+  align-items: center;
+}
+.Reedable .Banner h1 {
+  margin: 0 0 0 1em;
+}
 .Reedable .PictureFrame {
   box-shadow: 0 .1875rem .625rem black;
   border-radius: .25rem;
+}
+.Reedable .QuestionAndAnswer dt {
+  margin-top: 0.75em;
+}
+.Reedable .QuestionAndAnswer dt:before {
+  content: "Q: ";
+}
+.Reedable .QuestionAndAnswer dd {
+  margin-top: 0.25em;
+  font-style: italic;
+}
+.Reedable .QuestionAndAnswer dd:before {
+  content: "A: ";
+}
+.Reedable .CryptoCurrencyAddress {
+  font-family: Courier;
 }
 /*# sourceMappingURL=index.css.map */
