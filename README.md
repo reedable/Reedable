@@ -1,11 +1,11 @@
 # Reedable Chrome Extension
 
-We declare war against the micro-managing, self-centered, controlling web
-designers, and take back the world wide web for the rest of us.
+We declare war against the self-centered, self-absorbed, self-whatever
+web designers, and take back the world wide web for the rest of us.
 
-Tiny fonts, tightly positioned text, elegant typeface that is impossible to
-see and read... If you have experienced any of these things, we are here
-to help.
+Tiny fonts, tightly positioned text, elegant typeface that is impossible
+to see and read... If you have experienced any of these things, we are
+here to help.
 
 Override the typeface. Tweak that text space. (Oh, I just rhymed.)
 Reedable Chrome Extension provides the reader (that's you) the freedom
@@ -90,3 +90,8 @@ website content, and governed by the following license.
 ### Other
 
 - TODO Consider building a separate Outliner (injects TOC panel with landmarks/header links).
+
+## Links
+
+- https://reedable.github.io/Reedable/
+- https://github.com/reedable/Reedable

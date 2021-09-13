@@ -1,0 +1,12 @@
+.Reedable {
+  margin: 0 1.5em;
+}
+.Reedable footer {
+  font-size: 0.75rem;
+  margin-bottom: 6rem;
+}
+.Reedable .PictureFrame {
+  box-shadow: 0 .1875rem .625rem black;
+  border-radius: .25rem;
+}
+/*# sourceMappingURL=index.css.map */
