@@ -4,8 +4,8 @@ We declare a thumb war against the self-centered, self-absorbed,
 self-grrrrr-whatever web designers, and take back the world wide web for the
 rest of us.
 
-Tiny fonts, tightly positioned text, elegant typeface that is impossible to see
-and read... If you have experienced any of these things, we are here to help.
+Tiny fonts, tightly positioned text, elegant typeface that no one can see and
+read... If you have experienced any of these things, we are here to help.
 
 Override the typeface. Tweak that text space. (Oh, I just rhymed.) Reedable
 Chrome Extension provides the reader (that's you) the freedom to choose.
