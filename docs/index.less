@@ -1,55 +1,98 @@
-.Reedable {
-  margin: 1.5em;
+@xs: 320px;
+@sm: 640px;
+@md: 960px;
+@lg: 1280px;
 
-  p {
-    line-height: 1.25;
-  }
+html.Reedable {
+  font-size: 16px;
+  line-height: 1.5;
 
-  footer {
-    font-size: 0.75rem;
-    margin-bottom: 6rem;
-  }
+  body {
+    margin: 0;
 
-  dt {
-    font-weight: 700;
-  }
-
-  .Banner {
-    display: flex;
-    align-items: center;
-
-    h1 {
-      margin: 0 0 0 1em;
+    footer {
+      font-size: 0.75rem;
+      margin-bottom: 6rem;
     }
-  }
 
-  .PictureFrame {
+    p {
+      margin-block-start: 1.5em;
+      margin-block-end: 1.5em;
+    }
 
-    box-shadow: 0 .1875rem .625rem black;
-    border-radius: .25rem;
-  }
+    dl {
 
-  .QuestionAndAnswer {
-
-    dt {
-      margin-top: 0.75em;
-
-      &:before {
-        content: "Q: ";
+      dt {
+        font-weight: 700;
       }
     }
 
-    dd {
-      margin-top: 0.25em;
-      font-style: italic;
+    ol {
 
-      &:before {
-        content: "A: ";
+      @media only screen and (max-width: @sm) {
+        padding-left: 1.75em;
       }
     }
-  }
 
-  .CryptoCurrencyAddress {
-    font-family: Courier;
+    img {
+      max-width: 100%;
+      object-fit: cover;
+    }
+
+    .Banner {
+      display: flex;
+      align-items: center;
+
+      h1 {
+        margin: 0 0 0 .5em;
+
+        @media only screen and (max-width: @sm) {
+          font-size: 1.5rem;
+          line-height: 1.25em;
+          max-width: 8em;
+        }
+      }
+    }
+
+    .Content {
+      margin: 1.5rem;
+
+      @media only screen and (max-width: @sm) {
+        margin: 1.5rem .75rem;
+      }
+    }
+
+    .PictureFrame {
+      box-shadow: 0 .1875rem .625rem black;
+      border-radius: .25rem;
+    }
+
+    .QuestionAndAnswer {
+
+      dt {
+        margin-top: 0.75em;
+
+        &:before {
+          content: "Q: ";
+        }
+      }
+
+      dd {
+        margin-top: 0.25em;
+        font-style: italic;
+
+        @media only screen and (max-width: @sm) {
+          margin-left: 0;
+        }
+
+        &:before {
+          content: "A: ";
+        }
+      }
+    }
+
+    .CryptoCurrencyAddress {
+      font-family: Courier, monospace;
+    }
   }
 }

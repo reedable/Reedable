@@ -1,41 +1,75 @@
-.Reedable {
-  margin: 1.5em;
+html.Reedable {
+  font-size: 16px;
+  line-height: 1.5;
 }
-.Reedable p {
-  line-height: 1.25;
+html.Reedable body {
+  margin: 0;
 }
-.Reedable footer {
+html.Reedable body footer {
   font-size: 0.75rem;
   margin-bottom: 6rem;
 }
-.Reedable dt {
+html.Reedable body p {
+  margin-block-start: 1.5em;
+  margin-block-end: 1.5em;
+}
+html.Reedable body dl dt {
   font-weight: 700;
 }
-.Reedable .Banner {
+@media only screen and (max-width: 640px) {
+  html.Reedable body ol {
+    padding-left: 1.75em;
+  }
+}
+html.Reedable body img {
+  max-width: 100%;
+  object-fit: cover;
+}
+html.Reedable body .Banner {
   display: flex;
   align-items: center;
 }
-.Reedable .Banner h1 {
-  margin: 0 0 0 1em;
+html.Reedable body .Banner h1 {
+  margin: 0 0 0 .5em;
 }
-.Reedable .PictureFrame {
+@media only screen and (max-width: 640px) {
+  html.Reedable body .Banner h1 {
+    font-size: 1.5rem;
+    line-height: 1.25em;
+    max-width: 8em;
+  }
+}
+html.Reedable body .Content {
+  margin: 1.5rem;
+}
+@media only screen and (max-width: 640px) {
+  html.Reedable body .Content {
+    margin: 1.5rem .75rem;
+  }
+}
+html.Reedable body .PictureFrame {
   box-shadow: 0 .1875rem .625rem black;
   border-radius: .25rem;
 }
-.Reedable .QuestionAndAnswer dt {
+html.Reedable body .QuestionAndAnswer dt {
   margin-top: 0.75em;
 }
-.Reedable .QuestionAndAnswer dt:before {
+html.Reedable body .QuestionAndAnswer dt:before {
   content: "Q: ";
 }
-.Reedable .QuestionAndAnswer dd {
+html.Reedable body .QuestionAndAnswer dd {
   margin-top: 0.25em;
   font-style: italic;
 }
-.Reedable .QuestionAndAnswer dd:before {
+@media only screen and (max-width: 640px) {
+  html.Reedable body .QuestionAndAnswer dd {
+    margin-left: 0;
+  }
+}
+html.Reedable body .QuestionAndAnswer dd:before {
   content: "A: ";
 }
-.Reedable .CryptoCurrencyAddress {
-  font-family: Courier;
+html.Reedable body .CryptoCurrencyAddress {
+  font-family: Courier, monospace;
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,0 +1,17 @@
+@color: #eeeeee;
+@background-color: #333333;
+@link-color: cyan;
+@link-color-visited: lightpink;
+
+html.Reedable {
+  color: @color;
+  background-color: @background-color;
+
+  a {
+    color: @link-color;
+
+    &:visited {
+      color: @link-color-visited;
+    }
+  }
+}
