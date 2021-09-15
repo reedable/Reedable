@@ -69,8 +69,9 @@ https://reedable.github.io/Reedable/
 
 - TODO Add options panel to restore all values to the default.
 
-### Testing and samples
+### Testing, samples, and documentation
 
+- TODO Supply favicon for the documentation
 - TODO Add unit tests
 - TODO Add web component samples in sample/index.html
 
