@@ -62,6 +62,14 @@ html.Reedable {
       }
     }
 
+    // Footnote links should have aria-label explaining that it is a footnote
+    // link, or otherwise, it will sound like "link 1", "link 2", etc...
+    a.Footnote[aria-label] {
+      font-size: 0.75em; //relative to the text around it
+      font-weight: 700;
+      vertical-align: super;
+    }
+
     .PictureFrame {
       box-shadow: 0 .1875rem .625rem black;
       border-radius: .25rem;

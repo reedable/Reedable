@@ -47,6 +47,11 @@ html.Reedable body .Content {
     margin: 1.5rem .75rem;
   }
 }
+html.Reedable body a.Footnote[aria-label] {
+  font-size: 0.75em;
+  font-weight: 700;
+  vertical-align: super;
+}
 html.Reedable body .PictureFrame {
   box-shadow: 0 .1875rem .625rem black;
   border-radius: .25rem;
