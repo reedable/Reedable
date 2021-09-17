@@ -18,7 +18,7 @@ license is provided in the accompanying LICENSE file.
 
 Reedable Chrome Extension depends on the following third-party libraries, which
 may come under their own licenses. Reedable Chrome Extension's licensing terms
-and agreements do not override those of the third-party library licenses.
+and conditions do not override those of the third-party library licenses.
 
 What this means is that: Above all, do not be an asshole. Be respectful.
 Someone wasted their time, so you do not have to.
@@ -40,7 +40,59 @@ website content, and governed by the following license.
 
 ## Documentation
 
+Documentation for the production version of Reedable Chrome Extension is
+available at Github pages site.
+
 https://reedable.github.io/Reedable/
+
+
+## How to install unpacked Chrome extension
+
+*WARNING*
+
+If you wish, you can clone this git repository, download the source code to
+your disk, and load the unpacked version of Reedable Chrome Extension to your
+browser... BUT, we highly discourage you from doing this. If you are a casual
+user, you really should install Chrome Extensions from
+[Chrome Web Store](https://chrome.google.com/webstore/category/extensions).
+The Chrome Extensions available at the store are at least reviewed by someone
+more competent than we are, and it is less likely you that end up installing
+malware through the store. (Malware still does get through the review, but it
+is a little better than blindly trusting someone on Github.)
+
+While we have no intentions to harm you, after all, we are mostly humans. We
+make mistakes, we might get hacked, and someone might hitch a ride with our
+code and inject malicious code on to your computer.
+
+Unless you are absolutely sure you know what you are doing, please do NOT
+install the unpacked version of this extension.
+
+Now you have been warning... and you still want to install unpacked version
+of the extension? Well, here it goes.
+
+0. Clone the repository
+
+    `git clone https://github.com/reedable/Reedable.git`
+    
+1. Open Chrome Browser and enter `chrome://extensions` in the addressbar.
+![chrome://extensions](https://reedable.github.io/Reedable/images/Reedable_unpacked_1.png)
+
+2. Turn on "Developer mode"
+![Developer mode](https://reedable.github.io/Reedable/images/Reedable_unpacked_2.png)
+
+3. Click "Load unpacked" button, and select "src" inside Reedable project
+   you just checked out.
+![Load unpacked](https://reedable.github.io/Reedable/images/Reedable_unpacked_3.png)
+   
+   Once loaded, the Reedable Chrome Extension should appear on the
+   extensions page.
+![Pin the Reedable icon](https://reedable.github.io/Reedable/images/Reedable_unpacked_4.png)
+
+5. Pin the Reedable icon to the toolbar (optional)
+![Reedable popup](https://reedable.github.io/Reedable/images/Reedable_unpacked_5.png)
+
+6. Click Reedable icon to reveal the popup.
+![Reedable popup](https://reedable.github.io/Reedable/images/Reedable_unpacked_6.png)
 
 
 ## Stuff we're going to do
