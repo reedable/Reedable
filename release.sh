@@ -41,6 +41,6 @@ if git rev-parse "${version}" > /dev/null 2>&1; then
     exit 202
 fi
 
-git tag "${version}"
+git tag -s "${version}"
 
 git push origin "${version}"
