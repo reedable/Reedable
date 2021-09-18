@@ -58,6 +58,7 @@ if [ -z "${target_branch}" ]; then
     fi
 
     git checkout -b "${target_branch}" develop
+    git push origin "${target_branch}"
 fi
 
 #++
