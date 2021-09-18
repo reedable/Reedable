@@ -50,37 +50,37 @@ https://reedable.github.io/Reedable/
 
 *WARNING*
 
-If you wish, you can clone this git repository, download the source code to
+If you wish, you can clone this git repository, checkout the source code to
 your disk, and load the unpacked version of Reedable Chrome Extension to your
 browser... BUT, we highly discourage you from doing this. If you are a casual
 user, you really should install Chrome Extensions from
 [Chrome Web Store](https://chrome.google.com/webstore/category/extensions).
 The Chrome Extensions available at the store are at least reviewed by someone
-more competent than we are, and it is less likely you that end up installing
+more competent than we are, and it is less likely that you end up installing
 malware through the store. (Malware still does get through the review, but it
-is a little better than blindly trusting someone on Github.)
+is still better than blindly trusting someone on Github.)
 
 While we have no intentions to harm you, after all, we are mostly humans. We
 make mistakes, we might get hacked, and someone might hitch a ride with our
-code and inject malicious code on to your computer.
+code and inject malicious software into your computer.
 
 Unless you are absolutely sure you know what you are doing, please do NOT
 install the unpacked version of this extension.
 
-Now you have been warning... and you still want to install unpacked version
-of the extension? Well, here it goes.
+You have been warned. Do you still want to install an unpacked version of the
+extension? Well, here it goes.
 
-0. Clone the repository
+1. Clone the repository
 
     `git clone https://github.com/reedable/Reedable.git`
     
-1. Open Chrome Browser and enter `chrome://extensions` in the addressbar.
+2. Open Chrome Browser and enter `chrome://extensions` in the addressbar.
 ![chrome://extensions](https://reedable.github.io/Reedable/images/Reedable_unpacked_1.png)
 
-2. Turn on "Developer mode"
+3. Turn on "Developer mode"
 ![Developer mode](https://reedable.github.io/Reedable/images/Reedable_unpacked_2.png)
 
-3. Click "Load unpacked" button, and select "src" inside Reedable project
+4. Click "Load unpacked" button, and select "src" inside Reedable project
    you just checked out.
 ![Load unpacked](https://reedable.github.io/Reedable/images/Reedable_unpacked_3.png)
    
