@@ -54,7 +54,7 @@ fi
 # We will package the new zip file for review.
 #
 
-echo zip -r Reedable-${dstamp}.zip src
+zip -r Reedable-${dstamp}.zip src
 
 cat<<EOD
 
@@ -62,30 +62,30 @@ cat<<EOD
 
     Branch: ${target_branch}
 
-Upload Reedable-${dstamp}.zip to
+    Upload Reedable-${dstamp}.zip to
 
-  https://chrome.google.com/webstore/devconsole
+        https://chrome.google.com/webstore/devconsole
 
-Justification for permissions
+    Justification for permissions
 
-  activeTab
-    The extension applies the user's view preference to the currently active
-    visited web site content.
+        activeTab
+            The extension applies the user's view preference to the
+            currently active visited web site content.
 
-  storage
-    The user's view preferences for the visited web site content are stored
-    and shared across his browsers.
+        storage
+            The user's view preferences for the visited web site content
+            are stored and shared across his browsers.
 
-  scripting
-    The script modifies font and text spacing of the visited web
-    site content.
+        scripting
+            The script modifies font and text spacing of the visited web
+            site content.
 
-Justification for content scripts
+    Justification for content scripts
 
-  The user may choose any sites for applying his view preferences.
+        The user may choose any sites for applying his view preferences.
 
 EOD
 
 
-
+exit 0
 
