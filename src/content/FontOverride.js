@@ -82,17 +82,36 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
             const computedFontSize = computedStyle.fontSize || "";
 
             function getFontSize() {
-                const fontSizeTargetPx =
-                    parseFloat(computedFontSize) *
-                    (Number(FontOverride.fontSizeMag) / 100);
+                const fontSizeMinPx = Reedable.DOM.parseSize(
+                    FontOverride.fontSizeMin, computedStyle);
+                let reedableFontSizeMag = node.dataset.reedableFontSizeMag;
+                let fontSizeTargetPx;
 
-                const fontSizeMinPx =
-                    Reedable.DOM.parseSize(
-                        FontOverride.fontSizeMin,
-                        computedStyle);
+                if (!reedableFontSizeMag) {
+                    const reedableFontSizeMagNode =
+                        node.closest("[data-reedable-font-size-mag]");
+
+                    if (reedableFontSizeMagNode) {
+                        reedableFontSizeMag =
+                            reedableFontSizeMagNode.dataset.reedableFontSizeMag;
+                    } else {
+                        node.dataset.reedableFontSizeMag = FontOverride.fontSizeMag;
+                    }
+                }
+
+                if (reedableFontSizeMag !== FontOverride.fontSizeMag) {
+                    fontSizeTargetPx =
+                        parseFloat(computedFontSize) *
+                        Number(FontOverride.fontSizeMag) / 100;
+
+                    node.dataset.reedableFontSizeMag =
+                        FontOverride.fontSizeMag;
+                } else {
+                    fontSizeTargetPx = parseFloat(computedStyle.fontSize);
+                }
 
                 if (fontSizeTargetPx < fontSizeMinPx) {
-                    return [fontSizeMinPx, "px"].join("");
+                    fontSizeTargetPx = fontSizeMinPx;
                 }
 
                 return [fontSizeTargetPx, "px"].join("");
