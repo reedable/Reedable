@@ -123,7 +123,6 @@ extension? Well, here it goes.
 
 ### Testing, samples, and documentation
 
-- TODO Supply favicon for the documentation
 - TODO Add unit tests
 - TODO Add web component samples in sample/index.html
 
