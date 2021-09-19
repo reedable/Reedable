@@ -117,8 +117,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     chrome.storage.sync.get(["reedable"], async ({reedable}) => {
 
+        const viewPreferenceAccordionGroupNode =
+            document.querySelector("#viewPreference.AccordionGroup");
+
         const viewPreferenceAccordionGroupNodeController =
-            Reedable.Controller.$("#viewPreference.AccordionGroup");
+            viewPreferenceAccordionGroupNode &&
+            viewPreferenceAccordionGroupNode.controller;
 
         viewPreferenceAccordionGroupNodeController.on("collapse", appEvent => {
             const target = appEvent && appEvent.target;

@@ -5,25 +5,42 @@ Reedable.Controller = Reedable.Controller || (function () {
 
     class Controller {
 
-        static registry = new WeakMap();
-
-        static $(selectorOrNode) {
-
-            if (typeof selectorOrNode === "string") {
-                const node = document.querySelector(selectorOrNode);
-                return this.registry.get(node);
-            }
-
-            return this.registry.get(selectorOrNode);
-        }
-
         constructor(node, opts = {}) {
             this.opts = JSON.parse(JSON.stringify(opts));
             this.nodeRef = new WeakRef(node);
             this.eventListenerSetMap = {};
-
-            Controller.registry.set(node, this);
             node.controller = this;
+        }
+
+        async $(callback) {
+            const node = this.nodeRef.deref();
+
+            if (node) {
+                if (typeof callback === "function") {
+                    await callback(node);
+                }
+            }
+        }
+
+        async dispatchEvent(customEvent) {
+            if (customEvent && customEvent.name) {
+                const name = customEvent.name;
+                const eventListenerSet = this.eventListenerSetMap[name];
+
+                if (eventListenerSet) {
+                    const promiseList = Array.from(eventListenerSet).map(
+                        listener => {
+                            try {
+                                return Promise.resolve(listener(customEvent));
+                            } catch (e) {
+                                return Promise.reject(e);
+                            }
+                        },
+                    );
+
+                    return Promise.all(promiseList);
+                }
+            }
         }
 
         on(name, callback) {
@@ -48,27 +65,6 @@ Reedable.Controller = Reedable.Controller || (function () {
             if (name && callback) {
                 const eventListenerSet = this.eventListenerSetMap[name];
                 eventListenerSet.delete(callback);
-            }
-        }
-
-        async dispatchEvent(customEvent) {
-            if (customEvent && customEvent.name) {
-                const name = customEvent.name;
-                const eventListenerSet = this.eventListenerSetMap[name];
-
-                if (eventListenerSet) {
-                    const promiseList = Array.from(eventListenerSet).map(
-                        listener => {
-                            try {
-                                return Promise.resolve(listener(customEvent));
-                            } catch (e) {
-                                return Promise.reject(e);
-                            }
-                        },
-                    );
-
-                    return Promise.all(promiseList);
-                }
             }
         }
     }

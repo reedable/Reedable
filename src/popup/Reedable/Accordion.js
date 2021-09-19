@@ -12,8 +12,8 @@ Reedable.Accordion = Reedable.Accordion || (function () {
             const panelNodeId = headerNode.getAttribute("aria-controls");
             const panelNode = document.getElementById(panelNodeId);
 
-            headerNode.addEventListener("click", event => {
-                this.toggle(event);
+            headerNode.addEventListener("click", async event => {
+                await this.toggle(event);
             });
 
             if (headerNode.getAttribute("aria-expanded") === "true") {
@@ -24,21 +24,17 @@ Reedable.Accordion = Reedable.Accordion || (function () {
         }
 
         get isExpanded() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(node => {
                 const headerNode = node.querySelector("[aria-controls]");
                 return headerNode.getAttribute("aria-expanded") === "true";
-            }
+            });
         }
 
         get isCollapsed() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(node => {
                 const headerNode = node.querySelector("[aria-controls]");
                 return headerNode.getAttribute("aria-expanded") === "false";
-            }
+            });
         }
 
         async toggle(event) {
@@ -53,27 +49,24 @@ Reedable.Accordion = Reedable.Accordion || (function () {
         }
 
         async collapse() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(async node => {
                 const headerNode = node.querySelector("[aria-controls]");
                 const panelNodeId = headerNode.getAttribute("aria-controls");
                 const panelNode = document.getElementById(panelNodeId);
 
                 headerNode.setAttribute("aria-expanded", "false");
                 panelNode.setAttribute("hidden", "");
+
                 await this.dispatchEvent(
                     new Reedable.AppEvent("collapse", node, this),
                 );
-            }
 
-            return node;
+                return node;
+            });
         }
 
         async expand() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(async node => {
                 const headerNode = node.querySelector("[aria-controls]");
                 const panelNodeId = headerNode.getAttribute("aria-controls");
                 const panelNode = document.getElementById(panelNodeId);
@@ -83,9 +76,9 @@ Reedable.Accordion = Reedable.Accordion || (function () {
                 await this.dispatchEvent(
                     new Reedable.AppEvent("expand", node, this),
                 );
-            }
 
-            return node;
+                return node;
+            });
         }
     }
 

@@ -47,31 +47,21 @@ Reedable.AccordionGroup = Reedable.AccordionGroup || (function () {
         }
 
         getAccordionNodeList() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(node => {
                 return node.querySelectorAll(".Accordion");
-            }
-
-            return node;
+            });
         }
 
         async collapse() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(node => {
                 node.querySelectorAll(".Accordion").forEach(
                     accordionNode => accordionNode.controller.collapse(),
                 );
-            }
-
-            return node;
+            });
         }
 
         async expand() {
-            const node = this.nodeRef.deref();
-
-            if (node) {
+            return this.$(node => {
                 node.querySelectorAll(".Accordion").forEach(
                     (accordionNode, i) => {
                         if (accordionNode.controller) {
@@ -83,9 +73,7 @@ Reedable.AccordionGroup = Reedable.AccordionGroup || (function () {
                         }
                     },
                 );
-            }
-
-            return node;
+            });
         }
     }
 
