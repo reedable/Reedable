@@ -1,81 +1,88 @@
-window.Reedable = window.Reedable || {};
+import Accordion from "./Accordion.js";
+import Controller from "./Controller.js";
+import Registry from "./Registry.js";
 
-Reedable.AccordionGroup = Reedable.AccordionGroup || (function () {
-    "use strict";
+export default class AccordionGroup extends Controller {
 
-    class AccordionGroup extends Reedable.Controller {
+    constructor(node, opts) {
+        super(node, opts);
 
-        constructor(node, opts) {
-            super(node, opts);
+        const accordionNodeControllerList =
+            Array.from(node.querySelectorAll(".Accordion")).map(
+                accordionNode => new Accordion(accordionNode),
+            );
 
-            const accordionNodeControllerList =
-                Array.from(node.querySelectorAll(".Accordion")).map(
-                    accordionNode => new Reedable.Accordion(accordionNode),
-                );
-
-            accordionNodeControllerList.forEach(accordionNodeController => {
-                accordionNodeController.on("collapse", async appEvent => {
-                    await this.dispatchEvent(appEvent);
-                });
-                accordionNodeController.on("expand", async appEvent => {
-                    await this.dispatchEvent(appEvent);
-                });
+        accordionNodeControllerList.forEach(accordionNodeController => {
+            accordionNodeController.on("collapse", async appEvent => {
+                await this.dispatchEvent(appEvent);
             });
+            accordionNodeController.on("expand", async appEvent => {
+                await this.dispatchEvent(appEvent);
+            });
+        });
 
-            if (this.opts.isSinglePanelMode) {
-                node.addEventListener("click", event => {
-                    const target = event && event.target;
-                    const targetAccordionNode =
-                        target && target.closest(".Accordion");
+        if (this.opts.isSinglePanelMode) {
+            node.addEventListener("click", event => {
+                const target = event && event.target;
+                const targetAccordionNode =
+                    target && target.closest(".Accordion");
+                const targetAccordionNodeController =
+                    Registry.getController(node);
 
-                    if (targetAccordionNode &&
-                        targetAccordionNode.controller &&
-                        targetAccordionNode.controller.isExpanded) {
+                if (targetAccordionNodeController &&
+                    targetAccordionNodeController.isExpanded) {
 
-                        node.querySelectorAll(".Accordion").forEach(
-                            accordionNode => {
-                                if (accordionNode !== targetAccordionNode) {
-                                    if (accordionNode.controller.isExpanded) {
-                                        accordionNode.controller.collapse();
-                                    }
+                    node.querySelectorAll(".Accordion").forEach(
+                        accordionNode => {
+                            if (accordionNode !== targetAccordionNode) {
+                                const accordionNodeController =
+                                    Registry.getController(accordionNode);
+
+                                if (accordionNodeController.isExpanded) {
+                                    accordionNodeController.collapse();
                                 }
-                            },
-                        );
-                    }
-                });
-            }
-        }
-
-        getAccordionNodeList() {
-            return this.$(node => {
-                return node.querySelectorAll(".Accordion");
-            });
-        }
-
-        async collapse() {
-            return this.$(node => {
-                node.querySelectorAll(".Accordion").forEach(
-                    accordionNode => accordionNode.controller.collapse(),
-                );
-            });
-        }
-
-        async expand() {
-            return this.$(node => {
-                node.querySelectorAll(".Accordion").forEach(
-                    (accordionNode, i) => {
-                        if (accordionNode.controller) {
-                            if (!this.opts.isSinglePanelMode || i === 0) {
-                                accordionNode.controller.expand();
-                            } else if (this.opts.isSinglePanelMode) {
-                                accordionNode.controller.collapse();
                             }
-                        }
-                    },
-                );
+                        },
+                    );
+                }
             });
         }
     }
 
-    return AccordionGroup;
-})();
+    getAccordionNodeList() {
+        return this.$(node => {
+            return node.querySelectorAll(".Accordion");
+        });
+    }
+
+    async collapse() {
+        return this.$(node => {
+            node.querySelectorAll(".Accordion").forEach(
+                accordionNode => {
+                    const accordionNodeController =
+                        Registry.getController(accordionNode);
+                    accordionNodeController.collapse();
+                },
+            );
+        });
+    }
+
+    async expand() {
+        return this.$(node => {
+            node.querySelectorAll(".Accordion").forEach(
+                (accordionNode, i) => {
+                    const accordionNodeController =
+                        Registry.getController(accordionNode);
+
+                    if (accordionNodeController) {
+                        if (!this.opts.isSinglePanelMode || i === 0) {
+                            accordionNodeController.expand();
+                        } else if (this.opts.isSinglePanelMode) {
+                            accordionNodeController.collapse();
+                        }
+                    }
+                },
+            );
+        });
+    }
+}

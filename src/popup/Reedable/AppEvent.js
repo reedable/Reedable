@@ -1,16 +1,12 @@
-window.Reedable = window.Reedable || {};
+import Registry from "./Registry.js";
 
-Reedable.AppEvent = Reedable.AppEvent || (function () {
-    "use strict";
+export default class AppEvent {
 
-    class AppEvent {
-
-        constructor(name, target, controller) {
-            Object.assign(this, {
-                name, target, controller
-            });
-        }
+    constructor(name, target) {
+        Object.assign(this, {name, target});
     }
 
-    return AppEvent;
-})();
+    getController() {
+        return Registry.getController(this.target);
+    }
+}

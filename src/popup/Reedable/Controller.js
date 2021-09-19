@@ -1,73 +1,75 @@
-window.Reedable = window.Reedable || {};
+import Registry from "./Registry.js";
 
-Reedable.Controller = Reedable.Controller || (function () {
-    "use strict";
+export default class Controller {
 
-    class Controller {
+    constructor(node, opts = {}) {
+        this.opts = JSON.parse(JSON.stringify(opts));
+        this.nodeRef = new WeakRef(node);
+        this.eventListenerSetMap = {};
+        Registry.register(this);
+    }
 
-        constructor(node, opts = {}) {
-            this.opts = JSON.parse(JSON.stringify(opts));
-            this.nodeRef = new WeakRef(node);
-            this.eventListenerSetMap = {};
-            node.controller = this;
-        }
+    async $(callback) {
+        const node = this.nodeRef.deref();
 
-        async $(callback) {
-            const node = this.nodeRef.deref();
-
-            if (node) {
-                if (typeof callback === "function") {
-                    await callback(node);
-                }
-            }
-        }
-
-        async dispatchEvent(customEvent) {
-            if (customEvent && customEvent.name) {
-                const name = customEvent.name;
-                const eventListenerSet = this.eventListenerSetMap[name];
-
-                if (eventListenerSet) {
-                    const promiseList = Array.from(eventListenerSet).map(
-                        listener => {
-                            try {
-                                return Promise.resolve(listener(customEvent));
-                            } catch (e) {
-                                return Promise.reject(e);
-                            }
-                        },
-                    );
-
-                    return Promise.all(promiseList);
-                }
-            }
-        }
-
-        on(name, callback) {
-            let eventListenerSet = this.eventListenerSetMap[name];
-
-            if (!eventListenerSet) {
-                eventListenerSet = this.eventListenerSetMap[name] = new Set();
-            }
-
-            eventListenerSet.add(callback);
-        }
-
-        off(name, callback) {
-            if (name && typeof name === "string") {
-                delete this.eventListenerSetMap[name];
-            } else if (name && typeof name === "function") {
-                this.eventListenerSetMap.forEach(eventListenerSet => {
-                    eventListenerSet.delete(callback);
-                });
-            }
-
-            if (name && callback) {
-                const eventListenerSet = this.eventListenerSetMap[name];
-                eventListenerSet.delete(callback);
+        if (node) {
+            if (typeof callback === "function") {
+                await callback(node);
             }
         }
     }
 
-    return Controller;
-})();
+    async dispatchEvent(appEvent) {
+        if (appEvent && appEvent.name) {
+            const eventName = appEvent.name;
+            const eventListenerSet = this.eventListenerSetMap[eventName];
+
+            if (eventListenerSet) {
+                const promiseList = Array.from(eventListenerSet).map(
+                    eventListener => {
+                        try {
+                            return Promise.resolve(eventListener(appEvent));
+                        } catch (e) {
+                            return Promise.reject(e);
+                        }
+                    },
+                );
+
+                return Promise.all(promiseList);
+            }
+        }
+    }
+
+    on(eventName, eventListener) {
+        let eventListenerSet = this.eventListenerSetMap[eventName];
+
+        if (!eventListenerSet) {
+            eventListenerSet = this.eventListenerSetMap[eventName] = new Set();
+        }
+
+        eventListenerSet.add(eventListener);
+    }
+
+    off(eventName, eventListener) {
+
+        if (eventName && eventListener) {
+            const eventListenerSet = this.eventListenerSetMap[eventName];
+            eventListenerSet.delete(eventListener);
+
+        } else if (eventName && typeof eventName === "string") {
+
+            // If we receive eventName only. Remove all eventListeners
+            // observing this eventName.
+            delete this.eventListenerSetMap[eventName];
+
+        } else if (eventName && typeof eventName === "function") {
+
+            // If we receive eventListener function as the only argument,
+            // iterate through the map and remove the eventListener for all
+            // event names and remove the matching function from all of them.
+            this.eventListenerSetMap.forEach(eventListenerSet => {
+                eventListenerSet.delete(eventName);
+            });
+        }
+    }
+}
