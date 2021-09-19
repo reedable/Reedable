@@ -3,17 +3,17 @@
 
     const log = console.log.bind(console, "[FontOverride]");
 
-    chrome.storage.sync.get(["FontOverride"], ({FontOverride}) => {
+    chrome.storage.sync.get(["fontOverride"], ({fontOverride}) => {
 
-        const isEnabledCheckbox = document.querySelector("#FontOverride-isEnabled");
-        const fontSizeMinInput = document.querySelector("#FontOverride-fontSizeMin");
-        const fontSizeMagInput = document.querySelector("#FontOverride-fontSizeMag");
-        const fontFamilyInput = document.querySelector("#FontOverride-fontFamily");
+        const isEnabledCheckbox = document.querySelector("#fontOverride-isEnabled");
+        const fontSizeMinInput = document.querySelector("#fontOverride-fontSizeMin");
+        const fontSizeMagInput = document.querySelector("#fontOverride-fontSizeMag");
+        const fontFamilyInput = document.querySelector("#fontOverride-fontFamily");
 
-        isEnabledCheckbox.checked = FontOverride.isEnabled;
-        fontSizeMinInput.value = FontOverride.fontSizeMin;
-        fontSizeMagInput.value = FontOverride.fontSizeMag;
-        fontFamilyInput.value = FontOverride.fontFamily;
+        isEnabledCheckbox.checked = fontOverride.isEnabled;
+        fontSizeMinInput.value = fontOverride.fontSizeMin;
+        fontSizeMagInput.value = fontOverride.fontSizeMag;
+        fontFamilyInput.value = fontOverride.fontFamily;
 
         const _onChangeCheckbox = debounce(onChangeCheckbox, 400);
         const _onChangeInput = debounce(onChangeInput, 400);
@@ -53,10 +53,10 @@
             const fontSizeMag = fontSizeMagInput.value;
             const fontFamily = fontFamilyInput.value;
 
-            chrome.storage.sync.get(["FontOverride"], async ({FontOverride}) => {
+            chrome.storage.sync.get(["fontOverride"], async ({fontOverride}) => {
 
                 chrome.storage.sync.set({
-                    "FontOverride": Object.assign(FontOverride, {
+                    "fontOverride": Object.assign(fontOverride, {
                         fontSizeMin,
                         fontSizeMag,
                         fontFamily,
@@ -68,7 +68,7 @@
                     "currentWindow": true,
                 });
 
-                if (FontOverride.isEnabled) {
+                if (fontOverride.isEnabled) {
                     log("onChangeInput calling start", tab.id);
                     chrome.scripting.executeScript({
                         "target": {"tabId": tab.id},

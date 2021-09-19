@@ -3,17 +3,17 @@
 
     const log = console.log.bind(console, "[FocusIndicator]");
 
-    chrome.storage.sync.get(["FocusIndicator"], ({FocusIndicator}) => {
+    chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
 
-        const isEnabledCheckbox = document.querySelector("#FocusIndicator-isEnabled");
-        const boxShadowInput = document.querySelector("#FocusIndicator-boxShadow");
-        const borderRadiusInput = document.querySelector("#FocusIndicator-borderRadius");
-        const transitionInput = document.querySelector("#FocusIndicator-transition");
+        const isEnabledCheckbox = document.querySelector("#focusIndicator-isEnabled");
+        const boxShadowInput = document.querySelector("#focusIndicator-boxShadow");
+        const borderRadiusInput = document.querySelector("#focusIndicator-borderRadius");
+        const transitionInput = document.querySelector("#focusIndicator-transition");
 
-        isEnabledCheckbox.checked = FocusIndicator.isEnabled;
-        boxShadowInput.value = FocusIndicator.boxShadow;
-        borderRadiusInput.value = FocusIndicator.borderRadius;
-        transitionInput.value = FocusIndicator.transition;
+        isEnabledCheckbox.checked = focusIndicator.isEnabled;
+        boxShadowInput.value = focusIndicator.boxShadow;
+        borderRadiusInput.value = focusIndicator.borderRadius;
+        transitionInput.value = focusIndicator.transition;
 
         const _onChangeCheckbox = debounce(onChangeCheckbox, 400);
         const _onChangeInput = debounce(onChangeInput, 400);
@@ -53,10 +53,10 @@
             const borderRadius = borderRadiusInput.value;
             const transition = transitionInput.value;
 
-            chrome.storage.sync.get(["FocusIndicator"], async ({FocusIndicator}) => {
+            chrome.storage.sync.get(["focusIndicator"], async ({focusIndicator}) => {
 
                 chrome.storage.sync.set({
-                    "FocusIndicator": Object.assign(FocusIndicator, {
+                    "focusIndicator": Object.assign(focusIndicator, {
                         boxShadow,
                         borderRadius,
                         transition,
@@ -68,7 +68,7 @@
                     "currentWindow": true,
                 });
 
-                if (FocusIndicator.isEnabled) {
+                if (focusIndicator.isEnabled) {
                     log("onChangeInput calling start", tab.id);
                     chrome.scripting.executeScript({
                         "target": {"tabId": tab.id},

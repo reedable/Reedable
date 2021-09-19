@@ -35,12 +35,12 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
     }
 
     function processNodes(nodeList) {
-        chrome.storage.sync.get(["TextSpacing"], ({TextSpacing}) => {
+        chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
             nodeList.forEach(node => {
 
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (Reedable.DOM.getText(node)) {
-                        processNode(node, TextSpacing);
+                        processNode(node, textSpacing);
                     }
                 }
 
@@ -196,9 +196,9 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 doc.addEventListener("DOMContentLoaded", () => _start(doc));
             }
 
-            chrome.storage.sync.get(["TextSpacing"], ({TextSpacing}) => {
-                TextSpacing.isEnabled = true;
-                chrome.storage.sync.set({TextSpacing});
+            chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
+                textSpacing.isEnabled = true;
+                chrome.storage.sync.set({textSpacing});
             });
         },
         "stop": function (doc) {
@@ -209,9 +209,9 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 doc.addEventListener("DOMContentLoaded", () => _stop(doc));
             }
 
-            chrome.storage.sync.get(["TextSpacing"], ({TextSpacing}) => {
-                TextSpacing.isEnabled = false;
-                chrome.storage.sync.set({TextSpacing});
+            chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
+                textSpacing.isEnabled = false;
+                chrome.storage.sync.set({textSpacing});
             });
         },
     };

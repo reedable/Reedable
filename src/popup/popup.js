@@ -106,11 +106,55 @@ function throttle(func, delay = 400) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const accordionGroupNodeList = document.querySelectorAll(".AccordionGroup");
 
-    accordionGroupNodeList.forEach(accordionGroupNode => {
-        new Reedable.AccordionGroup(accordionGroupNode, {
-            "isSinglePanel": true
+    document.querySelectorAll(".AccordionGroup").forEach(
+        accordionGroupNode => {
+            new Reedable.AccordionGroup(accordionGroupNode, {
+                "isSinglePanelMode": true,
+            });
+        },
+    );
+
+    chrome.storage.sync.get(["reedable"], async ({reedable}) => {
+
+        const viewPreferenceAccordionGroupNodeController =
+            Reedable.Controller.$("#viewPreference.AccordionGroup");
+
+        viewPreferenceAccordionGroupNodeController.on("collapse", appEvent => {
+            const target = appEvent && appEvent.target;
+            const id = target && target.id;
+
+            reedable[id] = reedable[id] || {};
+            reedable[id].isExpanded = false;
+            chrome.storage.sync.set({reedable});
         });
+
+        viewPreferenceAccordionGroupNodeController.on("expand", appEvent => {
+            const target = appEvent && appEvent.target;
+            const id = target && target.id;
+
+            reedable[id] = reedable[id] || {};
+            reedable[id].isExpanded = true;
+            chrome.storage.sync.set({reedable});
+        });
+
+        const fontOverrideAccordionNode =
+            document.querySelector("#fontOverride.Accordion");
+        const textSpacingAccordionNode =
+            document.querySelector("#textSpacing.Accordion");
+        const focusIndicatorAccordionNode =
+            document.querySelector("#focusIndicator.Accordion");
+
+        if (reedable.fontOverride && reedable.fontOverride.isExpanded) {
+            await fontOverrideAccordionNode.controller.expand();
+        }
+
+        if (reedable.textSpacing && reedable.textSpacing.isExpanded) {
+            await textSpacingAccordionNode.controller.expand();
+        }
+
+        if (reedable.focusIndicator && reedable.focusIndicator.isExpanded) {
+            await focusIndicatorAccordionNode.controller.expand();
+        }
     });
 });

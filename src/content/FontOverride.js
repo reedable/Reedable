@@ -44,12 +44,12 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
     }
 
     function processNodes(nodeList) {
-        chrome.storage.sync.get(["FontOverride"], ({FontOverride}) => {
+        chrome.storage.sync.get(["fontOverride"], ({fontOverride}) => {
             nodeList.forEach(node => {
 
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (Reedable.DOM.getText(node)) {
-                        processNode(node, FontOverride);
+                        processNode(node, fontOverride);
                     }
                 }
 
@@ -170,11 +170,11 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
 
     return {
         "start": function (doc) {
-            let style = doc.querySelector("#Reedable-FontOverride");
+            let style = doc.querySelector("#reedable-FontOverride");
 
             if (!style) {
                 style = doc.createElement("style");
-                style.id = "Reedable-FontOverride";
+                style.id = "reedable-FontOverride";
                 style.appendChild(doc.createTextNode(FONT_FACE_CSS));
                 (doc.head || doc).appendChild(style);
             }
@@ -185,13 +185,13 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
                 doc.addEventListener("DOMContentLoaded", () => _start(doc));
             }
 
-            chrome.storage.sync.get(["FontOverride"], ({FontOverride}) => {
-                FontOverride.isEnabled = true;
-                chrome.storage.sync.set({FontOverride});
+            chrome.storage.sync.get(["fontOverride"], ({fontOverride}) => {
+                fontOverride.isEnabled = true;
+                chrome.storage.sync.set({fontOverride});
             });
         },
         "stop": function (doc) {
-            const style = doc.querySelector("#Reedable-FontOverride");
+            const style = doc.querySelector("#reedable-FontOverride");
 
             if (style) {
                 style.remove();
@@ -203,9 +203,9 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
                 doc.addEventListener("DOMContentLoaded", () => _stop(doc));
             }
 
-            chrome.storage.sync.get(["FontOverride"], ({FontOverride}) => {
-                FontOverride.isEnabled = false;
-                chrome.storage.sync.set({FontOverride});
+            chrome.storage.sync.get(["fontOverride"], ({fontOverride}) => {
+                fontOverride.isEnabled = false;
+                chrome.storage.sync.set({fontOverride});
             });
         },
     };

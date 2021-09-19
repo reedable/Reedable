@@ -17,10 +17,10 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
         node.dataset.reedableTransition = transition;
         node.dataset.reedableOutline = outline;
 
-        chrome.storage.sync.get(["FocusIndicator"], ({FocusIndicator}) => {
-            node.style.borderRadius = FocusIndicator.borderRadius;
-            node.style.boxShadow = FocusIndicator.boxShadow;
-            node.style.transition = FocusIndicator.transition;
+        chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
+            node.style.borderRadius = focusIndicator.borderRadius;
+            node.style.boxShadow = focusIndicator.boxShadow;
+            node.style.transition = focusIndicator.transition;
             node.style.outline = "none";
             node.addEventListener("focusout", onFocusOut);
         });
@@ -73,9 +73,9 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
                 doc.addEventListener("DOMContentLoaded", () => _start(doc));
             }
 
-            chrome.storage.sync.get(["FocusIndicator"], ({FocusIndicator}) => {
-                FocusIndicator.isEnabled = true;
-                chrome.storage.sync.set({FocusIndicator});
+            chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
+                focusIndicator.isEnabled = true;
+                chrome.storage.sync.set({focusIndicator});
             });
         },
         "stop": function (doc) {
@@ -85,9 +85,9 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
                 doc.addEventListener("DOMContentLoaded", () => _stop(doc));
             }
 
-            chrome.storage.sync.get(["FocusIndicator"], ({FocusIndicator}) => {
-                FocusIndicator.isEnabled = false;
-                chrome.storage.sync.set({FocusIndicator});
+            chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
+                focusIndicator.isEnabled = false;
+                chrome.storage.sync.set({focusIndicator});
             });
         },
     };

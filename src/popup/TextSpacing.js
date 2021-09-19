@@ -3,17 +3,17 @@
 
     const log = console.log.bind(console, "[TextSpacing]");
 
-    chrome.storage.sync.get(["TextSpacing"], ({TextSpacing}) => {
+    chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
 
-        const isEnabledCheckbox = document.querySelector("#TextSpacing-isEnabled");
-        const lineHeightInput = document.querySelector("#TextSpacing-lineHeight");
-        const letterSpacingInput = document.querySelector("#TextSpacing-letterSpacing");
-        const wordSpacingInput = document.querySelector("#TextSpacing-wordSpacing");
+        const isEnabledCheckbox = document.querySelector("#textSpacing-isEnabled");
+        const lineHeightInput = document.querySelector("#textSpacing-lineHeight");
+        const letterSpacingInput = document.querySelector("#textSpacing-letterSpacing");
+        const wordSpacingInput = document.querySelector("#textSpacing-wordSpacing");
 
-        isEnabledCheckbox.checked = TextSpacing.isEnabled;
-        lineHeightInput.value = TextSpacing.lineHeight;
-        letterSpacingInput.value = TextSpacing.letterSpacing;
-        wordSpacingInput.value = TextSpacing.wordSpacing;
+        isEnabledCheckbox.checked = textSpacing.isEnabled;
+        lineHeightInput.value = textSpacing.lineHeight;
+        letterSpacingInput.value = textSpacing.letterSpacing;
+        wordSpacingInput.value = textSpacing.wordSpacing;
 
         const _onChangeCheckbox = debounce(onChangeCheckbox, 400);
         const _onChangeInput = debounce(onChangeInput, 400);
@@ -53,10 +53,10 @@
             const letterSpacing = letterSpacingInput.value;
             const wordSpacing = wordSpacingInput.value;
 
-            chrome.storage.sync.get(["TextSpacing"], async ({TextSpacing}) => {
+            chrome.storage.sync.get(["textSpacing"], async ({textSpacing}) => {
 
                 chrome.storage.sync.set({
-                    "TextSpacing": Object.assign(TextSpacing, {
+                    "textSpacing": Object.assign(textSpacing, {
                         lineHeight,
                         letterSpacing,
                         wordSpacing,
@@ -68,7 +68,7 @@
                     "currentWindow": true,
                 });
 
-                if (TextSpacing.isEnabled) {
+                if (textSpacing.isEnabled) {
                     log("onChangeInput calling start", tab.id);
                     chrome.scripting.executeScript({
                         "target": {"tabId": tab.id},

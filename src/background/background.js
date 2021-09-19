@@ -2,71 +2,78 @@ const log = console.log.bind(console, "[background]");
 
 const manifest = chrome.runtime.getManifest();
 
-// TODO Add version-to-version upgrade mechanisms
-function upgrade({Reedable, TextSpacing, FontOverride, FocusIndicator}) {
-    const version = manifest.version;
-    // TODO const prevVersion = Reedable.version;
-    // TODO Store previous version and develop a restore strategy
+chrome.runtime.onInstalled.addListener(async () => {
 
-    if (!Reedable) {
-        Reedable = {};
-        TextSpacing = {
-            "isEnabled": true,
-            "lineHeight": "2",
-            "letterSpacing": "0.1em",
-            "wordSpacing": "0.4em",
-        };
-        FontOverride = {
-            "isEnabled": true,
-            "fontSizeMin": "10pt",
-            "fontSizeMag": "100",
-            "fontFamily": "",
-        };
-        FocusIndicator = {
-            "isEnabled": true,
-            "boxShadow": "0 0 0 0.15em orange,\n0 0 0 0.3em white",
-            "borderRadius": "0.3em",
-            "transition": "0.1s",
-        };
+    async function v1_0() {
+        return new Promise(resolve => {
+
+        });
     }
 
-    Object.assign(Reedable, {version});
-
-    // Save default parameters onInstall
-    chrome.storage.sync.set({
-        Reedable,
-        TextSpacing,
-        FontOverride,
-        FocusIndicator,
-    });
-
-    return {
-        Reedable,
-        TextSpacing,
-        FontOverride,
-        FocusIndicator,
+    const reedable = {
+        "fontOverride": {
+            "isExpanded": true,
+        },
+        "textSpacing": {
+            "isExpanded": false,
+        },
+        "focusIndicator": {
+            "isExpanded": false,
+        },
     };
-}
 
-chrome.runtime.onInstalled.addListener(() => {
+    const textSpacing = {
+        "isEnabled": true,
+        "lineHeight": "2",
+        "letterSpacing": "0.1em",
+        "wordSpacing": "0.4em",
+    };
+
+    const fontOverride = {
+        "isEnabled": true,
+        "fontSizeMin": "10pt",
+        "fontSizeMag": "100",
+        "fontFamily": "",
+    };
+
+    const focusIndicator = {
+        "isEnabled": true,
+        "boxShadow": "0 0 0 0.15em orange,\n0 0 0 0.3em white",
+        "borderRadius": "0.3em",
+        "transition": "0.1s",
+    };
+
     chrome.storage.sync.get(
-        ["Reedable", "TextSpacing", "FontOverride", "FocusIndicator"],
-        ({Reedable, TextSpacing, FontOverride, FocusIndicator}) => {
+        ["reedable", "textSpacing", "fontOverride", "focusIndicator"],
+        async (v1_1) => {
 
-            const before = {
-                Reedable,
-                TextSpacing,
-                FontOverride,
-                FocusIndicator,
-            };
+            log("v1.1", v1_1);
 
-            log("Before upgrade", before);
+            chrome.storage.sync.get(
+                ["Reedable", "FontOverride", "TextSpacing", "FocusIndicator"],
+                (v1_0) => {
 
-            const after = upgrade(before);
+                    log("v1.0", v1_0);
 
-            log("After upgrade", after);
+                    const store = Object.assign({
+                        reedable,
+                        textSpacing,
+                        fontOverride,
+                        focusIndicator,
+                    }, {
+                        "reedable": v1_0.Reedable,
+                        "textSpacing": v1_0.TextSpacing,
+                        "fontOverride": v1_0.FontOverride,
+                        "focusIndicator": v1_0.FocusIndicator,
+                    }, v1_1);
 
-            chrome.storage.sync.set(after);
+                    store.version = manifest.version;
+
+                    log(store);
+
+                    chrome.storage.sync.set(store);
+                },
+            );
         },
     );
 });
@@ -75,16 +82,16 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
 
     chrome.storage.sync.get(
-        ["FocusIndicator", "FontOverride", "TextSpacing"],
-        ({FocusIndicator, FontOverride, TextSpacing}) => {
+        ["focusIndicator", "fontOverride", "textSpacing"],
+        ({focusIndicator, fontOverride, textSpacing}) => {
 
             log("tabId", activeInfo.tabId);
-            log("FocusIndicator", FocusIndicator);
-            log("TextSpacing", TextSpacing);
+            log("focusIndicator", focusIndicator);
+            log("textSpacing", textSpacing);
 
             const tabId = activeInfo.tabId;
 
-            if (TextSpacing.isEnabled) {
+            if (textSpacing.isEnabled) {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
@@ -100,7 +107,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 });
             }
 
-            if (FontOverride.isEnabled) {
+            if (fontOverride.isEnabled) {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
@@ -116,7 +123,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 });
             }
 
-            if (FocusIndicator.isEnabled) {
+            if (focusIndicator.isEnabled) {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
