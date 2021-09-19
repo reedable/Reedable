@@ -7,19 +7,9 @@ export default class AccordionGroup extends Controller {
     constructor(node, opts) {
         super(node, opts);
 
-        const accordionNodeControllerList =
-            Array.from(node.querySelectorAll(".Accordion")).map(
-                accordionNode => new Accordion(accordionNode),
-            );
-
-        accordionNodeControllerList.forEach(accordionNodeController => {
-            accordionNodeController.on("collapse", async appEvent => {
-                await this.dispatchEvent(appEvent);
-            });
-            accordionNodeController.on("expand", async appEvent => {
-                await this.dispatchEvent(appEvent);
-            });
-        });
+        Array.from(node.querySelectorAll(".Accordion")).map(
+            accordionNode => new Accordion(accordionNode),
+        );
 
         if (this.opts.isSinglePanelMode) {
             node.addEventListener("click", event => {
@@ -27,7 +17,7 @@ export default class AccordionGroup extends Controller {
                 const targetAccordionNode =
                     target && target.closest(".Accordion");
                 const targetAccordionNodeController =
-                    Registry.getController(node);
+                    Registry.getController(targetAccordionNode);
 
                 if (targetAccordionNodeController &&
                     targetAccordionNodeController.isExpanded) {

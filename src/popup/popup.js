@@ -13,15 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     chrome.storage.sync.get(["reedable"], async ({reedable}) => {
 
-        const viewPreferenceAccordionGroupNodeController =
-            Registry.getController("#viewPreference.AccordionGroup");
+        const viewPreferenceAccordionGroupNode =
+            document.querySelector("#viewPreference.AccordionGroup");
 
-        if (viewPreferenceAccordionGroupNodeController) {
+        if (viewPreferenceAccordionGroupNode) {
 
-            viewPreferenceAccordionGroupNodeController.on(
+            viewPreferenceAccordionGroupNode.addEventListener(
                 "collapse",
-                appEvent => {
-                    const target = appEvent && appEvent.target;
+                customEvent => {
+                    const target = customEvent && customEvent.target;
                     const id = target && target.id;
 
                     reedable[id] = reedable[id] || {};
@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
             );
 
-            viewPreferenceAccordionGroupNodeController.on(
+            viewPreferenceAccordionGroupNode.addEventListener(
                 "expand",
-                appEvent => {
-                    const target = appEvent && appEvent.target;
+                customEvent => {
+                    const target = customEvent && customEvent.target;
                     const id = target && target.id;
 
                     reedable[id] = reedable[id] || {};

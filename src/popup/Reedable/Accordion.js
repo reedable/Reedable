@@ -1,4 +1,3 @@
-import AppEvent from "./AppEvent.js";
 import Controller from "./Controller.js";
 
 export default class Accordion extends Controller {
@@ -54,11 +53,9 @@ export default class Accordion extends Controller {
 
             headerNode.setAttribute("aria-expanded", "false");
             panelNode.setAttribute("hidden", "");
-
-            await this.dispatchEvent(
-                new AppEvent("collapse", node),
-            );
-
+            node.dispatchEvent(new CustomEvent("collapse", {
+                "bubbles": true,
+            }));
             return node;
         });
     }
@@ -71,10 +68,9 @@ export default class Accordion extends Controller {
 
             headerNode.setAttribute("aria-expanded", "true");
             panelNode.removeAttribute("hidden");
-            await this.dispatchEvent(
-                new AppEvent("expand", node),
-            );
-
+            node.dispatchEvent(new CustomEvent("expand", {
+                "bubbles": true,
+            }));
             return node;
         });
     }
