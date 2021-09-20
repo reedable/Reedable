@@ -1,6 +1,6 @@
 import AccordionGroup from "./Reedable/AccordionGroup.js";
 import Registry from "./Reedable/Registry.js";
-import TextSpadingAccordion from "./TextSpacingAccordion.js";
+import TextSpacingAccordion from "./TextSpacingAccordion.js";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const textSpacingAccordionNode =
             document.querySelector("#textSpacing.Accordion");
 
-        new TextSpadingAccordion(textSpacingAccordionNode);
+        new TextSpacingAccordion(textSpacingAccordionNode);
 
         if (viewPreferenceAccordionGroupNode) {
 
@@ -50,29 +50,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (reedable.fontOverride && reedable.fontOverride.isExpanded) {
-            const fontOverrideAccordionNodeController =
+            const fontOverrideAccordionController =
                 Registry.getController("#fontOverride.Accordion");
 
-            if (fontOverrideAccordionNodeController) {
-                await fontOverrideAccordionNodeController.expand();
+            if (fontOverrideAccordionController) {
+                await fontOverrideAccordionController.expand();
             }
         }
 
         if (reedable.textSpacing && reedable.textSpacing.isExpanded) {
-            const textSpacingAccordionNodeController =
+            const textSpacingAccordionController =
                 Registry.getController("#textSpacing.Accordion");
 
-            if (textSpacingAccordionNodeController) {
-                await textSpacingAccordionNodeController.expand();
+            if (textSpacingAccordionController) {
+                await textSpacingAccordionController.expand();
             }
         }
 
         if (reedable.focusIndicator && reedable.focusIndicator.isExpanded) {
-            const focusIndicatorAccordionNodeController =
+            const focusIndicatorAccordionController =
                 Registry.getController("#focusIndicator.Accordion");
 
-            if (focusIndicatorAccordionNodeController) {
-                await focusIndicatorAccordionNodeController.expand();
+            if (focusIndicatorAccordionController) {
+                await focusIndicatorAccordionController.expand();
             }
         }
     });

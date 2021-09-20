@@ -24,20 +24,20 @@ export default class AccordionGroup extends Controller {
         if (node) {
             const target = event && event.target;
             const targetAccordionNode = target && target.closest(".Accordion");
-            const targetAccordionNodeController =
+            const targetAccordionController =
                 Registry.getController(targetAccordionNode);
 
-            if (targetAccordionNodeController &&
-                targetAccordionNodeController.isExpanded) {
+            if (targetAccordionController &&
+                targetAccordionController.isExpanded) {
 
                 node.querySelectorAll(".Accordion").forEach(
                     accordionNode => {
                         if (accordionNode !== targetAccordionNode) {
-                            const accordionNodeController =
+                            const accordionController =
                                 Registry.getController(accordionNode);
 
-                            if (accordionNodeController.isExpanded) {
-                                accordionNodeController.collapse();
+                            if (accordionController.isExpanded) {
+                                accordionController.collapse();
                             }
                         }
                     },
@@ -60,9 +60,9 @@ export default class AccordionGroup extends Controller {
         if (node) {
             node.querySelectorAll(".Accordion").forEach(
                 accordionNode => {
-                    const accordionNodeController =
+                    const accordionController =
                         Registry.getController(accordionNode);
-                    accordionNodeController.collapse();
+                    accordionController.collapse();
                 },
             );
         }
@@ -74,14 +74,14 @@ export default class AccordionGroup extends Controller {
         if (node) {
             node.querySelectorAll(".Accordion").forEach(
                 (accordionNode, i) => {
-                    const accordionNodeController =
+                    const accordionController =
                         Registry.getController(accordionNode);
 
-                    if (accordionNodeController) {
+                    if (accordionController) {
                         if (!this.opts.isSinglePanelMode || i === 0) {
-                            accordionNodeController.expand();
+                            accordionController.expand();
                         } else if (this.opts.isSinglePanelMode) {
-                            accordionNodeController.collapse();
+                            accordionController.collapse();
                         }
                     }
                 },
