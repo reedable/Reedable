@@ -1,5 +1,6 @@
 import AccordionGroup from "./Reedable/AccordionGroup.js";
 import Registry from "./Reedable/Registry.js";
+import TextSpadingAccordion from "./TextSpacingAccordion.js";
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -15,6 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const viewPreferenceAccordionGroupNode =
             document.querySelector("#viewPreference.AccordionGroup");
+
+        const textSpacingAccordionNode =
+            document.querySelector("#textSpacing.Accordion");
+
+        new TextSpadingAccordion(textSpacingAccordionNode);
 
         if (viewPreferenceAccordionGroupNode) {
 

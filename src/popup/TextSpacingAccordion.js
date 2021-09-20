@@ -1,0 +1,85 @@
+import Accordion from "./Reedable/Accordion.js";
+import debounce from "./Reedable/debounce.js";
+
+export default class TextSpadingAccordion extends Accordion {
+
+    constructor(node, opts) {
+        super(node, opts);
+
+        chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
+            const isEnabledCheckbox = node.querySelector("#textSpacing-isEnabled");
+            const lineHeightInput = node.querySelector("#textSpacing-lineHeight");
+            const letterSpacingInput = node.querySelector("#textSpacing-letterSpacing");
+            const wordSpacingInput = node.querySelector("#textSpacing-wordSpacing");
+
+            isEnabledCheckbox.checked = textSpacing.isEnabled;
+            lineHeightInput.value = textSpacing.lineHeight;
+            letterSpacingInput.value = textSpacing.letterSpacing;
+            wordSpacingInput.value = textSpacing.wordSpacing;
+
+            const onChangeCheckbox = debounce(async () => {
+                if (isEnabledCheckbox.checked) {
+                    await this.start();
+                } else {
+                    await this.stop();
+                }
+            }, 400);//end of onChangeCheckbox
+
+            const onChangeInput = debounce(async () => {
+                const lineHeight = lineHeightInput.value;
+                const letterSpacing = letterSpacingInput.value;
+                const wordSpacing = wordSpacingInput.value;
+
+                chrome.storage.sync.get(["textSpacing"], async ({textSpacing}) => {
+
+                    chrome.storage.sync.set({
+                        "textSpacing": Object.assign(textSpacing, {
+                            lineHeight,
+                            letterSpacing,
+                            wordSpacing,
+                        }),
+                    });
+
+                    if (textSpacing.isEnabled) {
+                        await this.start();
+                    } else {
+                        await this.stop();
+                    }
+                });
+            }, 400);//end of onChangeInput
+
+            this.$(isEnabledCheckbox).addEventListener("change", onChangeCheckbox);
+            this.$(lineHeightInput).addEventListener("input", onChangeInput);
+            this.$(letterSpacingInput).addEventListener("input", onChangeInput);
+            this.$(wordSpacingInput).addEventListener("input", onChangeInput);
+        });
+    }
+
+    async start() {
+        const [tab] = await chrome.tabs.query({
+            "active": true,
+            "currentWindow": true,
+        });
+
+        chrome.scripting.executeScript({
+            "target": {"tabId": tab.id},
+            "func": function () {
+                Reedable.TextSpacing.start(document);
+            },
+        });
+    }
+
+    async stop() {
+        const [tab] = await chrome.tabs.query({
+            "active": true,
+            "currentWindow": true,
+        });
+
+        chrome.scripting.executeScript({
+            "target": {"tabId": tab.id},
+            "func": function () {
+                Reedable.TextSpacing.stop(document);
+            },
+        });
+    }
+};

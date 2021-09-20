@@ -12,41 +12,52 @@ export default class AccordionGroup extends Controller {
         );
 
         if (this.opts.isSinglePanelMode) {
-            node.addEventListener("click", event => {
-                const target = event && event.target;
-                const targetAccordionNode =
-                    target && target.closest(".Accordion");
-                const targetAccordionNodeController =
-                    Registry.getController(targetAccordionNode);
-
-                if (targetAccordionNodeController &&
-                    targetAccordionNodeController.isExpanded) {
-
-                    node.querySelectorAll(".Accordion").forEach(
-                        accordionNode => {
-                            if (accordionNode !== targetAccordionNode) {
-                                const accordionNodeController =
-                                    Registry.getController(accordionNode);
-
-                                if (accordionNodeController.isExpanded) {
-                                    accordionNodeController.collapse();
-                                }
-                            }
-                        },
-                    );
-                }
+            this.$(node).addEventListener("click", event => {
+                this.collapseOthers(event);
             });
         }
     }
 
+    collapseOthers(event) {
+        const node = this.nodeRef.deref();
+
+        if (node) {
+            const target = event && event.target;
+            const targetAccordionNode = target && target.closest(".Accordion");
+            const targetAccordionNodeController =
+                Registry.getController(targetAccordionNode);
+
+            if (targetAccordionNodeController &&
+                targetAccordionNodeController.isExpanded) {
+
+                node.querySelectorAll(".Accordion").forEach(
+                    accordionNode => {
+                        if (accordionNode !== targetAccordionNode) {
+                            const accordionNodeController =
+                                Registry.getController(accordionNode);
+
+                            if (accordionNodeController.isExpanded) {
+                                accordionNodeController.collapse();
+                            }
+                        }
+                    },
+                );
+            }
+        }
+    }
+
     getAccordionNodeList() {
-        return this.$(node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             return node.querySelectorAll(".Accordion");
-        });
+        }
     }
 
     async collapse() {
-        return this.$(node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             node.querySelectorAll(".Accordion").forEach(
                 accordionNode => {
                     const accordionNodeController =
@@ -54,11 +65,13 @@ export default class AccordionGroup extends Controller {
                     accordionNodeController.collapse();
                 },
             );
-        });
+        }
     }
 
     async expand() {
-        return this.$(node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             node.querySelectorAll(".Accordion").forEach(
                 (accordionNode, i) => {
                     const accordionNodeController =
@@ -73,6 +86,6 @@ export default class AccordionGroup extends Controller {
                     }
                 },
             );
-        });
+        }
     }
 }

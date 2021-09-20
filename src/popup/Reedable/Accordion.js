@@ -9,7 +9,7 @@ export default class Accordion extends Controller {
         const panelNodeId = headerNode.getAttribute("aria-controls");
         const panelNode = document.getElementById(panelNodeId);
 
-        headerNode.addEventListener("click", async event => {
+        this.$(headerNode).addEventListener("click", async event => {
             await this.toggle(event);
         });
 
@@ -21,17 +21,21 @@ export default class Accordion extends Controller {
     }
 
     get isExpanded() {
-        return this.$(node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             const headerNode = node.querySelector("[aria-controls]");
             return headerNode.getAttribute("aria-expanded") === "true";
-        });
+        }
     }
 
     get isCollapsed() {
-        return this.$(node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             const headerNode = node.querySelector("[aria-controls]");
             return headerNode.getAttribute("aria-expanded") === "false";
-        });
+        }
     }
 
     async toggle(event) {
@@ -46,7 +50,9 @@ export default class Accordion extends Controller {
     }
 
     async collapse() {
-        return this.$(async node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             const headerNode = node.querySelector("[aria-controls]");
             const panelNodeId = headerNode.getAttribute("aria-controls");
             const panelNode = document.getElementById(panelNodeId);
@@ -57,11 +63,13 @@ export default class Accordion extends Controller {
                 "bubbles": true,
             }));
             return node;
-        });
+        }
     }
 
     async expand() {
-        return this.$(async node => {
+        const node = this.nodeRef.deref();
+
+        if (node) {
             const headerNode = node.querySelector("[aria-controls]");
             const panelNodeId = headerNode.getAttribute("aria-controls");
             const panelNode = document.getElementById(panelNodeId);
@@ -72,6 +80,6 @@ export default class Accordion extends Controller {
                 "bubbles": true,
             }));
             return node;
-        });
+        }
     }
 }

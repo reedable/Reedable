@@ -3,17 +3,23 @@ export default class Registry {
     static nodeControllerMap = new WeakMap();
 
     static register(controller) {
-        return controller.$(node => {
+        const node = controller.nodeRef.deref();
+
+        if (node) {
             this.nodeControllerMap.set(node, controller);
-            return Registry;
-        });
+        }
+
+        return Registry;
     }
 
     static deregister(controller) {
-        return controller.$(node => {
+        const node = controller.nodeRef.deref();
+
+        if (node) {
             this.nodeControllerMap.delete(node);
-            return Registry;
-        });
+        }
+
+        return Registry;
     }
 
     static querySelector(selector) {
