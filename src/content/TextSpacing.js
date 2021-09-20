@@ -36,7 +36,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
 
     function processNodes(nodeList) {
         chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
-            nodeList.forEach(node => {
+            nodeList.forEach((node) => {
 
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (Reedable.DOM.getText(node)) {
@@ -157,7 +157,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
             observers.delete(documentFragment);
         }
 
-        documentFragment.querySelectorAll("*").forEach(node => {
+        documentFragment.querySelectorAll("*").forEach((node) => {
             restoreNode(node);
 
             if (node.shadowRoot) {

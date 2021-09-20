@@ -6,52 +6,43 @@ export default class TextSpadingAccordion extends Accordion {
     constructor(node, opts) {
         super(node, opts);
 
-        chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
-            const isEnabledCheckbox = node.querySelector("#textSpacing-isEnabled");
-            const lineHeightInput = node.querySelector("#textSpacing-lineHeight");
-            const letterSpacingInput = node.querySelector("#textSpacing-letterSpacing");
-            const wordSpacingInput = node.querySelector("#textSpacing-wordSpacing");
+        const isEnabledCheckbox = node.querySelector("#textSpacing-isEnabled");
+        const lineHeightInput = node.querySelector("#textSpacing-lineHeight");
+        const letterSpacingInput = node.querySelector("#textSpacing-letterSpacing");
+        const wordSpacingInput = node.querySelector("#textSpacing-wordSpacing");
 
+        const onChangeCheckbox = debounce(async () => {
+            if (isEnabledCheckbox.checked) {
+                await this.start();
+            } else {
+                await this.stop();
+            }
+        }, 400);
+
+        const onChangeInput = debounce(async () => {
+            chrome.storage.sync.get(["textSpacing"], async ({textSpacing}) => {
+                chrome.storage.sync.set({
+                    "textSpacing": Object.assign(textSpacing, {
+                        "lineHeight": lineHeightInput.value,
+                        "letterSpacing": letterSpacingInput.value,
+                        "wordSpacing": wordSpacingInput.value,
+                    }),
+                });
+
+                await onChangeCheckbox();
+            });
+        }, 400);
+
+        this.$(isEnabledCheckbox).addEventListener("change", onChangeCheckbox);
+        this.$(lineHeightInput).addEventListener("input", onChangeInput);
+        this.$(letterSpacingInput).addEventListener("input", onChangeInput);
+        this.$(wordSpacingInput).addEventListener("input", onChangeInput);
+
+        chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
             isEnabledCheckbox.checked = textSpacing.isEnabled;
             lineHeightInput.value = textSpacing.lineHeight;
             letterSpacingInput.value = textSpacing.letterSpacing;
             wordSpacingInput.value = textSpacing.wordSpacing;
-
-            const onChangeCheckbox = debounce(async () => {
-                if (isEnabledCheckbox.checked) {
-                    await this.start();
-                } else {
-                    await this.stop();
-                }
-            }, 400);//end of onChangeCheckbox
-
-            const onChangeInput = debounce(async () => {
-                const lineHeight = lineHeightInput.value;
-                const letterSpacing = letterSpacingInput.value;
-                const wordSpacing = wordSpacingInput.value;
-
-                chrome.storage.sync.get(["textSpacing"], async ({textSpacing}) => {
-
-                    chrome.storage.sync.set({
-                        "textSpacing": Object.assign(textSpacing, {
-                            lineHeight,
-                            letterSpacing,
-                            wordSpacing,
-                        }),
-                    });
-
-                    if (textSpacing.isEnabled) {
-                        await this.start();
-                    } else {
-                        await this.stop();
-                    }
-                });
-            }, 400);//end of onChangeInput
-
-            this.$(isEnabledCheckbox).addEventListener("change", onChangeCheckbox);
-            this.$(lineHeightInput).addEventListener("input", onChangeInput);
-            this.$(letterSpacingInput).addEventListener("input", onChangeInput);
-            this.$(wordSpacingInput).addEventListener("input", onChangeInput);
         });
     }
 

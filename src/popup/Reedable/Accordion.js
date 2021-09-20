@@ -9,7 +9,7 @@ export default class Accordion extends Controller {
         const panelNodeId = headerNode.getAttribute("aria-controls");
         const panelNode = document.getElementById(panelNodeId);
 
-        this.$(headerNode).addEventListener("click", async event => {
+        this.$(headerNode).addEventListener("click", async (event) => {
             await this.toggle(event);
         });
 

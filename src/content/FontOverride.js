@@ -45,7 +45,7 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
 
     function processNodes(nodeList) {
         chrome.storage.sync.get(["fontOverride"], ({fontOverride}) => {
-            nodeList.forEach(node => {
+            nodeList.forEach((node) => {
 
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (Reedable.DOM.getText(node)) {
@@ -144,7 +144,7 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
             observers.delete(documentFragment);
         }
 
-        documentFragment.querySelectorAll("*").forEach(node => {
+        documentFragment.querySelectorAll("*").forEach((node) => {
             restoreNode(node);
 
             if (node.shadowRoot) {

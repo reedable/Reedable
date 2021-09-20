@@ -32,16 +32,54 @@ export default class Controller {
         this.eventListenerSetMap.clear();
     }
 
-    $(node) {
+    $(node = this.nodeRef.deref()) {
         const addEventListener = (eventName, eventListener) => {
-            const eventListenerSet =
-                this.eventListenerSetMap.get(node) || new Set();
+            if (node) {
+                const eventListenerSet =
+                    this.eventListenerSetMap.get(node) || new Set();
 
-            node.addEventListener(eventName, eventListener);
-            eventListenerSet.add({eventName, eventListener});
-            this.eventListenerSetMap.set(node, eventListenerSet);
+                node.addEventListener(eventName, eventListener);
+                eventListenerSet.add({eventName, eventListener});
+                this.eventListenerSetMap.set(node, eventListenerSet);
+            }
         };
 
-        return {addEventListener};
+        const init = (selectorInitMap = {}) => {
+            if (node) {
+                return Object.keys(selectorInitMap).map((selector) => {
+                    const nodeList = node.querySelectorAll(selector);
+                    const initializer = selectorInitMap[selector];
+
+                    return Array.from(nodeList).map((node) => {
+                        try {
+                            const controller = Registry.getController(node);
+
+                            if (controller) {
+
+                                //
+                                // TODO Figure out a better way to handle this.
+                                //
+
+                                console.log(
+                                    "node is already associated with a " +
+                                    "different controller. Did you forget " +
+                                    "to de-register it?", node, controller,
+                                );
+                            } else {
+                                return initializer(node);
+                            }
+                        } catch (cause) {
+                            console.error(
+                                "Error while calling initializer for",
+                                selector,
+                                cause,
+                            );
+                        }
+                    });
+                });
+            }
+        };
+
+        return {addEventListener, init};
     }
 }

@@ -33,7 +33,7 @@ export default class Registry {
     static querySelectorAll(selector) {
         const nodeList = document.querySelectorAll(selector);
 
-        return Array.from(nodeList).map(node => {
+        return Array.from(nodeList).map((node) => {
             return this.nodeControllerMap.get(node);
         });
     }

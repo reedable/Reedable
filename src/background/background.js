@@ -4,12 +4,6 @@ const manifest = chrome.runtime.getManifest();
 
 chrome.runtime.onInstalled.addListener(async () => {
 
-    async function v1_0() {
-        return new Promise(resolve => {
-
-        });
-    }
-
     const reedable = {
         "fontOverride": {
             "isExpanded": true,

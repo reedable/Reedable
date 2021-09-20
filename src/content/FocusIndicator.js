@@ -49,7 +49,7 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
 
     function _start(documentFragment) {
         documentFragment.addEventListener("focusin", onFocusIn);
-        documentFragment.querySelectorAll("*").forEach(node => {
+        documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
                 _start(node.shadowRoot);
             }
@@ -58,7 +58,7 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
 
     function _stop(documentFragment) {
         documentFragment.removeEventListener("focusin", onFocusIn);
-        documentFragment.querySelectorAll("*").forEach(node => {
+        documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
                 _stop(node.shadowRoot);
             }

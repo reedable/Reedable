@@ -7,12 +7,13 @@ export default class AccordionGroup extends Controller {
     constructor(node, opts) {
         super(node, opts);
 
-        Array.from(node.querySelectorAll(".Accordion")).map(
-            accordionNode => new Accordion(accordionNode),
-        );
+        this.$(node).init({
+            ".Accordion": (n) => new Accordion(n)
+        });
 
+        // TODO Consider doing this as maxOpenPanel and minOpenPanel
         if (this.opts.isSinglePanelMode) {
-            this.$(node).addEventListener("click", event => {
+            this.$(node).addEventListener("click", (event) => {
                 this.collapseOthers(event);
             });
         }
@@ -24,24 +25,18 @@ export default class AccordionGroup extends Controller {
         if (node) {
             const target = event && event.target;
             const targetAccordionNode = target && target.closest(".Accordion");
-            const targetAccordionController =
-                Registry.getController(targetAccordionNode);
+            const targetAccordion = Registry.getController(targetAccordionNode);
 
-            if (targetAccordionController &&
-                targetAccordionController.isExpanded) {
+            if (targetAccordion && targetAccordion.isExpanded) {
+                node.querySelectorAll(".Accordion").forEach((accordionNode) => {
+                    if (accordionNode !== targetAccordionNode) {
+                        const accordion = Registry.getController(accordionNode);
 
-                node.querySelectorAll(".Accordion").forEach(
-                    accordionNode => {
-                        if (accordionNode !== targetAccordionNode) {
-                            const accordionController =
-                                Registry.getController(accordionNode);
-
-                            if (accordionController.isExpanded) {
-                                accordionController.collapse();
-                            }
+                        if (accordion.isExpanded) {
+                            accordion.collapse();
                         }
-                    },
-                );
+                    }
+                });
             }
         }
     }
@@ -58,13 +53,10 @@ export default class AccordionGroup extends Controller {
         const node = this.nodeRef.deref();
 
         if (node) {
-            node.querySelectorAll(".Accordion").forEach(
-                accordionNode => {
-                    const accordionController =
-                        Registry.getController(accordionNode);
-                    accordionController.collapse();
-                },
-            );
+            node.querySelectorAll(".Accordion").forEach((accordionNode) => {
+                const accordion = Registry.getController(accordionNode);
+                accordion.collapse();
+            });
         }
     }
 
@@ -72,20 +64,17 @@ export default class AccordionGroup extends Controller {
         const node = this.nodeRef.deref();
 
         if (node) {
-            node.querySelectorAll(".Accordion").forEach(
-                (accordionNode, i) => {
-                    const accordionController =
-                        Registry.getController(accordionNode);
+            node.querySelectorAll(".Accordion").forEach((accordionNode, i) => {
+                const accordion = Registry.getController(accordionNode);
 
-                    if (accordionController) {
-                        if (!this.opts.isSinglePanelMode || i === 0) {
-                            accordionController.expand();
-                        } else if (this.opts.isSinglePanelMode) {
-                            accordionController.collapse();
-                        }
+                if (accordion) {
+                    if (!this.opts.isSinglePanelMode || i === 0) {
+                        accordion.expand();
+                    } else if (this.opts.isSinglePanelMode) {
+                        accordion.collapse();
                     }
-                },
-            );
+                }
+            });
         }
     }
 }
