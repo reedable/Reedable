@@ -33,9 +33,9 @@ chrome.runtime.onInstalled.addListener(async () => {
 
     const default_focusIndicator = {
         "isEnabled": true,
-        "boxShadow": "0 0 0 0.15em orange,\n0 0 0 0.3em white",
-        "borderRadius": "0.3em",
-        "transition": "0.1s",
+        "boxShadow": "0 0 0 0.25em orange,\n0 0 0 0.5em white",
+        "borderRadius": "0.5em",
+        "transition": "0.2s",
     };
 
     chrome.storage.sync.get(
