@@ -4,7 +4,7 @@ const manifest = chrome.runtime.getManifest();
 
 chrome.runtime.onInstalled.addListener(async () => {
 
-    const reedable = {
+    const default_reedable = {
         "fontOverride": {
             "isExpanded": true,
         },
@@ -16,21 +16,22 @@ chrome.runtime.onInstalled.addListener(async () => {
         },
     };
 
-    const textSpacing = {
+    const default_textSpacing = {
         "isEnabled": true,
-        "lineHeight": "2",
-        "letterSpacing": "0.1em",
-        "wordSpacing": "0.4em",
+        "lineHeight": "1.5",
+        "afterParagraph": "2em",
+        "letterSpacing": "0.12em",
+        "wordSpacing": "0.16em",
     };
 
-    const fontOverride = {
+    const default_fontOverride = {
         "isEnabled": true,
         "fontSizeMin": "10pt",
         "fontSizeMag": "100",
         "fontFamily": "",
     };
 
-    const focusIndicator = {
+    const default_focusIndicator = {
         "isEnabled": true,
         "boxShadow": "0 0 0 0.15em orange,\n0 0 0 0.3em white",
         "borderRadius": "0.3em",
@@ -41,31 +42,41 @@ chrome.runtime.onInstalled.addListener(async () => {
         ["reedable", "textSpacing", "fontOverride", "focusIndicator"],
         async (v1_1) => {
 
-            log("v1.1", v1_1);
+            log("v1.1", v1_1); //user provided v1.1 pref
 
             chrome.storage.sync.get(
                 ["Reedable", "FontOverride", "TextSpacing", "FocusIndicator"],
                 (v1_0) => {
 
-                    log("v1.0", v1_0);
+                    log("v1.0", v1_0); //user provided v1.0 pref
 
-                    const store = Object.assign({
-                        reedable,
-                        textSpacing,
-                        fontOverride,
-                        focusIndicator,
-                    }, {
-                        "reedable": v1_0.Reedable,
-                        "textSpacing": v1_0.TextSpacing,
-                        "fontOverride": v1_0.FontOverride,
-                        "focusIndicator": v1_0.FocusIndicator,
-                    }, v1_1);
+                    const pref = Object.assign({
+                        "version": manifest.version,
+                        "reedable": Object.assign(
+                            default_reedable,
+                            v1_0.Reedable,
+                            v1_1.reedable,
+                        ),
+                        "textSpacing": Object.assign(
+                            default_textSpacing,
+                            v1_0.TextSpacing,
+                            v1_1.textSpacing,
+                        ),
+                        "fontOverride": Object.assign(
+                            default_fontOverride,
+                            v1_0.FontOverride,
+                            v1_1.fontOverride,
+                        ),
+                        "focusIndicator": Object.assign(
+                            default_focusIndicator,
+                            v1_0.FocusIndicator,
+                            v1_1.focusIndicator,
+                        ),
+                    });
 
-                    store.version = manifest.version;
+                    log("pref", pref); //user pref to be stored
 
-                    log(store);
-
-                    chrome.storage.sync.set(store);
+                    chrome.storage.sync.set(pref);
                 },
             );
         },

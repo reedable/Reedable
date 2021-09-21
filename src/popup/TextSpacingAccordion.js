@@ -8,6 +8,7 @@ export default class TextSpadingAccordion extends Accordion {
 
         const isEnabledCheckbox = node.querySelector("#textSpacing-isEnabled");
         const lineHeightInput = node.querySelector("#textSpacing-lineHeight");
+        const afterParagraphInput = node.querySelector("#textSpacing-afterParagraph");
         const letterSpacingInput = node.querySelector("#textSpacing-letterSpacing");
         const wordSpacingInput = node.querySelector("#textSpacing-wordSpacing");
 
@@ -24,6 +25,7 @@ export default class TextSpadingAccordion extends Accordion {
                 chrome.storage.sync.set({
                     "textSpacing": Object.assign(textSpacing, {
                         "lineHeight": lineHeightInput.value,
+                        "afterParagraph": afterParagraphInput.value,
                         "letterSpacing": letterSpacingInput.value,
                         "wordSpacing": wordSpacingInput.value,
                     }),
@@ -35,12 +37,14 @@ export default class TextSpadingAccordion extends Accordion {
 
         this.$(isEnabledCheckbox).addEventListener("change", onChangeCheckbox);
         this.$(lineHeightInput).addEventListener("input", onChangeInput);
+        this.$(afterParagraphInput).addEventListener("input", onChangeInput);
         this.$(letterSpacingInput).addEventListener("input", onChangeInput);
         this.$(wordSpacingInput).addEventListener("input", onChangeInput);
 
         chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
             isEnabledCheckbox.checked = textSpacing.isEnabled;
             lineHeightInput.value = textSpacing.lineHeight;
+            afterParagraphInput.value = textSpacing.afterParagraph;
             letterSpacingInput.value = textSpacing.letterSpacing;
             wordSpacingInput.value = textSpacing.wordSpacing;
         });
