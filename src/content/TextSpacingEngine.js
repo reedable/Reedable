@@ -1,57 +1,34 @@
 window.Reedable = window.Reedable || {};
 
-Reedable.TextSpacing = Reedable.TextSpacing || (function () {
-    "use strict";
-
-    const observers = new WeakMap();
-
-    function _start(documentFragment) {
-        let observer = observers.get(documentFragment);
-
-        if (!observer) {
-            observer = createObserver(documentFragment, processNodes);
-            observers.set(documentFragment, observer);
+Reedable.TextSpacingEngine = Reedable.TextSpacingEngine || (function (
+    {
+        DOM,
+        Engine,
+    },
+) {
+    TextSpacingEngine.getInstance = function () {
+        if (!TextSpacingEngine.instance) {
+            TextSpacingEngine.instance = new TextSpacingEngine();
         }
 
-        observer.observe(documentFragment, {
-            "attributes": false,
-            "childList": true,
-            "subtree": true,
-        });
+        return TextSpacingEngine.instance;
+    };
 
-        processNodes(documentFragment.querySelectorAll("*"));
+    function TextSpacingEngine() {
+        Engine.call(this, "textSpacing");
     }
 
-    function createObserver(doc, processNodes) {
-        return new MutationObserver((mutationList) => {
-            for (let i = 0; i < mutationList.length; i++) {
-                const mutation = mutationList[i];
+    TextSpacingEngine.prototype = Object.create(Engine.prototype);
 
-                if (mutation.type === "childList") {
-                    processNodes(mutation.addedNodes);
-                }
-            }
-        });
-    }
+    TextSpacingEngine.constructor = TextSpacingEngine;
 
-    function processNodes(nodeList) {
-        chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
-            nodeList.forEach((node) => {
+    Object.assign(TextSpacingEngine.prototype, {
+        _processNode,
+        _restoreNode,
+    });
 
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (Reedable.DOM.getText(node)) {
-                        processNode(node, textSpacing);
-                    }
-                }
+    async function _processNode(node, enginePref) {
 
-                if (node.shadowRoot) {
-                    _start(node.shadowRoot);
-                }
-            });
-        });
-    }
-
-    async function processNode(node, textSpacing) {
         const {
             reedableLineHeight,
             reedableMarginBottom,
@@ -66,9 +43,10 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
             typeof reedableWordSpacing !== "undefined" ||
             typeof reedableTextAlign !== "undefined") {
 
-            await restoreNode(node);
+            await this._restoreNode(node);
         }
 
+        //FIXME Why did I make this async?
         return (async () => {
             const {
                 lineHeight,
@@ -85,16 +63,16 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 const computedLineHeight = computedStyle.lineHeight || "";
 
                 if (computedLineHeight === "normal") {
-                    return Reedable.DOM.parseSize(
-                        textSpacing.lineHeight, computedStyle);
+                    return DOM.parseLength(
+                        enginePref.lineHeight, computedStyle);
                 }
 
                 const estimatedLineHeight =
                     parseFloat(computedLineHeight) /
                     parseFloat(computedFontSize);
 
-                if (estimatedLineHeight < textSpacing.lineHeight) {
-                    return textSpacing.lineHeight;
+                if (estimatedLineHeight < enginePref.lineHeight) {
+                    return enginePref.lineHeight;
                 }
             }
 
@@ -104,11 +82,11 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                     const computedMarginBottom = computedStyle.marginBottom;
 
                     if (parseFloat(computedMarginBottom) <
-                        Reedable.DOM.parseSize(
-                            textSpacing.afterParagraph,
+                        DOM.parseLength(
+                            enginePref.afterParagraph,
                             computedStyle)) {
 
-                        return textSpacing.afterParagraph;
+                        return enginePref.afterParagraph;
                     }
                 }
             }
@@ -117,7 +95,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 const computedLetterSpacing = computedStyle.letterSpacing;
 
                 if (computedLetterSpacing === "normal") {
-                    return textSpacing.letterSpacing;
+                    return enginePref.letterSpacing;
                 }
 
                 const estimatedLetterSpacing =
@@ -125,11 +103,11 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                     parseFloat(computedFontSize);
 
                 if (estimatedLetterSpacing <
-                    Reedable.DOM.parseSize(
-                        textSpacing.letterSpacing,
+                    DOM.parseLength(
+                        enginePref.letterSpacing,
                         computedStyle)) {
 
-                    return textSpacing.letterSpacing;
+                    return enginePref.letterSpacing;
                 }
             }
 
@@ -137,7 +115,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 const computedWordSpacing = computedStyle.wordSpacing;
 
                 if (computedWordSpacing === "normal") {
-                    return textSpacing.wordSpacing;
+                    return enginePref.wordSpacing;
                 }
 
                 const computedFontSize = computedStyle.fontSize;
@@ -146,11 +124,11 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                     parseFloat(computedFontSize);
 
                 if (estimatedLetterSpacing <
-                    Reedable.DOM.parseSize(
-                        textSpacing.wordSpacing,
+                    DOM.parseLength(
+                        enginePref.wordSpacing,
                         computedStyle)) {
 
-                    return textSpacing.wordSpacing;
+                    return enginePref.wordSpacing;
                 }
             }
 
@@ -165,28 +143,13 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
             node.style.marginBottom = getMarginBottom();
             node.style.letterSpacing = getLetterSpacing();
             node.style.wordSpacing = getWordSpacing();
-            node.style.textAlign = textSpacing.textAlign || "inherit";
+            node.style.textAlign = enginePref.textAlign || "inherit";
         })();
     }
 
-    function _stop(documentFragment) {
-        const observer = observers.get(documentFragment);
+    async function _restoreNode(node) {
 
-        if (observer) {
-            observer.disconnect();
-            observers.delete(documentFragment);
-        }
-
-        documentFragment.querySelectorAll("*").forEach((node) => {
-            restoreNode(node);
-
-            if (node.shadowRoot) {
-                _stop(node.shadowRoot);
-            }
-        });
-    }
-
-    async function restoreNode(node) {
+        // FIXME Why did I made this async? Consider performance implications
         return (async () => {
             const {
                 reedableLineHeight,
@@ -210,32 +173,6 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
         })();
     }
 
-    return {
-        "start": function (doc) {
+    return TextSpacingEngine;
 
-            if (doc.body) {
-                _start(doc);
-            } else {
-                doc.addEventListener("DOMContentLoaded", () => _start(doc));
-            }
-
-            chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
-                textSpacing.isEnabled = true;
-                chrome.storage.sync.set({textSpacing});
-            });
-        },
-        "stop": function (doc) {
-
-            if (doc.body) {
-                _stop(doc);
-            } else {
-                doc.addEventListener("DOMContentLoaded", () => _stop(doc));
-            }
-
-            chrome.storage.sync.get(["textSpacing"], ({textSpacing}) => {
-                textSpacing.isEnabled = false;
-                chrome.storage.sync.set({textSpacing});
-            });
-        },
-    };
-})();
+})(Reedable);

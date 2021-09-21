@@ -55,7 +55,7 @@ export default class FontOverrideAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
-                Reedable.FontOverride.start(document);
+                Reedable.FontOverrideEngine.getInstance().start(document);
             },
         });
     }
@@ -69,7 +69,7 @@ export default class FontOverrideAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
-                Reedable.FontOverride.stop(document);
+                Reedable.FontOverrideEngine.getInstance().stop(document);
             },
         });
     }

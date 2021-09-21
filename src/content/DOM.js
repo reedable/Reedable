@@ -19,9 +19,9 @@ Reedable.DOM = Reedable.DOM || (function () {
             .replace(/\s+/g, " ");
     }
 
-    function parseSize(string, node) {
+    function parseLength(string, computedStyle) {
         return parseAbsoluteSize(string) ||
-            parseRelativeSize(string, node) ||
+            parseRelativeSize(string, computedStyle) ||
             parseFloat(string);
     }
 
@@ -51,5 +51,6 @@ Reedable.DOM = Reedable.DOM || (function () {
         }
     }
 
-    return {parseSize, getText};
-})();
+    return {parseLength, getText};
+
+})(Reedable);

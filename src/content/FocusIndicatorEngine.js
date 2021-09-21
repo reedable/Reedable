@@ -1,7 +1,30 @@
 window.Reedable = window.Reedable || {};
 
-Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
-    "use strict";
+Reedable.FocusIndicatorEngine = Reedable.FocusIndicatorEngine || (function (
+    {
+        Engine,
+    },
+) {
+    FocusIndicatorEngine.getInstance = function () {
+        if (!FocusIndicatorEngine.instance) {
+            FocusIndicatorEngine.instance = new FocusIndicatorEngine();
+        }
+
+        return FocusIndicatorEngine.instance;
+    };
+
+    function FocusIndicatorEngine() {
+        Engine.call(this, "focusIndicator");
+    }
+
+    FocusIndicatorEngine.prototype = Object.create(Engine.prototype);
+
+    FocusIndicatorEngine.constructor = FocusIndicatorEngine;
+
+    Object.assign(FocusIndicatorEngine.prototype, {
+        _start,
+        _stop,
+    });
 
     function onFocusIn(event) {
         const node = event.target;
@@ -17,12 +40,15 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
         node.dataset.reedableTransition = transition;
         node.dataset.reedableOutline = outline;
 
-        chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
-            node.style.borderRadius = focusIndicator.borderRadius;
-            node.style.boxShadow = focusIndicator.boxShadow;
-            node.style.transition = focusIndicator.transition;
+        this._onFocusOut = onFocusOut.bind(this);
+
+        chrome.storage.sync.get([this.engineName], (pref) => {
+            const enginePref = pref[this.engineName];
+            node.style.borderRadius = enginePref.borderRadius;
+            node.style.boxShadow = enginePref.boxShadow;
+            node.style.transition = enginePref.transition;
             node.style.outline = "none";
-            node.addEventListener("focusout", onFocusOut);
+            node.addEventListener("focusout", this._onFocusOut);
         });
     }
 
@@ -44,11 +70,12 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
         node.style.boxShadow = reedableBoxShadow || "";
         node.style.transition = reedableTransition || "";
         node.style.outline = reedableOutline || "";
-        node.removeEventListener("focusout", onFocusOut);
+        node.removeEventListener("focusout", this._onFocusOut);
     }
 
     function _start(documentFragment) {
-        documentFragment.addEventListener("focusin", onFocusIn);
+        this._onFocusIn = onFocusIn.bind(this);
+        documentFragment.addEventListener("focusin", this._onFocusIn);
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
                 _start(node.shadowRoot);
@@ -57,7 +84,7 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
     }
 
     function _stop(documentFragment) {
-        documentFragment.removeEventListener("focusin", onFocusIn);
+        documentFragment.removeEventListener("focusin", this._onFocusIn);
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
                 _stop(node.shadowRoot);
@@ -65,30 +92,6 @@ Reedable.FocusIndicator = Reedable.FocusIndicator || (function () {
         });
     }
 
-    return {
-        "start": function (doc) {
-            if (doc.body) {
-                _start(doc);
-            } else {
-                doc.addEventListener("DOMContentLoaded", () => _start(doc));
-            }
+    return FocusIndicatorEngine;
 
-            chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
-                focusIndicator.isEnabled = true;
-                chrome.storage.sync.set({focusIndicator});
-            });
-        },
-        "stop": function (doc) {
-            if (doc.body) {
-                _stop(doc);
-            } else {
-                doc.addEventListener("DOMContentLoaded", () => _stop(doc));
-            }
-
-            chrome.storage.sync.get(["focusIndicator"], ({focusIndicator}) => {
-                focusIndicator.isEnabled = false;
-                chrome.storage.sync.set({focusIndicator});
-            });
-        },
-    };
-})();
+})(Reedable);

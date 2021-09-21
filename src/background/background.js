@@ -100,14 +100,14 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
-                        Reedable.TextSpacing.start(document);
+                        Reedable.TextSpacingEngine.getInstance().start(document);
                     },
                 });
             } else {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
-                        Reedable.TextSpacing.stop(document);
+                        Reedable.TextSpacingEngine.getInstance().stop(document);
                     },
                 });
             }
@@ -116,14 +116,14 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
-                        Reedable.FontOverride.start(document);
+                        Reedable.FontOverrideEngine.getInstance().start(document);
                     },
                 });
             } else {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
-                        Reedable.FontOverride.stop(document);
+                        Reedable.FontOverrideEngine.getInstance().stop(document);
                     },
                 });
             }
@@ -132,14 +132,14 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
-                        Reedable.FocusIndicator.start(document);
+                        Reedable.FocusIndicatorEngine.getInstance().start(document);
                     },
                 });
             } else {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
-                        Reedable.FocusIndicator.stop(document);
+                        Reedable.FocusIndicatorEngine.getInstance().stop(document);
                     },
                 });
             }

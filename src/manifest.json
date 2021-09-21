@@ -34,9 +34,10 @@
       "run_at": "document_start",
       "js": [
         "/content/DOM.js",
-        "/content/FocusIndicator.js",
-        "/content/FontOverride.js",
-        "/content/TextSpacing.js",
+        "/content/Engine.js",
+        "/content/FocusIndicatorEngine.js",
+        "/content/FontOverrideEngine.js",
+        "/content/TextSpacingEngine.js",
         "/content/main.js"
       ]
     }

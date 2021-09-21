@@ -59,7 +59,7 @@ export default class TextSpadingAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
-                Reedable.TextSpacing.start(document);
+                Reedable.TextSpacingEngine.getInstance().start(document);
             },
         });
     }
@@ -73,7 +73,7 @@ export default class TextSpadingAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
-                Reedable.TextSpacing.stop(document);
+                Reedable.TextSpacingEngine.getInstance().stop(document);
             },
         });
     }

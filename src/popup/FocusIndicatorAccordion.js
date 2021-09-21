@@ -55,7 +55,7 @@ export default class FocusIndicatorAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
-                Reedable.FocusIndicator.start(document);
+                Reedable.FocusIndicatorEngine.getInstance().start(document);
             },
         });
     }
@@ -69,7 +69,7 @@ export default class FocusIndicatorAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
-                Reedable.FocusIndicator.stop(document);
+                Reedable.FocusIndicatorEngine.getInstance().stop(document);
             },
         });
     }
