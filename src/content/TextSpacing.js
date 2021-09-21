@@ -51,7 +51,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
         });
     }
 
-    async function processNode(node, TextSpacing) {
+    async function processNode(node, textSpacing) {
         const {
             reedableLineHeight,
             reedableMarginBottom,
@@ -86,15 +86,15 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
 
                 if (computedLineHeight === "normal") {
                     return Reedable.DOM.parseSize(
-                        TextSpacing.lineHeight, computedStyle);
+                        textSpacing.lineHeight, computedStyle);
                 }
 
                 const estimatedLineHeight =
                     parseFloat(computedLineHeight) /
                     parseFloat(computedFontSize);
 
-                if (estimatedLineHeight < TextSpacing.lineHeight) {
-                    return TextSpacing.lineHeight;
+                if (estimatedLineHeight < textSpacing.lineHeight) {
+                    return textSpacing.lineHeight;
                 }
             }
 
@@ -105,10 +105,10 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
 
                     if (parseFloat(computedMarginBottom) <
                         Reedable.DOM.parseSize(
-                            TextSpacing.afterParagraph,
+                            textSpacing.afterParagraph,
                             computedStyle)) {
 
-                        return TextSpacing.afterParagraph;
+                        return textSpacing.afterParagraph;
                     }
                 }
             }
@@ -117,7 +117,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 const computedLetterSpacing = computedStyle.letterSpacing;
 
                 if (computedLetterSpacing === "normal") {
-                    return TextSpacing.letterSpacing;
+                    return textSpacing.letterSpacing;
                 }
 
                 const estimatedLetterSpacing =
@@ -126,10 +126,10 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
 
                 if (estimatedLetterSpacing <
                     Reedable.DOM.parseSize(
-                        TextSpacing.letterSpacing,
+                        textSpacing.letterSpacing,
                         computedStyle)) {
 
-                    return TextSpacing.letterSpacing;
+                    return textSpacing.letterSpacing;
                 }
             }
 
@@ -137,7 +137,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
                 const computedWordSpacing = computedStyle.wordSpacing;
 
                 if (computedWordSpacing === "normal") {
-                    return TextSpacing.wordSpacing;
+                    return textSpacing.wordSpacing;
                 }
 
                 const computedFontSize = computedStyle.fontSize;
@@ -147,10 +147,10 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
 
                 if (estimatedLetterSpacing <
                     Reedable.DOM.parseSize(
-                        TextSpacing.wordSpacing,
+                        textSpacing.wordSpacing,
                         computedStyle)) {
 
-                    return TextSpacing.wordSpacing;
+                    return textSpacing.wordSpacing;
                 }
             }
 
@@ -165,7 +165,7 @@ Reedable.TextSpacing = Reedable.TextSpacing || (function () {
             node.style.marginBottom = getMarginBottom();
             node.style.letterSpacing = getLetterSpacing();
             node.style.wordSpacing = getWordSpacing();
-            node.style.textAlign = TextSpacing.textAlign || "inherit";
+            node.style.textAlign = textSpacing.textAlign || "inherit";
         })();
     }
 

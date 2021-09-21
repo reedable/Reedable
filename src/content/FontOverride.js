@@ -60,7 +60,7 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
         });
     }
 
-    async function processNode(node, FontOverride) {
+    async function processNode(node, fontOverride) {
         const {
             reedableFontSize,
             reedableFontFamily,
@@ -83,7 +83,7 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
 
             function getFontSize() {
                 const fontSizeMinPx = Reedable.DOM.parseSize(
-                    FontOverride.fontSizeMin, computedStyle);
+                    fontOverride.fontSizeMin, computedStyle);
                 let reedableFontSizeMag = node.dataset.reedableFontSizeMag;
                 let fontSizeTargetPx;
 
@@ -95,17 +95,17 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
                         reedableFontSizeMag =
                             reedableFontSizeMagNode.dataset.reedableFontSizeMag;
                     } else {
-                        node.dataset.reedableFontSizeMag = FontOverride.fontSizeMag;
+                        node.dataset.reedableFontSizeMag = fontOverride.fontSizeMag;
                     }
                 }
 
-                if (reedableFontSizeMag !== FontOverride.fontSizeMag) {
+                if (reedableFontSizeMag !== fontOverride.fontSizeMag) {
                     fontSizeTargetPx =
                         parseFloat(computedFontSize) *
-                        Number(FontOverride.fontSizeMag) / 100;
+                        Number(fontOverride.fontSizeMag) / 100;
 
                     node.dataset.reedableFontSizeMag =
-                        FontOverride.fontSizeMag;
+                        fontOverride.fontSizeMag;
                 } else {
                     fontSizeTargetPx = parseFloat(computedStyle.fontSize);
                 }
@@ -121,8 +121,8 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
             function getFontFamily() {
                 const computedFontFamily = computedStyle.fontFamily;
 
-                if (computedFontFamily !== FontOverride.fontFamily) {
-                    return FontOverride.fontFamily;
+                if (computedFontFamily !== fontOverride.fontFamily) {
+                    return fontOverride.fontFamily;
                 }
 
                 return "";
@@ -170,11 +170,11 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
 
     return {
         "start": function (doc) {
-            let style = doc.querySelector("#reedable-FontOverride");
+            let style = doc.querySelector("#reedableFontOverride");
 
             if (!style) {
                 style = doc.createElement("style");
-                style.id = "reedable-FontOverride";
+                style.id = "reedableFontOverride";
                 style.appendChild(doc.createTextNode(FONT_FACE_CSS));
                 (doc.head || doc).appendChild(style);
             }
@@ -191,7 +191,7 @@ Reedable.FontOverride = Reedable.FontOverride || (function () {
             });
         },
         "stop": function (doc) {
-            const style = doc.querySelector("#reedable-FontOverride");
+            const style = doc.querySelector("#reedableFontOverride");
 
             if (style) {
                 style.remove();
