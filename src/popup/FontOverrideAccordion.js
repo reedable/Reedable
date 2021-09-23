@@ -1,5 +1,5 @@
 import Accordion from "./Reedable/Accordion.js";
-import debounce from "./Reedable/debounce.js";
+import Debounce from "./Reedable/Debounce.js";
 
 export default class FontOverrideAccordion extends Accordion {
 
@@ -11,7 +11,7 @@ export default class FontOverrideAccordion extends Accordion {
         const fontSizeMagInput = node.querySelector("#fontOverride-fontSizeMag");
         const fontFamilyInput = node.querySelector("#fontOverride-fontFamily");
 
-        const onChangeCheckbox = debounce(async () => {
+        const onChangeCheckbox = Debounce.trailing(async () => {
             if (isEnabledCheckbox.checked) {
                 await this.start();
             } else {
@@ -19,7 +19,7 @@ export default class FontOverrideAccordion extends Accordion {
             }
         }, 400);
 
-        const onChangeInput = debounce(async () => {
+        const onChangeInput = Debounce.trailing(async () => {
             chrome.storage.sync.get(["fontOverride"], async ({fontOverride}) => {
                 chrome.storage.sync.set({
                     "fontOverride": Object.assign(fontOverride, {

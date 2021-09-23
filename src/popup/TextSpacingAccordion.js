@@ -1,5 +1,5 @@
 import Accordion from "./Reedable/Accordion.js";
-import debounce from "./Reedable/debounce.js";
+import Debounce from "./Reedable/Debounce.js";
 
 export default class TextSpadingAccordion extends Accordion {
 
@@ -12,7 +12,7 @@ export default class TextSpadingAccordion extends Accordion {
         const letterSpacingInput = node.querySelector("#textSpacing-letterSpacing");
         const wordSpacingInput = node.querySelector("#textSpacing-wordSpacing");
 
-        const onChangeCheckbox = debounce(async () => {
+        const onChangeCheckbox = Debounce.trailing(async () => {
             if (isEnabledCheckbox.checked) {
                 await this.start();
             } else {
@@ -20,7 +20,7 @@ export default class TextSpadingAccordion extends Accordion {
             }
         }, 400);
 
-        const onChangeInput = debounce(async () => {
+        const onChangeInput = Debounce.trailing(async () => {
             chrome.storage.sync.get(["textSpacing"], async ({textSpacing}) => {
                 chrome.storage.sync.set({
                     "textSpacing": Object.assign(textSpacing, {

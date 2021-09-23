@@ -46,6 +46,18 @@ if git rev-parse "${version}" > /dev/null 2>&1; then
 fi
 
 #++
+# Check to see if the version number in the package.json is the same.
+#
+package_version=$(grep '"version"' package.json |\
+    sed -e 's/[",]//g' |\
+    awk '{printf("v%s", $2)}')
+
+if [ "${version}" != "${package_version}" ] ; then
+    echo "src/manifest.json and package.json version conflict"
+    exit 203
+fi
+
+#++
 # If we are currently not on the target branch, i.e. we should then
 # be on develop branch, we need to create the new target branch.
 

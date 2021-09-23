@@ -1,5 +1,5 @@
 import Accordion from "./Reedable/Accordion.js";
-import debounce from "./Reedable/debounce.js";
+import Debounce from "./Reedable/Debounce.js";
 
 export default class FocusIndicatorAccordion extends Accordion {
 
@@ -11,7 +11,7 @@ export default class FocusIndicatorAccordion extends Accordion {
         const borderRadiusInput = node.querySelector("#focusIndicator-borderRadius");
         const transitionInput = node.querySelector("#focusIndicator-transition");
 
-        const onChangeCheckbox = debounce(async () => {
+        const onChangeCheckbox = Debounce.trailing(async () => {
             if (isEnabledCheckbox.checked) {
                 await this.start();
             } else {
@@ -19,7 +19,7 @@ export default class FocusIndicatorAccordion extends Accordion {
             }
         }, 400);
 
-        const onChangeInput = debounce(async () => {
+        const onChangeInput = Debounce.trailing(async () => {
             chrome.storage.sync.get(["focusIndicator"], async ({focusIndicator}) => {
                 chrome.storage.sync.set({
                     "focusIndicator": Object.assign(focusIndicator, {
