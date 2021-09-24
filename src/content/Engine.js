@@ -74,12 +74,16 @@ Reedable.Engine = Reedable.Engine || (function (
     }
 
     function _processNodes(nodeList) {
-        chrome.storage.sync.get([this.engineName], (pref) => {
-            nodeList.forEach((node) => {
+        chrome.storage.sync.get([this.engineName], (pref = {}) => {
+            (nodeList || []).forEach((node) => {
 
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     if (DOM.getText(node)) {
-                        this._processNode(node, pref[this.engineName]);
+                        try {
+                            this._processNode(node, pref[this.engineName]);
+                        } catch (e) {
+                            console.debug(e);
+                        }
                     }
                 }
 

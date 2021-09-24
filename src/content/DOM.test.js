@@ -1,6 +1,7 @@
 require("./DOM");
 
 describe("DOM", function () {
+    "use strict";
 
     /**
      * Reference:
@@ -13,60 +14,36 @@ describe("DOM", function () {
         });
 
         it("returns empty string if node has no childNodes", () => {
-            expect(Reedable.DOM.getText({})).toBe("");
-        });
-
-        it("returns empty string if node's childNodes is empty", () => {
-            expect(Reedable.DOM.getText({
-                "childNodes": [],
-            })).toBe("");
+            const node = document.createElement("p");
+            expect(Reedable.DOM.getText(node)).toBe("");
         });
 
         it("ignores the childNode textContent if nodeType is not Node.TEXTNOD", () => {
-            expect(Reedable.DOM.getText({
-                "childNodes": [{
-                    "textContent": "Hello, ",
-                }, {
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "World!",
-                }],
-            })).toBe("World!");
+            const node = document.createElement("p");
+            node.appendChild(document.createElement("div"));
+            node.appendChild(document.createTextNode("World!"));
+            expect(Reedable.DOM.getText(node)).toBe("World!");
         });
 
         it("combines all textContent into a single string", () => {
-            expect(Reedable.DOM.getText({
-                "childNodes": [{
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "Hello, ",
-                }, {
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "World!",
-                }],
-            })).toBe("Hello, World!");
+            const node = document.createElement("p");
+            node.appendChild(document.createTextNode("Hello, "));
+            node.appendChild(document.createTextNode("World!"));
+            expect(Reedable.DOM.getText(node)).toBe("Hello, World!");
         });
 
         it("replaces carriage return and tab into a single whitespace", () => {
-            expect(Reedable.DOM.getText({
-                "childNodes": [{
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "Hello,\r",
-                }, {
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "\tWorld!",
-                }],
-            })).toBe("Hello, World!");
+            const node = document.createElement("p");
+            node.appendChild(document.createTextNode("Hello,\r"));
+            node.appendChild(document.createTextNode("\tWorld!"));
+            expect(Reedable.DOM.getText(node)).toBe("Hello, World!");
         });
 
         it("compresses repeating whitespaces into single whitespace", () => {
-            expect(Reedable.DOM.getText({
-                "childNodes": [{
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "  Hello, \r    ",
-                }, {
-                    "nodeType": Node.TEXT_NODE,
-                    "textContent": "    \t World!  ",
-                }],
-            })).toBe(" Hello, World! ");
+            const node = document.createElement("p");
+            node.appendChild(document.createTextNode("  Hello, \r   "));
+            node.appendChild(document.createTextNode("    \t World! "));
+            expect(Reedable.DOM.getText(node)).toBe(" Hello, World! ");
         });
     });
 
