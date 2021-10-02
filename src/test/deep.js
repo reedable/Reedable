@@ -8,25 +8,3 @@ export function deep(object, callback, parent, key) {
         return callback(object, parent, key);
     }
 }
-
-export function deepMock(object) {
-    return deep(object, (value, parent, key) => {
-        if (typeof value === "function") {
-            return jest.spyOn(parent, key);
-        }
-
-        return value;
-    });
-}
-
-export function deepRestore(mockObject) {
-    deep(mockObject, (value) => {
-        if (typeof value === "function") {
-            try {
-                value.mockRestore();
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    });
-}

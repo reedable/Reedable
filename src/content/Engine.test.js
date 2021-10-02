@@ -1,18 +1,19 @@
 import chrome from "../test/fake/chrome";
-import {deepMock, deepRestore} from "../test/deep";
+import {deepRestore, deepSpy} from "../test/jestHelper";
 
+require("./UnsupportedOperationError");
 require("./DOM");
 require("./Engine");
 
 describe("Engine", function () {
     "use strict";
 
-    let engine;
+    let sut;
     let chromeMock;
 
     beforeEach(function () {
-        chromeMock = deepMock(chrome);
-        engine = new Reedable.Engine("MyEngine");
+        chromeMock = deepSpy(chrome);
+        sut = new Reedable.Engine("MyEngine");
     });
 
     afterEach(function () {
@@ -22,24 +23,21 @@ describe("Engine", function () {
     describe("_processNodes", function () {
 
         beforeEach(() => {
-            engine._processNode = jest.fn();
-        });
-
-        afterEach(() => {
+            sut._processNode = jest.fn();
         });
 
         it("requests pref data by same engine name", () => {
-            engine._processNodes();
+            sut._processNodes();
             expect(chromeMock.storage.sync.get).toHaveBeenCalledTimes(1);
             expect(chromeMock.storage.sync.get.mock.calls[0][0]).toStrictEqual(["MyEngine"]);
         });
 
         it("does not do anything if nothing was passed to _processNodes", () => {
-            engine._processNodes();
+            sut._processNodes();
 
             const callback = chromeMock.storage.sync.get.mock.calls[0][1];
             callback();
-            expect(engine._processNode).toHaveBeenCalledTimes(0);
+            expect(sut._processNode).toHaveBeenCalledTimes(0);
         });
 
         it("calls _processNode as many times as there are nodes in the nodeList passed to _processNodes", () => {
@@ -54,11 +52,114 @@ describe("Engine", function () {
             documentFragment.append(createElement("asdf"));
             documentFragment.append(createElement("qwerty"));
             documentFragment.append(createElement("hello"));
-            engine._processNodes(documentFragment.querySelectorAll("p"));
+            sut._processNodes(documentFragment.querySelectorAll("p"));
 
             const callback = chromeMock.storage.sync.get.mock.calls[0][1];
             callback();
-            expect(engine._processNode).toHaveBeenCalledTimes(3);
+            expect(sut._processNode).toHaveBeenCalledTimes(3);
+        });
+    });
+
+    describe("_start", function () {
+        let _processNodesMock;
+        let querySelectorAllMock;
+        let observerMock;
+
+        beforeEach(() => {
+            sut._createObserver = jest.fn().mockReturnValue(observerMock = {
+                "observe": jest.fn(),
+            });
+            querySelectorAllMock = jest.spyOn(document, "querySelectorAll");
+            _processNodesMock = jest.spyOn(sut, "_processNodes");
+        });
+
+        afterEach(() => {
+            querySelectorAllMock.mockRestore();
+            _processNodesMock.mockRestore();
+        });
+
+        it("starts observing the documentFragment", () => {
+            sut._start(document);
+            expect(observerMock.observe).toHaveBeenCalledTimes(1);
+            expect(querySelectorAllMock).toHaveBeenCalledTimes(1);
+            expect(_processNodesMock).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe("start", function () {
+        let _startMock;
+
+        beforeEach(() => {
+            _startMock = jest.spyOn(sut, "_start");
+        });
+
+        afterEach(() => {
+            _startMock.mockRestore();
+        });
+
+        it("calls _start right away if document.body is available", () => {
+            sut.start(document);
+            expect(_startMock).toHaveBeenCalledTimes(1);
+        });
+
+        it("calls addEventListener if document.body is not available", () => {
+            let documentFragment = document.createDocumentFragment();
+            let addEventListenerMock = jest.spyOn(documentFragment, "addEventListener");
+
+            sut.start(documentFragment);
+            expect(_startMock).toHaveBeenCalledTimes(0);
+            expect(addEventListenerMock).toHaveBeenCalledTimes(1);
+            expect(addEventListenerMock.mock.calls[0][0]).toBe("DOMContentLoaded");
+        });
+    });
+
+    describe("_stop", function () {
+        let observersGetMock;
+
+        beforeEach(() => {
+            sut._restoreNode = jest.fn();
+            observersGetMock = jest.spyOn(sut.observers, "get");
+        });
+
+        afterEach(() => {
+            observersGetMock.mockReset();
+        });
+
+        it("disconnects observer if one is found", function () {
+            let observerMock;
+            observersGetMock.mockReturnValue(observerMock = {
+                "disconnect": jest.fn(),
+            });
+            sut._stop();
+            expect(observerMock.disconnect).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe("stop", function () {
+        let _stopMock;
+
+        beforeEach(() => {
+            sut._restoreNode = jest.fn();
+            _stopMock = jest.spyOn(sut, "_stop");
+        });
+
+        afterEach(() => {
+            _stopMock.mockRestore();
+        });
+
+        it("calls _stop right away if document.body is available", () => {
+            sut.stop(document);
+            expect(_stopMock).toHaveBeenCalledTimes(1);
+        });
+
+        it("calls addEventListener if document.body is not available", () => {
+            let documentFragment = document.createDocumentFragment();
+            let addEventListenerMock = jest.spyOn(documentFragment, "addEventListener");
+
+            sut.stop(documentFragment);
+            expect(_stopMock).toHaveBeenCalledTimes(0);
+            expect(addEventListenerMock).toHaveBeenCalledTimes(1);
+            expect(addEventListenerMock.mock.calls[0][0]).toBe("DOMContentLoaded");
         });
     });
 });

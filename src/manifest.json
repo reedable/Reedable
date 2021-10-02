@@ -33,6 +33,7 @@
       ],
       "run_at": "document_start",
       "js": [
+        "/content/UnsupportedOperationError.js",
         "/content/DOM.js",
         "/content/Engine.js",
         "/content/FocusIndicatorEngine.js",

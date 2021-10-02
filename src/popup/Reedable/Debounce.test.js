@@ -21,12 +21,12 @@ describe("Debounce", function () {
         jest.useRealTimers();
     });
 
-    describe("Debounce.trailing creates a debounced function, which", function () {
+    describe("Missing argument to", function () {
 
-        it("returns a Promise for noop if no function was provided", (done) => {
-            const debouncedFn = Debounce.trailing();
+        it("Debounce.trailing() returns a noop function", (done) => {
+            const sut = Debounce.trailing();
 
-            debouncedFn().then((result) => {
+            sut().then((result) => {
                 expect(result).toBe(undefined);
             }, (e) => {
                 throw e;
@@ -35,30 +35,30 @@ describe("Debounce", function () {
             jest.advanceTimersByTime(400);
         });
 
-        it("returns a Promise", (done) => {
-            const fn = jest.fn(() => "Hello, world!");
-            const debouncedFn = Debounce.trailing(function () {
-                return fn();
-            });
+        it("Debounce.leading() returns a noop function", (done) => {
+            const sut = Debounce.leading();
 
-            debouncedFn().then((result) => {
-                expect(result).toBe("Hello, world!");
+            sut().then((result) => {
+                expect(result).toBe(undefined);
             }, (e) => {
                 throw e;
             }).then(done, done);
 
             jest.advanceTimersByTime(400);
         });
+    });
 
-        it("rejects a Promise if the underlying function throws an Error", (done) => {
+    describe("Function that throws an Error passed to", function () {
+
+        it("Debounce.trailing() returns a function that returns the Error as a Promise rejection", (done) => {
             const fn = jest.fn(() => {
                 throw "Hello, world!";
             });
-            const debouncedFn = Debounce.trailing(function () {
+            const sut = Debounce.trailing(function () {
                 return fn();
             });
 
-            debouncedFn().then(() => {
+            sut().then(() => {
                 throw new Error("We should not get here.");
             }, (e) => {
                 expect(e).toBe("Hello, world!");
@@ -67,84 +67,218 @@ describe("Debounce", function () {
             jest.advanceTimersByTime(400);
         });
 
-        it("executes only once with 400ms default delay", async () => {
+        it("Debounce.leading() returns a function that returns the Error as a Promise rejection", (done) => {
+            const fn = jest.fn(() => {
+                throw "Hello, world!";
+            });
+            const sut = Debounce.leading(function () {
+                return fn();
+            });
+
+            sut().then(() => {
+                throw new Error("We should not get here.");
+            }, (e) => {
+                expect(e).toBe("Hello, world!");
+            }).then(done, done);
+
+            jest.advanceTimersByTime(400);
+        });
+    })
+
+    describe("Debounce.trailing creates a debounced function, which", function () {
+
+        it("executes only the last time when each successive call is within the 400ms window", async () => {
             const all = [];
             const fn = jest.fn(v => v);
-            const debouncedFn = Debounce.trailing(function (value) {
+            const sut = Debounce.trailing(function (value) {
                 return fn(value);
             });
 
-            // Debounced function is not executed right away.
-            all.push(
-                debouncedFn("Hello, One!").then(result => {
-                    expect(result).toBe("Hello, Three!");
-                }),
+            all.push(sut("Hello, One!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
             );
             expect(fn.mock.calls.length).toBe(0);
 
-            // Debounced function is not executed even if another call follows
-            // it immediately.
-            all.push(
-                debouncedFn("Hello, Two!").then(result => {
-                    expect(result).toBe("Hello, Three!");
-                }),
+            // 101ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Two!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
             );
             expect(fn.mock.calls.length).toBe(0);
 
-            // Within the delay threshold (default value 400), any successive
-            // calls are ignored.
-            jest.advanceTimersByTime(100);
-            all.push(
-                debouncedFn("Hello, Three!").then(result => {
-                    expect(result).toBe("Hello, Three!");
-                }),
+            // 202ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Three!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
             );
             expect(fn.mock.calls.length).toBe(0);
 
-            // 410ms has passed since the first call.
-            // 310ms since the last call.
-            // The underlying function should not have been executed yet.
-            jest.advanceTimersByTime(310);
+            // 303ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Four!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
             expect(fn.mock.calls.length).toBe(0);
 
-            // 1410ms has passed since the first call.
-            // 1310ms since the last call.
-            // The underlying function should have been executed with the
-            // last execution context and arguments.
-            jest.advanceTimersByTime(1000);
+            // 404ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Five!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 505ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Six!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 606ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Seven!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 707ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Eight!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 808ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Nine!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            //
+            // Long enough pause...
+            //
+
+            // 1209ms since the first call
+            // 401ms since the last call
+            jest.advanceTimersByTime(401);
             await new Promise(x => x());
             expect(fn.mock.calls.length).toBe(1);
 
-            // 2410ms has passed since the first call.
-            // 2310ms since the last call, which already executed.
-            // The debounced function remains dormant.
-            jest.advanceTimersByTime(2000);
-            await new Promise(x => x());
-            expect(fn.mock.calls.length).toBe(1);
+            return Promise.all(all);
+        });
 
-            // Once the debounced function has executed, then it will allow
-            // another execution of the function, following the same rules.
-            all.push(
-                debouncedFn("Hello, Four!").then(result => {
-                    expect(result).toBe("Hello, Four!");
-                }),
+        it("executes only the last of the consecutive calls separated by 400ms pause", async () => {
+            const all = [];
+            const fn = jest.fn(v => v);
+            const sut = Debounce.trailing(function (value) {
+                return fn(value);
+            });
+
+            all.push(sut("Hello, One!")
+                .then(result => expect(result).toBe("Hello, Six!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 101ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Two!")
+                .then(result => expect(result).toBe("Hello, Six!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 202ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Three!")
+                .then(result => expect(result).toBe("Hello, Six!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 303ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Four!")
+                .then(result => expect(result).toBe("Hello, Six!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 404ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Five!")
+                .then(result => expect(result).toBe("Hello, Six!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            // 505ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Six!")
+                .then(result => expect(result).toBe("Hello, Six!")),
+            );
+            expect(fn.mock.calls.length).toBe(0);
+
+            //
+            // Long enough pause...
+            //
+
+            // 906ms since the first call
+            // 401ms since the last call
+            jest.advanceTimersByTime(401);
+            await new Promise(x => x());
+            all.push(sut("Hello, Seven!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
             );
             expect(fn.mock.calls.length).toBe(1);
 
-            // 2510ms since the first call.
-            // 2410ms since the call for previous execution.
-            // 100ms since the new call.
-            // The new call should not have been executed yet.
-            jest.advanceTimersByTime(100);
+            // 1007ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Eight!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
             expect(fn.mock.calls.length).toBe(1);
 
-            // 2820ms since the first call.
-            // 2720ms since the call for previous execution.
-            // 410ms since the new call.
-            // The new call should have been executed.
-            jest.advanceTimersByTime(310);
+            // 1108ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Nine!")
+                .then(result => expect(result).toBe("Hello, Nine!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            //
+            // Long enough pause...
+            //
+
+            // 1209ms since the first call
+            // 401ms since the last call
+            jest.advanceTimersByTime(401);
             await new Promise(x => x());
             expect(fn.mock.calls.length).toBe(2);
 
@@ -154,124 +288,179 @@ describe("Debounce", function () {
 
     describe("Debounce.leading creates a debounced function, which", function () {
 
-        it("returns a Promise for noop if no function was provided", (done) => {
-            const debouncedFn = Debounce.leading();
-
-            debouncedFn().then((result) => {
-                expect(result).toBe(undefined);
-            }, (e) => {
-                throw e;
-            }).then(done, done);
-
-            jest.advanceTimersByTime(400);
-        });
-
-        it("returns a Promise", (done) => {
-            const fn = jest.fn(() => "Hello, world!");
-            const debouncedFn = Debounce.leading(function () {
-                return fn();
-            });
-
-            debouncedFn().then((result) => {
-                expect(result).toBe("Hello, world!");
-            }, (e) => {
-                throw e;
-            }).then(done, done);
-
-            jest.advanceTimersByTime(400);
-        });
-
-        it("rejects a Promise if the underlying function throws an Error", (done) => {
-            const fn = jest.fn(() => {
-                throw "Hello, world!";
-            });
-            const debouncedFn = Debounce.leading(function () {
-                return fn();
-            });
-
-            debouncedFn().then(() => {
-                throw new Error("We should not get here.");
-            }, (e) => {
-                expect(e).toBe("Hello, world!");
-            }).then(done, done);
-
-            jest.advanceTimersByTime(400);
-        });
-
-        it("executes only once with 400ms default delay", async () => {
+        it("executes only the first time when each successive call is within the 400ms window", async () => {
             const all = [];
             const fn = jest.fn(v => v);
-            const debouncedFn = Debounce.leading(function (value) {
+            const sut = Debounce.leading(function (value) {
                 return fn(value);
             });
 
-            // Debounced function is executed right away.
-            all.push(
-                debouncedFn("Hello, One!").then(result => {
-                    expect(result).toBe("Hello, One!");
-                }),
+            all.push(sut("Hello, One!")
+                .then(result => expect(result).toBe("Hello, One!")),
             );
             expect(fn.mock.calls.length).toBe(1);
 
-            // Debounced function is not executed even if another call follows
-            // it immediately.
-            all.push(
-                debouncedFn("Hello, Two!").then(result => {
-                    expect(result).toBe("Hello, One!");
-                }),
+            // 101ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Two!")
+                .then(result => expect(result).toBe("Hello, One!")),
             );
             expect(fn.mock.calls.length).toBe(1);
 
-            // Within the delay threshold (default value 400), any successive
-            // calls are ignored.
-            jest.advanceTimersByTime(100);
-            all.push(
-                debouncedFn("Hello, Three!").then(result => {
-                    expect(result).toBe("Hello, One!");
-                }),
+            // 202ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Three!")
+                .then(result => expect(result).toBe("Hello, One!")),
             );
             expect(fn.mock.calls.length).toBe(1);
 
-            // 410ms has passed since the first call.
-            // 310ms since the last call.
-            jest.advanceTimersByTime(310);
+            // 303ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Four!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
             expect(fn.mock.calls.length).toBe(1);
 
-            // 1410ms has passed since the first call.
-            // 1310ms since the last call.
-            jest.advanceTimersByTime(1000);
+            // 404ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Five!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
             expect(fn.mock.calls.length).toBe(1);
 
-            // 2410ms has passed since the first call.
-            // 2310ms since the last call, which already executed.
-            // The debounced function is available once again to execute.
-            jest.advanceTimersByTime(2000);
+            // 505ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Six!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
             expect(fn.mock.calls.length).toBe(1);
 
-            // Once the debounced function has executed, then it will allow
-            // another execution of the function, following the same rules.
-            all.push(
-                debouncedFn("Hello, Four!").then(result => {
-                    expect(result).toBe("Hello, Four!");
-                }),
+            // 606ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Seven!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 707ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Eight!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 808ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Nine!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            return Promise.all(all);
+        });
+
+        it("executes only the first of the consecutive calls separated by 400ms pause", async () => {
+            const all = [];
+            const fn = jest.fn(v => v);
+            const sut = Debounce.leading(function (value) {
+                return fn(value);
+            });
+
+            all.push(sut("Hello, One!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 101ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Two!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 202ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Three!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 303ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Four!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 404ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Five!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            // 505ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
+            await new Promise(x => x());
+            all.push(sut("Hello, Six!")
+                .then(result => expect(result).toBe("Hello, One!")),
+            );
+            expect(fn.mock.calls.length).toBe(1);
+
+            //
+            // Long enough pause...
+            //
+
+            // 906ms since the first call
+            // 401ms since the last call
+            jest.advanceTimersByTime(401);
+            await new Promise(x => x());
+            all.push(sut("Hello, Seven!")
+                .then(result => expect(result).toBe("Hello, Seven!")),
             );
             expect(fn.mock.calls.length).toBe(2);
 
-            // 2510ms since the first call.
-            // 2410ms since the call for previous execution.
-            // 100ms since the new call.
-            jest.advanceTimersByTime(100);
+            // 1007ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Eight!")
+                .then(result => expect(result).toBe("Hello, Seven!")),
+            );
             expect(fn.mock.calls.length).toBe(2);
 
-            // 2820ms since the first call.
-            // 2720ms since the call for previous execution.
-            // 410ms since the new call.
-            jest.advanceTimersByTime(310);
+            // 1108ms since the first call
+            // 101ms since the last call
+            jest.advanceTimersByTime(101);
             await new Promise(x => x());
+            all.push(sut("Hello, Nine!")
+                .then(result => expect(result).toBe("Hello, Seven!")),
+            );
             expect(fn.mock.calls.length).toBe(2);
 
             return Promise.all(all);
