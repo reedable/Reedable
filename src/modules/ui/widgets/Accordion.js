@@ -1,4 +1,4 @@
-import Controller from "./Controller.js";
+import Controller from "../Controller.js";
 
 export default class Accordion extends Controller {
 

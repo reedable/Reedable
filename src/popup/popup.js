@@ -1,4 +1,4 @@
-import App from "./Reedable/App.js";
+import App from "../modules/ui/App.js";
 import Main from "./Main.js";
 
 const app = new App(document);

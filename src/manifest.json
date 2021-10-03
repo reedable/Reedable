@@ -33,7 +33,9 @@
       ],
       "run_at": "document_start",
       "js": [
-        "/content/UnsupportedOperationError.js",
+        "/content/errors/OperationCancellationError.js",
+        "/content/errors/UnsupportedOperationError.js",
+        "/content/When.js",
         "/content/DOM.js",
         "/content/Engine.js",
         "/content/FocusIndicatorEngine.js",

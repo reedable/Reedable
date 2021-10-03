@@ -14,26 +14,9 @@ Reedable.Engine = Reedable.Engine || (function (
             this.observers = new WeakMap();
         }
 
-        /*Object.assign(Engine.prototype, {
-            start,
-            _start,
-            _createObserver,
-            _processNodes,
-            _processNode,
-            stop,
-            _stop,
-            _restoreNode,
-        });*/
-
-        start(doc = document) {
-
-            if (doc.body) {
-                this._start(doc);
-            } else {
-                doc.addEventListener("DOMContentLoaded", () => {
-                    this._start(doc);
-                });
-            }
+        async start(doc = document) {
+            await DOM.when(doc).ready;
+            this._start(doc);
 
             chrome.storage.sync.get([this.engineName], (pref) => {
                 pref[this.engineName].isEnabled = true;
@@ -104,15 +87,9 @@ Reedable.Engine = Reedable.Engine || (function (
             throw new UnsupportedError("Engine._processNode", node, enginePref);
         }
 
-        stop(doc) {
-
-            if (doc.body) {
-                this._stop(doc);
-            } else {
-                doc.addEventListener("DOMContentLoaded", () => {
-                    this._stop(doc);
-                });
-            }
+        async stop(doc) {
+            await DOM.when(doc).ready;
+            this._stop(doc);
 
             chrome.storage.sync.get([this.engineName], (pref) => {
                 pref[this.engineName].isEnabled = false;

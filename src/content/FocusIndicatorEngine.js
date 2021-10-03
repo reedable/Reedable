@@ -34,7 +34,7 @@ Reedable.FocusIndicatorEngine = Reedable.FocusIndicatorEngine || (function (
             node.dataset.reedableTransition = transition;
             node.dataset.reedableOutline = outline;
 
-            this._onFocusOut = onFocusOut.bind(this);
+            this._onFocusOut = this._onFocusOut.bind(this);
 
             chrome.storage.sync.get([this.engineName], (pref) => {
                 const enginePref = pref[this.engineName];
@@ -68,7 +68,7 @@ Reedable.FocusIndicatorEngine = Reedable.FocusIndicatorEngine || (function (
         }
 
         _start(documentFragment) {
-            this._onFocusIn = onFocusIn.bind(this);
+            this._onFocusIn = this._onFocusIn.bind(this);
             documentFragment.addEventListener("focusin", this._onFocusIn);
             documentFragment.querySelectorAll("*").forEach((node) => {
                 if (node.shadowRoot) {

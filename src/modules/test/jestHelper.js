@@ -1,4 +1,4 @@
-import {deep} from "./deep";
+import {deep} from "../deep";
 
 export function deepSpy(object) {
     return deep(object, (value, parent, key) => {

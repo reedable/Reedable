@@ -1,6 +1,6 @@
 import Accordion from "./Accordion.js";
-import Controller from "./Controller.js";
-import Registry from "./Registry.js";
+import Controller from "../Controller.js";
+import Registry from "../Registry.js";
 
 export default class AccordionGroup extends Controller {
 

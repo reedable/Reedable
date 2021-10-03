@@ -1,9 +1,44 @@
 window.Reedable = window.Reedable || {};
 
-Reedable.DOM = Reedable.DOM || (function () {
-    "use strict";
+Reedable.DOM = Reedable.DOM || (function (
+    {
+        When,
+    },
+) {
 
     let _computedRem = null;
+    const _documentWhenMap = new WeakMap();
+
+    /**
+     * Usage
+     *
+     *  await Reedable.DOM.when(document).ready;
+     *
+     * I know I can write this with plain old Promise, but we use When
+     * object, which is a bit more versatile under different circumstances.
+     *
+     * @param doc
+     * @param opts
+     * @returns {Promise<void>}
+     */
+    async function when(doc = document) {
+        let whenDocument = _documentWhenMap.get(doc);
+
+        if (!whenDocument) {
+            whenDocument = new When();
+            _documentWhenMap.set(doc, whenDocument);
+
+            if (doc && doc.body) {
+                whenDocument.resolve(doc);
+            } else {
+                doc.addEventListener("DOMContentLoaded", () => {
+                    whenDocument.resolve(doc);
+                });
+            }
+        }
+
+        return whenDocument.ready;
+    }
 
     /**
      * Returns the document's root fontSize, i.e. rem.
@@ -115,6 +150,6 @@ Reedable.DOM = Reedable.DOM || (function () {
         }
     }
 
-    return {parseLength, getText};
+    return {parseLength, getText, when};
 
 })(Reedable);

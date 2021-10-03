@@ -1,7 +1,8 @@
-import chrome from "../test/fake/chrome";
-import {deepRestore, deepSpy} from "../test/jestHelper";
+import chrome from "../modules/test/fake/chrome";
+import {deepRestore, deepSpy} from "../modules/test/jestHelper";
 
-require("./UnsupportedOperationError");
+require("./errors/UnsupportedOperationError");
+require("./When");
 require("./DOM");
 require("./Engine");
 
@@ -97,19 +98,9 @@ describe("Engine", function () {
             _startMock.mockRestore();
         });
 
-        it("calls _start right away if document.body is available", () => {
-            sut.start(document);
+        it("calls _start when document is ready", async () => {
+            await sut.start(document);
             expect(_startMock).toHaveBeenCalledTimes(1);
-        });
-
-        it("calls addEventListener if document.body is not available", () => {
-            let documentFragment = document.createDocumentFragment();
-            let addEventListenerMock = jest.spyOn(documentFragment, "addEventListener");
-
-            sut.start(documentFragment);
-            expect(_startMock).toHaveBeenCalledTimes(0);
-            expect(addEventListenerMock).toHaveBeenCalledTimes(1);
-            expect(addEventListenerMock.mock.calls[0][0]).toBe("DOMContentLoaded");
         });
     });
 
@@ -147,19 +138,9 @@ describe("Engine", function () {
             _stopMock.mockRestore();
         });
 
-        it("calls _stop right away if document.body is available", () => {
-            sut.stop(document);
+        it("calls _stop when document is ready", async () => {
+            await sut.stop(document);
             expect(_stopMock).toHaveBeenCalledTimes(1);
-        });
-
-        it("calls addEventListener if document.body is not available", () => {
-            let documentFragment = document.createDocumentFragment();
-            let addEventListenerMock = jest.spyOn(documentFragment, "addEventListener");
-
-            sut.stop(documentFragment);
-            expect(_stopMock).toHaveBeenCalledTimes(0);
-            expect(addEventListenerMock).toHaveBeenCalledTimes(1);
-            expect(addEventListenerMock.mock.calls[0][0]).toBe("DOMContentLoaded");
         });
     });
 });
