@@ -1,5 +1,5 @@
-import AccordionGroup from "../modules/ui/widgets/AccordionGroup.js";
-import Controller from "../modules/ui/Controller.js";
+import AccordionGroup from "../../modules/ui/widgets/AccordionGroup.js";
+import Controller from "../../modules/ui/Controller.js";
 
 import FontOverrideAccordion from "./FontOverrideAccordion.js";
 import TextSpacingAccordion from "./TextSpacingAccordion.js";

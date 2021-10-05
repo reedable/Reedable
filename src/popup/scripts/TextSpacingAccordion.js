@@ -1,5 +1,5 @@
-import Accordion from "../modules/ui/widgets/Accordion.js";
-import Debounce from "../modules/Debounce.js";
+import Accordion from "../../modules/ui/widgets/Accordion.js";
+import Debounce from "../../modules/Debounce.js";
 
 export default class TextSpadingAccordion extends Accordion {
 
