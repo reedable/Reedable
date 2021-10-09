@@ -100,6 +100,8 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
+                        // See ../content/content.js
+                        // eslint-disable-next-line no-undef
                         Reedable.TextSpacingEngine.getInstance().start(document);
                     }
                 });
@@ -107,6 +109,8 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
+                        // See ../content/content.js
+                        // eslint-disable-next-line no-undef
                         Reedable.TextSpacingEngine.getInstance().stop(document);
                     }
                 });
@@ -116,6 +120,8 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
+                        // See ../content/content.js
+                        // eslint-disable-next-line no-undef
                         Reedable.FontOverrideEngine.getInstance().start(document);
                     }
                 });
@@ -123,6 +129,8 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
+                        // See ../content/content.js
+                        // eslint-disable-next-line no-undef
                         Reedable.FontOverrideEngine.getInstance().stop(document);
                     }
                 });
@@ -132,6 +140,8 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
+                        // See ../content/content.js
+                        // eslint-disable-next-line no-undef
                         Reedable.FocusIndicatorEngine.getInstance().start(document);
                     }
                 });
@@ -139,6 +149,8 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 chrome.scripting.executeScript({
                     "target": {"tabId": tabId},
                     "func": function () {
+                        // See ../content/content.js
+                        // eslint-disable-next-line no-undef
                         Reedable.FocusIndicatorEngine.getInstance().stop(document);
                     }
                 });

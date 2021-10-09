@@ -55,8 +55,15 @@ export class FocusIndicatorAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
                 Reedable.FocusIndicatorEngine.getInstance().start(document);
             }
+        });
+
+        chrome.storage.sync.get(["focusIndicator"], (pref) => {
+            pref.focusIndicator.isEnabled = true;
+            chrome.storage.sync.set(pref);
         });
     }
 
@@ -69,8 +76,15 @@ export class FocusIndicatorAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
                 Reedable.FocusIndicatorEngine.getInstance().stop(document);
             }
+        });
+
+        chrome.storage.sync.get(["focusIndicator"], (pref) => {
+            pref.focusIndicator.isEnabled = false;
+            chrome.storage.sync.set(pref);
         });
     }
 }

@@ -18,4 +18,4 @@ extends:
   - eslint:recommended
 
 rules:
-  import/default: 2
+  import/no-default-export: 2

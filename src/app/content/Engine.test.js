@@ -58,7 +58,7 @@ describe("Engine", function () {
         });
     });
 
-    describe("_start", function () {
+    describe("start", function () {
         let _processNodesMock;
         let querySelectorAllMock;
         let observerMock;
@@ -76,32 +76,15 @@ describe("Engine", function () {
             _processNodesMock.mockRestore();
         });
 
-        it("starts observing the documentFragment", () => {
-            sut._start(document);
+        it("starts observing the documentFragment", async () => {
+            await sut.start(document);
             expect(observerMock.observe).toHaveBeenCalledTimes(1);
             expect(querySelectorAllMock).toHaveBeenCalledTimes(1);
             expect(_processNodesMock).toHaveBeenCalledTimes(1);
         });
     });
 
-    describe("start", function () {
-        let _startMock;
-
-        beforeEach(() => {
-            _startMock = jest.spyOn(sut, "_start");
-        });
-
-        afterEach(() => {
-            _startMock.mockRestore();
-        });
-
-        it("calls _start when document is ready", async () => {
-            await sut.start(document);
-            expect(_startMock).toHaveBeenCalledTimes(1);
-        });
-    });
-
-    describe("_stop", function () {
+    describe("stop", function () {
         let observersGetMock;
 
         beforeEach(() => {
@@ -113,31 +96,14 @@ describe("Engine", function () {
             observersGetMock.mockReset();
         });
 
-        it("disconnects observer if one is found", function () {
+        it("disconnects observer if one is found", async () => {
             let observerMock;
             observersGetMock.mockReturnValue(observerMock = {
                 "disconnect": jest.fn()
             });
-            sut._stop();
+            await sut.stop();
             expect(observerMock.disconnect).toHaveBeenCalledTimes(1);
         });
     });
 
-    describe("stop", function () {
-        let _stopMock;
-
-        beforeEach(() => {
-            sut._restoreNode = jest.fn();
-            _stopMock = jest.spyOn(sut, "_stop");
-        });
-
-        afterEach(() => {
-            _stopMock.mockRestore();
-        });
-
-        it("calls _stop when document is ready", async () => {
-            await sut.stop(document);
-            expect(_stopMock).toHaveBeenCalledTimes(1);
-        });
-    });
 });

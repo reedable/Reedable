@@ -55,8 +55,15 @@ export class FontOverrideAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
                 Reedable.FontOverrideEngine.getInstance().start(document);
             }
+        });
+
+        chrome.storage.sync.get(["fontOverride"], (pref) => {
+            pref.fontOverride.isEnabled = true;
+            chrome.storage.sync.set(pref);
         });
     }
 
@@ -69,8 +76,15 @@ export class FontOverrideAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
                 Reedable.FontOverrideEngine.getInstance().stop(document);
             }
+        });
+
+        chrome.storage.sync.get(["fontOverride"], (pref) => {
+            pref.fontOverride.isEnabled = false;
+            chrome.storage.sync.set(pref);
         });
     }
 }

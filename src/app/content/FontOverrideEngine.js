@@ -29,8 +29,8 @@ export class FontOverrideEngine extends Engine {
         super("fontOverride");
     }
 
-    _start(doc) {
-        super._start(doc);
+    async start(doc) {
+        await super.start(doc);
 
         if (doc) {
             let style = doc.querySelector("#reedableFontOverride");
@@ -44,8 +44,8 @@ export class FontOverrideEngine extends Engine {
         }
     }
 
-    _stop(doc) {
-        super._stop(doc);
+    async stop(doc) {
+        await super.stop(doc);
 
         if (doc) {
             const style = doc.querySelector("#reedableFontOverride");

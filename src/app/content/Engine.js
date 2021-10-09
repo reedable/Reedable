@@ -8,17 +8,8 @@ export class Engine {
         this.observers = new WeakMap();
     }
 
-    async start(doc = document) {
-        await DOM.when(doc).ready;
-        this._start(doc);
-
-        chrome.storage.sync.get([this.engineName], (pref) => {
-            pref[this.engineName].isEnabled = true;
-            chrome.storage.sync.set(pref);
-        });
-    }
-
-    _start(documentFragment = document) {
+    async start(documentFragment = document) {
+        await DOM.when(documentFragment).ready;
         let observer = this.observers.get(documentFragment);
 
         if (!observer) {
@@ -35,6 +26,24 @@ export class Engine {
         });
 
         this._processNodes(documentFragment.querySelectorAll("*"));
+    }
+
+    async stop(documentFragment = document) {
+        await DOM.when(documentFragment).ready;
+        const observer = this.observers.get(documentFragment);
+
+        if (observer) {
+            observer.disconnect();
+            this.observers.delete(documentFragment);
+        }
+
+        documentFragment.querySelectorAll("*").forEach((node) => {
+            this._restoreNode(node);
+
+            if (node.shadowRoot) {
+                this.stop(node.shadowRoot);
+            }
+        });
     }
 
     _createObserver(callback) {
@@ -68,7 +77,7 @@ export class Engine {
                 }
 
                 if (node.shadowRoot) {
-                    this._start(node.shadowRoot);
+                    this.start(node.shadowRoot);
                 }
             });
         });
@@ -79,33 +88,6 @@ export class Engine {
      */
     async _processNode(node, enginePref) {
         throw new UnsupportedOperationError("Engine._processNode", node, enginePref);
-    }
-
-    async stop(doc) {
-        await DOM.when(doc).ready;
-        this._stop(doc);
-
-        chrome.storage.sync.get([this.engineName], (pref) => {
-            pref[this.engineName].isEnabled = false;
-            chrome.storage.sync.set(pref);
-        });
-    }
-
-    _stop(documentFragment = document) {
-        const observer = this.observers.get(documentFragment);
-
-        if (observer) {
-            observer.disconnect();
-            this.observers.delete(documentFragment);
-        }
-
-        documentFragment.querySelectorAll("*").forEach((node) => {
-            this._restoreNode(node);
-
-            if (node.shadowRoot) {
-                this._stop(node.shadowRoot);
-            }
-        });
     }
 
     /**

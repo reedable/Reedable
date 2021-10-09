@@ -59,8 +59,15 @@ export class TextSpacingAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
                 Reedable.TextSpacingEngine.getInstance().start(document);
             }
+        });
+
+        chrome.storage.sync.get(["textSpacing"], (pref) => {
+            pref.textSpacing.isEnabled = true;
+            chrome.storage.sync.set(pref);
         });
     }
 
@@ -73,8 +80,15 @@ export class TextSpacingAccordion extends Accordion {
         chrome.scripting.executeScript({
             "target": {"tabId": tab.id},
             "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
                 Reedable.TextSpacingEngine.getInstance().stop(document);
             }
+        });
+
+        chrome.storage.sync.get(["textSpacing"], (pref) => {
+            pref.textSpacing.isEnabled = false;
+            chrome.storage.sync.set(pref);
         });
     }
 }

@@ -61,21 +61,23 @@ export class FocusIndicatorEngine extends Engine {
         node.removeEventListener("focusout", this._onFocusOut);
     }
 
-    _start(documentFragment) {
+    async start(documentFragment) {
+        await super.start(documentFragment);
         this._onFocusIn = this._onFocusIn.bind(this);
         documentFragment.addEventListener("focusin", this._onFocusIn);
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
-                this._start(node.shadowRoot);
+                this.start(node.shadowRoot);
             }
         });
     }
 
-    _stop(documentFragment) {
+    async stop(documentFragment) {
+        await super.stop(documentFragment);
         documentFragment.removeEventListener("focusin", this._onFocusIn);
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
-                this._stop(node.shadowRoot);
+                this.stop(node.shadowRoot);
             }
         });
     }
