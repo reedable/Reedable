@@ -71,28 +71,35 @@ You have been warned. Do you still want to install an unpacked version of the
 extension? Well, here it goes.
 
 1. Clone the repository
+    ```
+    git clone https://github.com/reedable/Reedable.git
+    ```
 
-    `git clone https://github.com/reedable/Reedable.git`
-    
-2. Open Chrome Browser and enter `chrome://extensions` in the addressbar.
-![chrome://extensions](https://reedable.github.io/Reedable/images/Reedable_unpacked_1.png)
+2. Build the project
+    ```
+    npm install
+    npm run build
+    ```
 
-3. Turn on "Developer mode"
-![Developer mode](https://reedable.github.io/Reedable/images/Reedable_unpacked_2.png)
+3. Open Chrome Browser and enter `chrome://extensions` in the addressbar.
+    ![chrome://extensions](https://reedable.github.io/Reedable/images/Reedable_unpacked_1.png)
 
-4. Click "Load unpacked" button, and select "src" inside Reedable project
-   you just checked out.
-![Load unpacked](https://reedable.github.io/Reedable/images/Reedable_unpacked_3.png)
+4. Turn on "Developer mode"
+    ![Developer mode](https://reedable.github.io/Reedable/images/Reedable_unpacked_2.png)
+
+5. Click "Load unpacked" button, and select `unpacked` directory inside
+   Reedable project you just checked out.
+    ![Load unpacked](https://reedable.github.io/Reedable/images/Reedable_unpacked_3.png)
    
    Once loaded, the Reedable Chrome Extension should appear on the
    extensions page.
-![Pin the Reedable icon](https://reedable.github.io/Reedable/images/Reedable_unpacked_4.png)
+    ![Pin the Reedable icon](https://reedable.github.io/Reedable/images/Reedable_unpacked_4.png)
 
-5. Pin the Reedable icon to the toolbar (optional)
-![Reedable popup](https://reedable.github.io/Reedable/images/Reedable_unpacked_5.png)
+6. Pin the Reedable icon to the toolbar (optional)
+    ![Reedable popup](https://reedable.github.io/Reedable/images/Reedable_unpacked_5.png)
 
-6. Click Reedable icon to reveal the popup.
-![Reedable popup](https://reedable.github.io/Reedable/images/Reedable_unpacked_6.png)
+7. Click Reedable icon to reveal the popup.
+    ![Reedable popup](https://reedable.github.io/Reedable/images/Reedable_unpacked_6.png)
 
 
 ## Stuff we're going to do

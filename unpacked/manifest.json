@@ -4,7 +4,7 @@
   "version": "1.1.1",
   "manifest_version": 3,
   "background": {
-    "service_worker": "/background/background.js"
+    "service_worker": "/scripts/background.bundle.js"
   },
   "permissions": [
     "activeTab",
@@ -33,22 +33,14 @@
       ],
       "run_at": "document_start",
       "js": [
-        "/content/errors/OperationCancellationError.js",
-        "/content/errors/UnsupportedOperationError.js",
-        "/content/When.js",
-        "/content/DOM.js",
-        "/content/Engine.js",
-        "/content/FocusIndicatorEngine.js",
-        "/content/FontOverrideEngine.js",
-        "/content/TextSpacingEngine.js",
-        "/content/main.js"
+        "/scripts/content.bundle.js"
       ]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
-        "/font/OpenDyslexic-Regular.otf"
+        "/thirdparty/OpenDyslexic-Regular.otf"
       ],
       "matches": [
         "<all_urls>"

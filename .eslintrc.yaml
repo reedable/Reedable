@@ -1,0 +1,21 @@
+parser: "@babel/eslint-parser"
+
+parserOptions:
+  ecmaVersion: 8
+  sourceType: module
+
+env:
+  browser: true
+  es6: true
+  jest/globals: true
+  webextensions: true
+
+plugins:
+  - jest
+  - import
+
+extends:
+  - eslint:recommended
+
+rules:
+  import/default: 2

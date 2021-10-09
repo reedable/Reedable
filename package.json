@@ -2,13 +2,19 @@
   "name": "reedable",
   "version": "1.1.1",
   "description": "Reedable Chrome Extension",
-  "main": "index.js",
+  "private": true,
   "directories": {
     "doc": "docs",
-    "test": "src/modules/test"
+    "test": "src/core/test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage",
+    "build-background": "npx webpack --config build/background.config.js",
+    "build-content": "npx webpack --config build/content.config.js",
+    "build-popup": "npx webpack --config build/popup.config.js",
+    "build": "npm run build-background; npm run build-content; npm run build-popup",
+    "prerelease": "./release/prerelease.sh",
+    "release": "./release/release.sh"
   },
   "repository": {
     "type": "git",
@@ -26,7 +32,12 @@
   },
   "homepage": "https://github.com/reedable/Reedable#readme",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.15.8",
     "@babel/plugin-transform-modules-commonjs": "^7.15.4",
+    "@jest/globals": "^27.2.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.5.2",
     "jest": "^27.2.1",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
