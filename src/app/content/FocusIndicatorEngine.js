@@ -1,4 +1,5 @@
 import {Engine} from "./Engine";
+import {DOM} from "../../core/ui/DOM";
 
 export class FocusIndicatorEngine extends Engine {
 
@@ -62,7 +63,7 @@ export class FocusIndicatorEngine extends Engine {
     }
 
     async start(documentFragment) {
-        await super.start(documentFragment);
+        await DOM.when(documentFragment).ready;
         this._onFocusIn = this._onFocusIn.bind(this);
         documentFragment.addEventListener("focusin", this._onFocusIn);
         documentFragment.querySelectorAll("*").forEach((node) => {
@@ -73,7 +74,7 @@ export class FocusIndicatorEngine extends Engine {
     }
 
     async stop(documentFragment) {
-        await super.stop(documentFragment);
+        await DOM.when(documentFragment).ready;
         documentFragment.removeEventListener("focusin", this._onFocusIn);
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
