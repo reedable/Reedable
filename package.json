@@ -1,6 +1,6 @@
 {
   "name": "reedable",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Reedable Chrome Extension",
   "private": true,
   "directories": {
@@ -9,11 +9,8 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "build-background": "npx webpack --config build/background.config.js",
-    "build-content": "npx webpack --config build/content.config.js",
-    "build-popup": "npx webpack --config build/popup.config.js",
-    "build": "npm run build-background; npm run build-content; npm run build-popup",
-    "prerelease": "./release/prerelease.sh",
+    "build": "npx webpack --config build/*.config.js",
+    "prerelease": "npm run build; ./release/prerelease.sh",
     "release": "./release/release.sh"
   },
   "repository": {
