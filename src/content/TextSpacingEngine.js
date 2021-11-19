@@ -1,5 +1,5 @@
-import {DOM} from "../../core/ui/DOM";
-import {Engine} from "./Engine";
+import {DOM} from "../../modules/Reedable-core/ui/DOM";
+import {Engine} from "../../modules/Reedable-core/content/Engine";
 
 export class TextSpacingEngine extends Engine {
 
@@ -22,7 +22,7 @@ export class TextSpacingEngine extends Engine {
             reedableMarginBottom,
             reedableLetterSpacing,
             reedableWordSpacing,
-            reedableTextAlign,
+            reedableTextAlign
         } = node.dataset;
 
         if (typeof reedableLineHeight !== "undefined" ||
@@ -41,7 +41,7 @@ export class TextSpacingEngine extends Engine {
                 marginBottom,
                 letterSpacing,
                 wordSpacing,
-                textAlign,
+                textAlign
             } = node.style;
 
             const computedStyle = getComputedStyle(node);
@@ -144,7 +144,7 @@ export class TextSpacingEngine extends Engine {
                 reedableMarginBottom,
                 reedableLetterSpacing,
                 reedableWordSpacing,
-                reedableTextAlign,
+                reedableTextAlign
             } = node.dataset;
 
             delete node.dataset.reedableLineHeight;

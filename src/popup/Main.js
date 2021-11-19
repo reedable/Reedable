@@ -1,5 +1,5 @@
-import {AccordionGroup} from "../../core/ui/widgets/AccordionGroup";
-import {Controller} from "../../core/ui/Controller";
+import {AccordionGroup} from "../../modules/Reedable-core/ui/widgets/AccordionGroup";
+import {Controller} from "../../modules/Reedable-core/ui/Controller";
 
 import {FontOverrideAccordion} from "./FontOverrideAccordion";
 import {TextSpacingAccordion} from "./TextSpacingAccordion";

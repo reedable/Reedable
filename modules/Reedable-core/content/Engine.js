@@ -1,5 +1,6 @@
-import {DOM} from "../../core/ui/DOM";
-import {UnsupportedOperationError} from "../../core/errors/UnsupportedOperationError";
+import {DOM} from "../ui/DOM";
+import {UnsupportedOperationError} from "../errors/UnsupportedOperationError";
+import {Sync} from "../Storage";
 
 export class Engine {
 
@@ -62,24 +63,22 @@ export class Engine {
         });
     }
 
-    _processNodes(nodeList) {
-        chrome.storage.sync.get([this.engineName], (pref = {}) => {
-            (nodeList || []).forEach((node) => {
+    async _processNodes(nodeList) {
+        const pref = await Sync.get(this.engineName);
 
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (DOM.getText(node)) {
-                        try {
-                            this._processNode(node, pref[this.engineName]);
-                        } catch (e) {
-                            console.debug(e);
-                        }
-                    }
-                }
+        (nodeList || []).forEach((node) => {
 
-                if (node.shadowRoot) {
-                    this.start(node.shadowRoot);
+            if (node.nodeType === Node.ELEMENT_NODE && DOM.getText(node)) {
+                try {
+                    this._processNode(node, pref[this.engineName]);
+                } catch (e) {
+                    console.error("Error while calling this._processNode", e);
                 }
-            });
+            }
+
+            if (node.shadowRoot) {
+                this.start(node.shadowRoot);
+            }
         });
     }
 
@@ -87,13 +86,13 @@ export class Engine {
      * Implementation must be provided by the sub-classes.
      */
     async _processNode(node, enginePref) {
-        throw new UnsupportedOperationError("Engine._processNode", node, enginePref);
+        throw new UnsupportedOperationError("Engine._processNode");
     }
 
     /**
      * Implementation must be provided by the sub-classes.
      */
     async _restoreNode(node) {
-        throw new UnsupportedOperationError("Engine._restoreNode", node);
+        throw new UnsupportedOperationError("Engine._restoreNode");
     }
 }

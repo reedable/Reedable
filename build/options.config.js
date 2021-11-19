@@ -2,9 +2,9 @@ const path = require("path");
 
 module.exports = {
     "mode": "none",
-    "entry": "./src/popup/popup.js",
+    "entry": "./src/options/options.js",
     "output": {
-        "filename": "popup.bundle.js",
+        "filename": "options.bundle.js",
         "path": path.join(__dirname, "../unpacked/scripts")
     },
     "optimization": {

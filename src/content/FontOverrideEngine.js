@@ -1,5 +1,5 @@
-import {DOM} from "../../core/ui/DOM";
-import {Engine} from "./Engine";
+import {DOM} from "../../modules/Reedable-core/ui/DOM";
+import {Engine} from "../../modules/Reedable-core/content/Engine";
 
 /**
  * Injected <style> tag content CSS text loads packaged font files.

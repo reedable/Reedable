@@ -1,6 +1,7 @@
 import {TextSpacingEngine} from "./TextSpacingEngine";
 import {FontOverrideEngine} from "./FontOverrideEngine";
 import {FocusIndicatorEngine} from "./FocusIndicatorEngine";
+import {Sync} from "../../modules/Reedable-core/Storage";
 
 window.Reedable = {
     TextSpacingEngine,
@@ -8,9 +9,10 @@ window.Reedable = {
     FocusIndicatorEngine
 };
 
-chrome.storage.sync.get(
-    ["textSpacing", "fontOverride", "focusIndicator"],
+Sync.get("textSpacing", "fontOverride", "focusIndicator").then(
     ({textSpacing, fontOverride, focusIndicator}) => {
+
+        console.log({textSpacing, fontOverride, focusIndicator});
 
         if (textSpacing.isEnabled) {
             TextSpacingEngine.getInstance().start(document);

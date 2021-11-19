@@ -1,9 +1,15 @@
 import {ControllerRegistry} from "./ControllerRegistry";
 import {NodeManager} from "./NodeManager";
+import {UnsupportedOperationError} from "../errors/UnsupportedOperationError";
 
 export class Controller {
 
     constructor(node, opts = {}) {
+
+        if (typeof node === "undefined") {
+            throw new UnsupportedOperationError("node is required");
+        }
+
         const controller = ControllerRegistry.getController(node);
 
         if (controller) {

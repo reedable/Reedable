@@ -1,7 +1,8 @@
 const path = require("path");
 
 module.exports = {
-    "entry": "./src/app/background/background.js",
+    "mode": "none",
+    "entry": "./src/background/background.js",
     "output": {
         "filename": "background.bundle.js",
         "path": path.join(__dirname, "../unpacked/scripts")
@@ -10,5 +11,3 @@ module.exports = {
         "minimize": false
     }
 };
-
-console.log(__dirname);

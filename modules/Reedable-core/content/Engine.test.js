@@ -1,21 +1,22 @@
-import {chrome} from "../../core/test/fake/chrome";
-import {deepRestore, deepSpy} from "../../core/test/jestHelper";
+import {deepRestore, deepSpy} from "../test/jestHelper";
 import {Engine} from "./Engine";
 import {afterEach, beforeEach, describe, it, jest} from "@jest/globals";
+import {Sync} from "../Storage";
 
 describe("Engine", function () {
     "use strict";
 
     let sut;
-    let chromeMock;
+    let SyncMock;
 
     beforeEach(function () {
-        chromeMock = deepSpy(chrome);
         sut = new Engine("MyEngine");
+        SyncMock = deepSpy(Sync);
+        SyncMock.get.mockResolvedValue({});
     });
 
     afterEach(function () {
-        deepRestore(chromeMock);
+        deepRestore(SyncMock);
     });
 
     describe("_processNodes", function () {
@@ -24,21 +25,18 @@ describe("Engine", function () {
             sut._processNode = jest.fn();
         });
 
-        it("requests pref data by same engine name", () => {
-            sut._processNodes();
-            expect(chromeMock.storage.sync.get).toHaveBeenCalledTimes(1);
-            expect(chromeMock.storage.sync.get.mock.calls[0][0]).toStrictEqual(["MyEngine"]);
+        it("requests pref data by same engine name", async () => {
+            await sut._processNodes();
+            expect(SyncMock.get).toHaveBeenCalledTimes(1);
+            expect(SyncMock.get.mock.calls[0][0]).toStrictEqual("MyEngine");
         });
 
-        it("does not do anything if nothing was passed to _processNodes", () => {
-            sut._processNodes();
-
-            const callback = chromeMock.storage.sync.get.mock.calls[0][1];
-            callback();
+        it("does not do anything if nothing was passed to _processNodes", async () => {
+            await sut._processNodes();
             expect(sut._processNode).toHaveBeenCalledTimes(0);
         });
 
-        it("calls _processNode as many times as there are nodes in the nodeList passed to _processNodes", () => {
+        it("calls _processNode as many times as there are nodes in the nodeList passed to _processNodes", async () => {
 
             const createParagraphElement = (textContent) => {
                 const p = document.createElement("p");
@@ -50,10 +48,8 @@ describe("Engine", function () {
             documentFragment.append(createParagraphElement("foo"));
             documentFragment.append(createParagraphElement("qwerty"));
             documentFragment.append(createParagraphElement("hello"));
-            sut._processNodes(documentFragment.querySelectorAll("p"));
 
-            const callback = chromeMock.storage.sync.get.mock.calls[0][1];
-            callback();
+            await sut._processNodes(documentFragment.querySelectorAll("p"));
             expect(sut._processNode).toHaveBeenCalledTimes(3);
         });
     });
@@ -98,9 +94,11 @@ describe("Engine", function () {
 
         it("disconnects observer if one is found", async () => {
             let observerMock;
+
             observersGetMock.mockReturnValue(observerMock = {
                 "disconnect": jest.fn()
             });
+
             await sut.stop();
             expect(observerMock.disconnect).toHaveBeenCalledTimes(1);
         });

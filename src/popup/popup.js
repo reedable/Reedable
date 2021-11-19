@@ -1,4 +1,4 @@
-import {App} from "../../core/ui/App";
+import {App} from "../../modules/Reedable-core/ui/App";
 import {Main} from "./Main";
 
 const app = new App(document);
