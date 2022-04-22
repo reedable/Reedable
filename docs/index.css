@@ -28,9 +28,10 @@ html.Reedable body img {
 html.Reedable body .Banner {
   display: flex;
   align-items: center;
+  margin: 1rem;
 }
 html.Reedable body .Banner h1 {
-  margin: 0 0 0 .5em;
+  margin: 0;
 }
 @media only screen and (max-width: 640px) {
   html.Reedable body .Banner h1 {
@@ -40,11 +41,11 @@ html.Reedable body .Banner h1 {
   }
 }
 html.Reedable body .Content {
-  margin: 1.5rem;
+  margin: 1rem;
 }
 @media only screen and (max-width: 640px) {
   html.Reedable body .Content {
-    margin: 1.5rem .75rem;
+    margin: 1.5rem 0.75rem;
   }
 }
 html.Reedable body a.Footnote[aria-label] {
@@ -53,8 +54,8 @@ html.Reedable body a.Footnote[aria-label] {
   vertical-align: super;
 }
 html.Reedable body .PictureFrame {
-  box-shadow: 0 .1875rem .625rem black;
-  border-radius: .25rem;
+  box-shadow: 0 0.1875rem 0.625rem black;
+  border-radius: 0.25rem;
 }
 html.Reedable body .QuestionAndAnswer dt {
   margin-top: 0.75em;
@@ -77,4 +78,3 @@ html.Reedable body .QuestionAndAnswer dd:before {
 html.Reedable body .CryptoCurrencyAddress {
   font-family: Courier, monospace;
 }
-/*# sourceMappingURL=index.css.map */
