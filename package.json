@@ -5,11 +5,13 @@
   "private": true,
   "directories": {
     "doc": "docs",
-    "test": "src/core/test"
+    "test": "src"
   },
   "scripts": {
     "test": "jest --coverage",
-    "build": "npx webpack --config build/*.config.js",
+    "lessc": "build/script/lessc.sh",
+    "showdown": "build/script/showdown.sh",
+    "build": "npm run lessc && npm run showdown && npx webpack --config build/*.config.js",
     "prerelease": "npm run build; ./release/prerelease.sh",
     "release": "./release/release.sh"
   },
@@ -36,10 +38,14 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.5.2",
     "jest": "^27.2.1",
+    "less": "^4.1.2",
+    "showdown": "^2.1.0",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
   },
   "jest": {
     "testEnvironment": "jsdom"
+  },
+  "dependencies": {
   }
 }
