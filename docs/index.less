@@ -3,105 +3,195 @@
 @md: 960px;
 @lg: 1280px;
 
-html.Reedable {
-  font-size: 16px;
-  line-height: 1.5;
+// Reset
+.Reedable {
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+  }
+}
+
+// Define rem
+.Reedable {
+
+  font-size: 14px;
+
+  @media only screen and (min-width: @xs) {
+    //color: purple;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: @sm) {
+    //color: blue;
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: @md) {
+    //color: orange;
+  }
+
+  @media only screen and (min-width: @lg) {
+    //color: red;
+  }
+}
+
+// Default document structure
+.Reedable {
 
   body {
+    width: 100%;
     margin: 0;
 
+    header {
+      padding: 1rem 1rem 0 1rem;
+    }
+
+    main {
+      padding: 0 1rem 0 1rem;
+    }
+
     footer {
-      font-size: 0.75rem;
-      margin-bottom: 6rem;
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+
+  p,
+  pre {
+    margin-top: 1rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+
+  h3 {
+    margin-top: 1.75rem;
+  }
+
+  h4 {
+    margin-top: 1.5rem;
+  }
+
+  h5 {
+    margin-top: 1.25rem;
+  }
+
+  h6 {
+    margin-top: 1.125rem;
+  }
+
+  dl {
+    margin-top: 1rem;
+
+    dt {
+      margin-top: 1rem;
     }
 
-    p {
-      margin-block-start: 1.5em;
-      margin-block-end: 1.5em;
+    dd {
+      margin-top: 0.5rem;
+      margin-left: 1rem;
     }
+  }
 
-    dl {
+  ol, ul {
+    margin-top: 1rem;
+    margin-left: 2rem;
 
-      dt {
-        font-weight: 700;
-      }
+    li {
+      margin-top: 0.25rem;
     }
+  }
 
-    ol {
+  @media only screen and (min-width: @xs) {}
 
-      @media only screen and (max-width: @sm) {
-        padding-left: 1.75em;
-      }
-    }
+  @media only screen and (min-width: @sm) {
 
-    img {
-      max-width: 100%;
-      object-fit: cover;
-    }
-
-    .Banner {
+    header {
       display: flex;
-      align-items: center;
-      margin: 1rem;
+      justify-content: center;
 
-      h1 {
-        margin: 0;
+      div {
 
-        @media only screen and (max-width: @sm) {
-          font-size: 1.5rem;
-          line-height: 1.25em;
-          max-width: 8em;
+        h1 {
+          width: @sm;
+        }
+
+        .Byline {
+          width: @sm;
         }
       }
     }
 
-    .Content {
-      margin: 1rem;
+    main {
+      display: flex;
+      justify-content: center;
 
-      @media only screen and (max-width: @sm) {
-        margin: 1.5rem .75rem;
+      &>section {
+        width: @sm;
+      }
+    }
+  }
+
+  @media only screen and (min-width: @md) {}
+
+  @media only screen and (min-width: @lg) {}
+}
+
+// Custom objects
+.Reedable {
+
+  h1 {
+
+    .Advisory {
+      font-size: 0.375em; //relative to the parent element font-size
+      font-weight: bolder;
+      color: red;
+    }
+
+    .SubHeading {
+      font-size: 0.5em; //relative to the parent element font-size
+    }
+  }
+
+  .Byline {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: 0.5rem;
+    //box-shadow: inset 0 0.05rem 0.25rem black;
+    border-radius: .25rem;
+    font-family: "Courier New", Courier, Monospace;
+    font-size: 75%;
+  }
+
+  .PictureFrame {
+    margin-top: 1rem;
+    box-shadow: 0 .1875rem .625rem black;
+    border-radius: .25rem;
+  }
+
+  .QuestionAndAnswer {
+
+    dt {
+
+      &:before {
+        content: "Question: ";
       }
     }
 
-    // Footnote links should have aria-label explaining that it is a footnote
-    // link, or otherwise, it will sound like "link 1", "link 2", etc...
-    a.Footnote[aria-label] {
-      font-size: 0.75em; //relative to the text around it
-      font-weight: 700;
-      vertical-align: super;
-    }
+    dd {
+      font-style: italic;
 
-    .PictureFrame {
-      box-shadow: 0 .1875rem .625rem black;
-      border-radius: .25rem;
-    }
-
-    .QuestionAndAnswer {
-
-      dt {
-        margin-top: 0.75em;
-
-        &:before {
-          content: "Q: ";
-        }
+      &:before {
+        content: "Answer: ";
       }
-
-      dd {
-        margin-top: 0.25em;
-        font-style: italic;
-
-        @media only screen and (max-width: @sm) {
-          margin-left: 0;
-        }
-
-        &:before {
-          content: "A: ";
-        }
-      }
-    }
-
-    .CryptoCurrencyAddress {
-      font-family: Courier, monospace;
     }
   }
 }

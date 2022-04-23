@@ -9,8 +9,9 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "lessc": "node_modules/.bin/lessc docs/index.less docs/index.css",
-    "build": "npm run lessc && npx webpack --config build/*.config.js",
+    "lessc": "build/script/lessc.sh",
+    "showdown": "build/script/showdown.sh",
+    "build": "npm run lessc && npm run showdown && npx webpack --config build/*.config.js",
     "prerelease": "npm run build; ./release/prerelease.sh",
     "release": "./release/release.sh"
   },
@@ -38,10 +39,13 @@
     "eslint-plugin-jest": "^24.5.2",
     "jest": "^27.2.1",
     "less": "^4.1.2",
+    "showdown": "^2.1.0",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
   },
   "jest": {
     "testEnvironment": "jsdom"
+  },
+  "dependencies": {
   }
 }

@@ -1,80 +1,128 @@
-html.Reedable {
-  font-size: 16px;
-  line-height: 1.5;
+.Reedable * {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
 }
-html.Reedable body {
+.Reedable {
+  font-size: 14px;
+}
+@media only screen and (min-width: 320px) {
+  .Reedable {
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 640px) {
+  .Reedable {
+    font-size: 18px;
+  }
+}
+@media only screen and (min-width: 960px) {
+}
+@media only screen and (min-width: 1280px) {
+}
+.Reedable body {
+  width: 100%;
   margin: 0;
 }
-html.Reedable body footer {
-  font-size: 0.75rem;
-  margin-bottom: 6rem;
+.Reedable body header {
+  padding: 1rem 1rem 0 1rem;
 }
-html.Reedable body p {
-  margin-block-start: 1.5em;
-  margin-block-end: 1.5em;
+.Reedable body main {
+  padding: 0 1rem 0 1rem;
 }
-html.Reedable body dl dt {
-  font-weight: 700;
+.Reedable body footer {
+  padding: 0 1rem 1rem 1rem;
 }
-@media only screen and (max-width: 640px) {
-  html.Reedable body ol {
-    padding-left: 1.75em;
+.Reedable p,
+.Reedable pre {
+  margin-top: 1rem;
+}
+.Reedable h2 {
+  margin-top: 2rem;
+}
+.Reedable h3 {
+  margin-top: 1.75rem;
+}
+.Reedable h4 {
+  margin-top: 1.5rem;
+}
+.Reedable h5 {
+  margin-top: 1.25rem;
+}
+.Reedable h6 {
+  margin-top: 1.125rem;
+}
+.Reedable dl {
+  margin-top: 1rem;
+}
+.Reedable dl dt {
+  margin-top: 1rem;
+}
+.Reedable dl dd {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+.Reedable ol,
+.Reedable ul {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.Reedable ol li,
+.Reedable ul li {
+  margin-top: 0.25rem;
+}
+@media only screen and (min-width: 640px) {
+  .Reedable header {
+    display: flex;
+    justify-content: center;
+  }
+  .Reedable header div h1 {
+    width: 640px;
+  }
+  .Reedable header div .Byline {
+    width: 640px;
+  }
+  .Reedable main {
+    display: flex;
+    justify-content: center;
+  }
+  .Reedable main > section {
+    width: 640px;
   }
 }
-html.Reedable body img {
-  max-width: 100%;
-  object-fit: cover;
+.Reedable h1 .Advisory {
+  font-size: 0.375em;
+  font-weight: bolder;
+  color: red;
 }
-html.Reedable body .Banner {
-  display: flex;
-  align-items: center;
-  margin: 1rem;
+.Reedable h1 .SubHeading {
+  font-size: 0.5em;
 }
-html.Reedable body .Banner h1 {
-  margin: 0;
+.Reedable .Byline {
+  margin-top: 1rem;
+  font-size: 0.875rem;
 }
-@media only screen and (max-width: 640px) {
-  html.Reedable body .Banner h1 {
-    font-size: 1.5rem;
-    line-height: 1.25em;
-    max-width: 8em;
-  }
+.Reedable pre {
+  overflow-x: auto;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-family: "Courier New", Courier, Monospace;
+  font-size: 75%;
 }
-html.Reedable body .Content {
-  margin: 1rem;
-}
-@media only screen and (max-width: 640px) {
-  html.Reedable body .Content {
-    margin: 1.5rem 0.75rem;
-  }
-}
-html.Reedable body a.Footnote[aria-label] {
-  font-size: 0.75em;
-  font-weight: 700;
-  vertical-align: super;
-}
-html.Reedable body .PictureFrame {
+.Reedable .PictureFrame {
+  margin-top: 1rem;
   box-shadow: 0 0.1875rem 0.625rem black;
   border-radius: 0.25rem;
 }
-html.Reedable body .QuestionAndAnswer dt {
-  margin-top: 0.75em;
+.Reedable .QuestionAndAnswer dt:before {
+  content: "Question: ";
 }
-html.Reedable body .QuestionAndAnswer dt:before {
-  content: "Q: ";
-}
-html.Reedable body .QuestionAndAnswer dd {
-  margin-top: 0.25em;
+.Reedable .QuestionAndAnswer dd {
   font-style: italic;
 }
-@media only screen and (max-width: 640px) {
-  html.Reedable body .QuestionAndAnswer dd {
-    margin-left: 0;
-  }
-}
-html.Reedable body .QuestionAndAnswer dd:before {
-  content: "A: ";
-}
-html.Reedable body .CryptoCurrencyAddress {
-  font-family: Courier, monospace;
+.Reedable .QuestionAndAnswer dd:before {
+  content: "Answer: ";
 }
