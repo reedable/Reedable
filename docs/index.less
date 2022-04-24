@@ -3,6 +3,20 @@
 @md: 960px;
 @lg: 1280px;
 
+@xs-font-size: 14px;
+@sm-font-size: 16px;
+@md-font-size: 18px;
+@lg-font-size: 18px;
+
+:root {
+  --background-color: #ffffff;
+  --color: #333333;
+  --color-alert: red;
+  --color-link: blue;
+  --color-link-visited: purple;
+  --color-hr: #aaaaaa;
+}
+
 // Reset
 .Reedable {
   * {
@@ -15,27 +29,25 @@
   }
 }
 
-// Define rem
+// rem definition
 .Reedable {
 
-  font-size: 14px;
+  font-size: @xs-font-size;
 
   @media only screen and (min-width: @xs) {
-    //color: purple;
-    font-size: 16px;
+    font-size: @sm-font-size;
   }
 
   @media only screen and (min-width: @sm) {
-    //color: blue;
-    font-size: 18px;
+    font-size: @md-font-size;
   }
 
   @media only screen and (min-width: @md) {
-    //color: orange;
+    font-size: @lg-font-size;
   }
 
   @media only screen and (min-width: @lg) {
-    //color: red;
+    font-size: @lg-font-size;
   }
 }
 
@@ -97,13 +109,19 @@
     }
   }
 
-  ol, ul {
+  ol,
+  ul {
     margin-top: 1rem;
     margin-left: 2rem;
 
     li {
       margin-top: 0.25rem;
     }
+  }
+
+  hr {
+    border-top: 0.0625rem solid var(--color-hr);
+    margin: 1rem 0;
   }
 
   @media only screen and (min-width: @xs) {}
@@ -130,8 +148,23 @@
       display: flex;
       justify-content: center;
 
-      &>section {
-        width: @sm;
+      &>div {
+
+        &>* {
+          width: @sm;
+        }
+      }
+    }
+
+    footer {
+      display: flex;
+      justify-content: center;
+
+      &>div {
+
+        &>* {
+          width: @sm;
+        }
       }
     }
   }
@@ -143,13 +176,33 @@
 
 // Custom objects
 .Reedable {
+  color: var(--color);
+  background-color: var(--background-color);
+
+  nav {
+
+    ul {
+      margin: 1rem 0 0 0;
+      border-bottom: 0.0625rem solid var(--color-hr);
+
+      li {
+        display: inline-block;
+        margin-left: 1rem;
+        padding-bottom: 0.25rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
 
   h1 {
 
     .Advisory {
       font-size: 0.375em; //relative to the parent element font-size
       font-weight: bolder;
-      color: red;
+      color: var(--color-alert);
     }
 
     .SubHeading {
@@ -169,6 +222,14 @@
     border-radius: .25rem;
     font-family: "Courier New", Courier, Monospace;
     font-size: 75%;
+  }
+
+  a {
+    color: var(--color-link);
+
+    &:visited {
+      color: var(--color-link-visited);
+    }
   }
 
   .PictureFrame {

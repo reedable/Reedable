@@ -1,10 +1,7 @@
-html.Reedable {
-  color: #eeeeee;
-  background-color: #333333;
-}
-html.Reedable a {
-  color: cyan;
-}
-html.Reedable a:visited {
-  color: lightpink;
+:root {
+  --background-color: #333333;
+  --color: #eeeeee;
+  --color-alert: yellow;
+  --color-link: cyan;
+  --color-link-visited: lightpink;
 }
