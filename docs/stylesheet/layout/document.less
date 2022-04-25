@@ -1,0 +1,50 @@
+@import "../foundation/variables.less";
+
+.Reedable {
+
+  body {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+    header {
+      padding: 1rem 1rem 0 1rem;
+    }
+
+    nav,
+    main {
+      padding: 0 1rem;
+    }
+
+    footer {
+      padding: 0 1rem 1rem 1rem;
+    }
+
+    &>div {
+      width: 100%;
+    }
+
+    @media only screen and (min-width: @xs) {}
+
+    @media only screen and (min-width: @sm) {
+
+      &>div {
+        max-width: @sm;
+      }
+    }
+
+    @media only screen and (min-width: @md) {}
+
+    @media only screen and (min-width: @lg) {
+
+      &>div {
+        max-width: @lg;
+
+        main {
+          column-count: 2
+        }
+      }
+    }
+  }
+}

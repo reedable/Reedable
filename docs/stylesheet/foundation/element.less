@@ -1,0 +1,93 @@
+.Reedable {
+
+    :focus {
+        transition: 0.25s;
+        font-size: 125%;
+    }
+
+    p {
+        margin-top: 1rem;
+    }
+
+    pre {
+        overflow-x: auto;
+        padding: 0 0 0.5rem 0;
+
+        code {
+            margin: 0;
+            font-size: 75%;
+        }
+    }
+
+    code {
+        margin: 0 0.25rem;
+        font-family: "Courier New", Courier, Monospace;
+        font-size: 87.5%;
+    }
+
+    a {
+        color: var(--color-link);
+        text-decoration: none;
+
+        &:visited {
+            color: var(--color-link-visited);
+        }
+
+        &:hover,
+        &:focus {
+            border-bottom: 0.125rem solid;
+        }
+    }
+
+    h2 {
+        margin-top: 2rem;
+    }
+
+    h3 {
+        margin-top: 1.75rem;
+    }
+
+    h4 {
+        margin-top: 1.5rem;
+    }
+
+    h5 {
+        margin-top: 1.25rem;
+    }
+
+    h6 {
+        margin-top: 1.125rem;
+    }
+
+    dl {
+        margin-top: 1rem;
+
+        dt {
+            margin-top: 1rem;
+        }
+
+        dd {
+            margin-top: 0.5rem;
+            margin-left: 1rem;
+        }
+    }
+
+    ol,
+    ul {
+        margin-top: 1rem;
+        margin-left: 2rem;
+
+        li {
+            margin-top: 0.25rem;
+        }
+    }
+
+    hr {
+        border-top: 0.0625rem solid var(--color-hr);
+        margin: 1rem 0;
+    }
+
+    address {
+        display: inline-block;
+    }
+}

@@ -1,0 +1,25 @@
+// rem definition
+:root {
+    --xs-font-size: 14px;
+    --sm-font-size: 16px;
+    --md-font-size: 18px;
+    --lg-font-size: 18px;
+
+    font-size: var(--xs-font-size);
+
+    @media only screen and (min-width: @xs) {
+        font-size: var(--sm-font-size);
+    }
+
+    @media only screen and (min-width: @sm) {
+        font-size: var(--md-font-size);
+    }
+
+    @media only screen and (min-width: @md) {
+        font-size: var(--lg-font-size);
+    }
+
+    @media only screen and (min-width: @lg) {
+        font-size: var(--lg-font-size);
+    }
+}

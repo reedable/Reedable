@@ -1,0 +1,216 @@
+.Reedable * {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+}
+:root {
+  --xs-font-size: 14px;
+  --sm-font-size: 16px;
+  --md-font-size: 18px;
+  --lg-font-size: 18px;
+  font-size: var(--xs-font-size);
+}
+@media only screen and (min-width: 320px) {
+  :root {
+    font-size: var(--sm-font-size);
+  }
+}
+@media only screen and (min-width: 640px) {
+  :root {
+    font-size: var(--md-font-size);
+  }
+}
+@media only screen and (min-width: 960px) {
+  :root {
+    font-size: var(--lg-font-size);
+  }
+}
+@media only screen and (min-width: 1280px) {
+  :root {
+    font-size: var(--lg-font-size);
+  }
+}
+.Reedable :focus {
+  transition: 0.25s;
+  font-size: 125%;
+}
+.Reedable p {
+  margin-top: 1rem;
+}
+.Reedable pre {
+  overflow-x: auto;
+  padding: 0 0 0.5rem 0;
+}
+.Reedable pre code {
+  margin: 0;
+  font-size: 75%;
+}
+.Reedable code {
+  margin: 0 0.25rem;
+  font-family: "Courier New", Courier, Monospace;
+  font-size: 87.5%;
+}
+.Reedable a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+.Reedable a:visited {
+  color: var(--color-link-visited);
+}
+.Reedable a:hover,
+.Reedable a:focus {
+  border-bottom: 0.125rem solid;
+}
+.Reedable h2 {
+  margin-top: 2rem;
+}
+.Reedable h3 {
+  margin-top: 1.75rem;
+}
+.Reedable h4 {
+  margin-top: 1.5rem;
+}
+.Reedable h5 {
+  margin-top: 1.25rem;
+}
+.Reedable h6 {
+  margin-top: 1.125rem;
+}
+.Reedable dl {
+  margin-top: 1rem;
+}
+.Reedable dl dt {
+  margin-top: 1rem;
+}
+.Reedable dl dd {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+.Reedable ol,
+.Reedable ul {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+.Reedable ol li,
+.Reedable ul li {
+  margin-top: 0.25rem;
+}
+.Reedable hr {
+  border-top: 0.0625rem solid var(--color-hr);
+  margin: 1rem 0;
+}
+.Reedable address {
+  display: inline-block;
+}
+.Reedable .Center {
+  display: flex;
+  justify-content: center;
+}
+.Reedable body {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.Reedable body header {
+  padding: 1rem 1rem 0 1rem;
+}
+.Reedable body nav,
+.Reedable body main {
+  padding: 0 1rem;
+}
+.Reedable body footer {
+  padding: 0 1rem 1rem 1rem;
+}
+.Reedable body > div {
+  width: 100%;
+}
+@media only screen and (min-width: 640px) {
+  .Reedable body > div {
+    max-width: 640px;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .Reedable body > div {
+    max-width: 1280px;
+  }
+  .Reedable body > div main {
+    column-count: 2;
+  }
+}
+.Reedable h1 .Tag {
+  font-size: 0.375em;
+  font-weight: bolder;
+  color: var(--color-alert);
+}
+.Reedable h1 .SubHeading {
+  font-size: 0.5em;
+  font-weight: normal;
+  font-style: italic;
+}
+.Reedable .Byline {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+.Reedable nav ul {
+  margin: 1rem 0 0 0;
+  border-bottom: 0.0625rem solid var(--color-hr);
+}
+.Reedable nav ul li {
+  display: inline-block;
+  margin-left: 1rem;
+  padding-bottom: 0.25rem;
+}
+.Reedable nav ul li:first-child {
+  margin-left: 0;
+}
+.Reedable nav ul li a {
+  text-decoration: none;
+}
+.Reedable nav ul li a:visited {
+  color: var(--color-link);
+}
+.Reedable nav ul li a:hover,
+.Reedable nav ul li a:focus {
+  border-bottom: 2px solid var(--color-link);
+}
+.Reedable a.SkipLink {
+  padding: 1rem;
+  border: 0.125rem solid var(--color-link);
+  background-color: var(--background-color);
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.Reedable a.SkipLink:visited {
+  color: var(--color-link);
+}
+.Reedable a.SkipLink:focus {
+  position: static;
+  width: auto;
+  height: auto;
+}
+.Reedable .PictureFrame img {
+  margin-top: 1rem;
+  box-shadow: 0 0.1875rem 0.625rem black;
+  border-radius: 0.25rem;
+}
+.Reedable .QuestionAndAnswer dt:before {
+  content: "Question: ";
+}
+.Reedable .QuestionAndAnswer dd {
+  font-style: italic;
+}
+.Reedable .QuestionAndAnswer dd:before {
+  content: "Answer: ";
+}
+.Reedable {
+  color: var(--color);
+  background-color: var(--background-color);
+}
