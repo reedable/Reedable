@@ -13,7 +13,7 @@
     <header>
         <div>
             <h1>
-                <div class="Advisory">DRAFT</div>
+                <div class="Tag">DRAFT</div>
                 Peril of metrics
                 <div class="SubHeading">Changing role of automated unit testing over <abbr title="software development lifecycle">SDLC</abbr></div>
             </h1>
@@ -50,14 +50,13 @@
 
                 <p>Test-driven method, however, reverses this cycle. Instead of implementing the code first and then testing it, the developer is asked to script the testing ahead of writing the code.</p>
 
-                <pre><code>import {average} from "./average";
+                <pre><code>
+import {average} from "./average";
 
 describe("average function", function () {
 
     it("averages numbers", () => {
-
         const result = average([10, 20, 30]);
-
         expect(result).toBe(20);
     });
 });</code></pre>
@@ -68,21 +67,14 @@ describe("average function", function () {
 
                 <p>It is a matter of time until the developer realizes that even though there are six students in the classroom today, the number may grow to seven next year. Their implementation of <code>average</code> function should, at least, accommodate some of these variations in order to be forward compatible. They might even start asking, what if there are six students, but one student was absent and did not take the exam, thus having no score associated with them?</p>
 
-                <pre><code>it("averages five numbers", () => {
-
-    const result = average([
-        10, 20, 30, 40, 50
-    ]);
-
+                <pre><code>
+it("averages five numbers", () => {
+    const result = average([10, 20, 30, 40, 50]);
     expect(result).toBe(30);
 });
 
 it("ignores missing scores", () => {
-
-    const result = average([
-        10, 20, null, 40, 50
-    ]);
-
+    const result = average([10, 20, null, 40, 50]);
     expect(result).toBe(30);
 });</code></pre>
 
@@ -106,7 +98,8 @@ it("ignores missing scores", () => {
 
                 <p>For example, the developer working on our example program might have realized that they did not know how to handle the situation when all students missed a particular exam. They went to talk to the product owner, and with deadline looming, they decided that they did not have the time to design and implement the system behavior covering this use case.</p>
 
-                <pre><code>it("does not handle the condition where no scores exist", () => {
+                <pre><code>
+it("does not handle the condition where no scores exist", () => {
 
     const result = average([
         null, null, null, null, null
