@@ -11,9 +11,9 @@
 :root {
   --background-color: #ffffff;
   --color: #333333;
-  --color-alert: red;
-  --color-link: blue;
-  --color-link-visited: purple;
+  --color-alert: #ff0000;
+  --color-link: #0000ff;
+  --color-link-visited: #880088;
   --color-hr: #bbbbbb;
 }
 
@@ -124,6 +124,10 @@
     margin: 1rem 0;
   }
 
+  address {
+    display: inline-block;
+  }
+
   @media only screen and (min-width: @xs) {}
 
   @media only screen and (min-width: @sm) {
@@ -193,6 +197,19 @@
         &:first-child {
           margin-left: 0;
         }
+
+        a {
+          text-decoration: none;
+
+          &:visited {
+            color: var(--color-link);
+          }
+
+          &:hover,
+          &:focus {
+            border-bottom: 2px solid var(--color-link);
+          }
+        }
       }
     }
   }
@@ -226,10 +243,21 @@
 
   a {
     color: var(--color-link);
+    text-decoration: none;
 
     &:visited {
       color: var(--color-link-visited);
     }
+
+    &:hover,
+    &:focus {
+      border-bottom: 0.125rem solid;
+    }
+  }
+
+  :focus {
+    transition: 0.25s;
+    font-size: 125%;
   }
 
   .PictureFrame {
