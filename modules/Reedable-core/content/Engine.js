@@ -63,12 +63,16 @@ export class Engine {
         });
     }
 
+    _filterNode(node) {
+        return (node.nodeType === Node.ELEMENT_NODE && DOM.getText(node));
+    }
+
     async _processNodes(nodeList) {
         const pref = await Sync.get(this.engineName);
 
         (nodeList || []).forEach((node) => {
 
-            if (node.nodeType === Node.ELEMENT_NODE && DOM.getText(node)) {
+            if (this._filterNode(node)) {
                 try {
                     this._processNode(node, pref[this.engineName]);
                 } catch (e) {

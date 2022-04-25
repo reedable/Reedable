@@ -15,18 +15,27 @@ export class TextSpacingEngine extends Engine {
         super("textSpacing");
     }
 
+    _filterNode(node) {
+        return (
+            super._filterNode(node) ||
+            node.tagName === "PRE"
+        ) && (
+            node.tagName !== "CODE"
+        );
+    }
+
     async _processNode(node, enginePref) {
 
         const {
             reedableLineHeight,
-            reedableMarginBottom,
+            reedableMarginTop,
             reedableLetterSpacing,
             reedableWordSpacing,
             reedableTextAlign
         } = node.dataset;
 
         if (typeof reedableLineHeight !== "undefined" ||
-            typeof reedableMarginBottom !== "undefined" ||
+            typeof reedableMarginTop !== "undefined" ||
             typeof reedableLetterSpacing !== "undefined" ||
             typeof reedableWordSpacing !== "undefined" ||
             typeof reedableTextAlign !== "undefined") {
@@ -38,7 +47,7 @@ export class TextSpacingEngine extends Engine {
         return (async () => {
             const {
                 lineHeight,
-                marginBottom,
+                marginTop,
                 letterSpacing,
                 wordSpacing,
                 textAlign
@@ -64,12 +73,12 @@ export class TextSpacingEngine extends Engine {
                 }
             }
 
-            function getMarginBottom() {
+            function getMarginTop() {
                 // FIXME Are there non-semantic way to mark-up paragraphs?
                 if (node.tagName === "P") {
-                    const computedMarginBottom = computedStyle.marginBottom;
+                    const computedMarginTop = computedStyle.marginTop;
 
-                    if (parseFloat(computedMarginBottom) <
+                    if (parseFloat(computedMarginTop) <
                         DOM.parseLength(
                             enginePref.afterParagraph,
                             computedStyle)) {
@@ -121,17 +130,25 @@ export class TextSpacingEngine extends Engine {
             }
 
             node.dataset.reedableLineHeight = lineHeight;
-            node.dataset.reedableMarginBottom = marginBottom;
+            node.dataset.reedableMarginTop = marginTop;
             node.dataset.reedableLetterSpacing = letterSpacing;
             node.dataset.reedableWordSpacing = wordSpacing;
             node.dataset.reedableTextAlign = textAlign;
 
-            // Apply the value only if it exceeds the computed value.
-            node.style.lineHeight = getLineHeight();
-            node.style.marginBottom = getMarginBottom();
-            node.style.letterSpacing = getLetterSpacing();
-            node.style.wordSpacing = getWordSpacing();
-            node.style.textAlign = enginePref.textAlign || "inherit";
+            if (node.tagName === "PRE") {
+                // <PRE> pre-formatted content should remain as is
+                node.style.lineHeight = "initial";
+                node.style.marginTop = "initial";
+                node.style.letterSpacing = "initial";
+                node.style.wordSpacing = "initial";
+            } else {
+                // Apply the value only if it exceeds the computed value.
+                node.style.lineHeight = getLineHeight();
+                node.style.marginTop = getMarginTop();
+                node.style.letterSpacing = getLetterSpacing();
+                node.style.wordSpacing = getWordSpacing();
+                node.style.textAlign = enginePref.textAlign || "inherit";
+            }
         })();
     }
 
@@ -141,20 +158,20 @@ export class TextSpacingEngine extends Engine {
         return (async () => {
             const {
                 reedableLineHeight,
-                reedableMarginBottom,
+                reedableMarginTop,
                 reedableLetterSpacing,
                 reedableWordSpacing,
                 reedableTextAlign
             } = node.dataset;
 
             delete node.dataset.reedableLineHeight;
-            delete node.dataset.reedableMarginBottom;
+            delete node.dataset.reedableMarginTop;
             delete node.dataset.reedableLetterSpacing;
             delete node.dataset.reedableWordSpacing;
             delete node.dataset.reedableTextAlign;
 
             node.style.lineHeight = reedableLineHeight || "";
-            node.style.marginBottom = reedableMarginBottom || "";
+            node.style.marginTop = reedableMarginTop || "";
             node.style.letterSpacing = reedableLetterSpacing || "";
             node.style.wordSpacing = reedableWordSpacing || "";
             node.style.textAlign = reedableTextAlign || "";
