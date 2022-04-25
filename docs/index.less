@@ -71,8 +71,7 @@
     }
   }
 
-  p,
-  pre {
+  p {
     margin-top: 1rem;
   }
 
@@ -216,7 +215,7 @@
 
   h1 {
 
-    .Advisory {
+    .Tag {
       font-size: 0.375em; //relative to the parent element font-size
       font-weight: bolder;
       color: var(--color-alert);
@@ -224,6 +223,8 @@
 
     .SubHeading {
       font-size: 0.5em; //relative to the parent element font-size
+      font-weight: normal;
+      font-style: italic;
     }
   }
 
@@ -232,13 +233,22 @@
     font-size: 0.875rem;
   }
 
+  code {
+    margin: 0 0.25rem;
+    font-family: "Courier New", Courier, Monospace;
+    font-size: 87.5%;
+  }
+
   pre {
     overflow-x: auto;
-    padding: 0.5rem;
+    padding: 0 0 0.5rem 0;
     //box-shadow: inset 0 0.05rem 0.25rem black;
-    border-radius: .25rem;
-    font-family: "Courier New", Courier, Monospace;
-    font-size: 75%;
+    //border-radius: .25rem;
+
+    code {
+      margin: 0;
+      font-size: 75%;
+    }
   }
 
   a {
