@@ -25,21 +25,17 @@
       width: 100%;
     }
 
-    @media only screen and (min-width: @xs) {}
-
-    @media only screen and (min-width: @sm) {
+    @media only screen and (min-width: @md-min) {
 
       &>div {
-        max-width: @sm;
+        max-width: @sm-max;
       }
     }
 
-    @media only screen and (min-width: @md) {}
-
-    @media only screen and (min-width: @lg) {
+    @media only screen and (min-width: @xl-min) {
 
       &>div {
-        max-width: @lg;
+        max-width: @lg-max;
 
         main {
           column-count: 2

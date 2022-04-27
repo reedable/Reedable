@@ -7,38 +7,40 @@
   background: transparent;
 }
 :root {
-  --xs-font-size: 14px;
-  --sm-font-size: 16px;
+  --xs-font-size: 15px;
+  --sm-font-size: 17px;
   --md-font-size: 18px;
   --lg-font-size: 18px;
+  --xl-font-size: 18px;
   font-size: var(--xs-font-size);
 }
-@media only screen and (min-width: 320px) {
+@media only screen and (min-width: 321px) {
   :root {
     font-size: var(--sm-font-size);
   }
 }
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 641px) {
   :root {
     font-size: var(--md-font-size);
   }
 }
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 961px) {
   :root {
     font-size: var(--lg-font-size);
   }
 }
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1281px) {
   :root {
-    font-size: var(--lg-font-size);
+    font-size: var(--xl-font-size);
   }
-}
-.Reedable :focus {
-  transition: 0.25s;
-  font-size: 125%;
 }
 .Reedable p {
   margin-top: 1rem;
+}
+.Reedable code {
+  font-family: "Courier New", Courier, Monospace;
+  font-size: 87.5%;
+  color: var(--color-darker);
 }
 .Reedable pre {
   overflow-x: auto;
@@ -47,11 +49,6 @@
 .Reedable pre code {
   margin: 0;
   font-size: 75%;
-}
-.Reedable code {
-  margin: 0 0.25rem;
-  font-family: "Courier New", Courier, Monospace;
-  font-size: 87.5%;
 }
 .Reedable a {
   color: var(--color-link);
@@ -63,6 +60,10 @@
 .Reedable a:hover,
 .Reedable a:focus {
   border-bottom: 0.125rem solid;
+}
+.Reedable a:focus {
+  transition: 0.25s;
+  font-size: 125%;
 }
 .Reedable h2 {
   margin-top: 2rem;
@@ -98,6 +99,18 @@
 .Reedable ul li {
   margin-top: 0.25rem;
 }
+.Reedable abbr[title] {
+  text-decoration: none;
+}
+.Reedable abbr[title]:not([tabindex])::after {
+  content: " (" attr(title) ")";
+}
+.Reedable abbr[title][tabindex]:hover {
+  border-bottom: 0.0625rem solid var(--color-link);
+}
+.Reedable abbr[title][tabindex]:focus::after {
+  content: " (" attr(title) ")";
+}
 .Reedable hr {
   border-top: 0.0625rem solid var(--color-hr);
   margin: 1rem 0;
@@ -108,6 +121,46 @@
 .Reedable .Center {
   display: flex;
   justify-content: center;
+}
+@media only screen and (min-width: 321px) {
+  .Reedable .XS {
+    display: none;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .Reedable .SM {
+    display: none;
+  }
+}
+@media only screen and (min-width: 641px) {
+  .Reedable .SM {
+    display: none;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .Reedable .MD {
+    display: none;
+  }
+}
+@media only screen and (min-width: 961px) {
+  .Reedable .MD {
+    display: none;
+  }
+}
+@media only screen and (max-width: 960px) {
+  .Reedable .LG {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1281px) {
+  .Reedable .LG {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  .Reedable .XL {
+    display: none;
+  }
 }
 .Reedable body {
   width: 100%;
@@ -128,12 +181,12 @@
 .Reedable body > div {
   width: 100%;
 }
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 641px) {
   .Reedable body > div {
     max-width: 640px;
   }
 }
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1281px) {
   .Reedable body > div {
     max-width: 1280px;
   }

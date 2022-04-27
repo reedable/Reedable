@@ -1,7 +1,54 @@
 .Reedable {
 
-    .Center {
-        display: flex;
-        justify-content: center;
+  .Center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .XS {
+
+    @media only screen and (min-width: @sm-min) {
+      display: none;
     }
+  }
+
+  .SM {
+    
+    @media only screen and (max-width: @xs-max) {
+      display: none;
+    }
+
+    @media only screen and (min-width: @md-min) {
+      display: none;
+    }
+  }
+
+  .MD {
+
+    @media only screen and (max-width: @sm-max) {
+      display: none;
+    }
+
+    @media only screen and (min-width: @lg-min) {
+      display: none;
+    }
+  }
+
+  .LG {
+
+    @media only screen and (max-width: @md-max) {
+      display: none;
+    }
+
+    @media only screen and (min-width: @xl-min) {
+      display: none;
+    }
+  }
+
+  .XL {
+
+    @media only screen and (max-width: @lg-max) {
+      display: none;
+    }
+  }
 }
