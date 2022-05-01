@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reedable | Peril of metrics | Changing role of automated unit testing over SDLC</title>
+  <title>Reedable Blog | Peril of metrics: Changing role of automated unit testing over SDLC</title>
   <link rel="shortcut icon" type="image/png" href="../../../../images/Reedable-128.png" />
   <link type="text/css" rel="stylesheet" href="../../../../stylesheet/theme/light.css" media="screen and (prefers-color-scheme: light)">
   <link type="text/css" rel="stylesheet" href="../../../../stylesheet/theme/dark.css" media="screen and (prefers-color-scheme: dark)">
@@ -15,25 +15,25 @@
 
     <header>
       <h1>
-        <div class="Tag">DRAFT</div>
+        <div class="Tag">Draft</div>
         Peril of metrics
-        <div class="SubHeading">Changing role of automated unit testing over <abbr tabindex="-1" title="software development lifecycle">SDLC</abbr></div>
+        <div class="SubHeading">Changing role of automated unit testing over SDLC</div>
       </h1>
       <div class="Byline">
-        <address>By <a rel="author" href="mailto:reedable@oinklet.com">Abraham Reed</a></address> on
-        <time pubdate datetime="2022-04-22">22-Apr-2022</time>
+        By <address><a rel="author" href="mailto:reedable@oinklet.com">Abraham Reed</a></address> on
+        <time is="localized-datetime" pubdate datetime="2022-04-22 Z-400">4/22/2022</time>
       </div>
     </header>
 
     <nav>
-      <a tabindex="-1" id="startOfMenu"></a>
+      <div id="startOfMenu" class="SR">Start of menu</div>
       <a class="SkipLink" href="#endOfMenu">Skip to end of menu</a>
       <ul>
         <li><a href="../../../../">Home</a></li>
         <li><a href="../../../../blog.html">Blog</a></li>
       </ul>
       <a class="SkipLink" href="#startOfMenu">Skip to start of menu</a>
-      <a tabindex="-1" id="endOfMenu"></a>
+      <div id="endOfMenu" class="SR">End of menu</div>
     </nav>
 
     <main>
@@ -47,11 +47,12 @@
       <p>Test-driven software development is a software development practice in which tests are scripted in tandem with, or even prior to, the development of a software product.</p>
 
       <ul>
-        <li>Writing unit test cases ahead of software implementation encourages identification of boundary conditions early on,</li>
-        <li>Unit test cases document not only the expected behavior of the code but also the prevailing behavior,</li>
-        <li>Identification of boundary conditions essential to secure software development, and</li>
+        <li>Writing unit test cases ahead of software implementation encourages identification of boundary conditions earlier in the development cycle,</li>
+        <li>Unit test cases document not only the expected behavior of the code but also its prevailing behavior, and</li>
         <li>Unit testable code is modular and often stateless.</li>
       </ul>
+
+      <h3>Early identification of boundary conditions</h3>
       
       <p>Test-driven software methodology is more a way of thinking than a strictly defined set of procedures. Let us illustrate this idea through a hypothetical example.</p>
 
@@ -95,17 +96,15 @@ it("ignores missing scores", () => {
 
       <p>Thanks to the test-driven approach to the software development, the developer has a chance to think through the boundary conditions before the code is committed, making the system more robust in real-life usage. Test-driven approach can also provide the development team with a opportunity to better define what <abbr title="minimum viable product">MVP</abbr> really means for this system.</p>
 
-      <h3>The notion of edge cases and minimum viable product</h3>
+      <h3>Unit test scripts and self-documenting code</h3>
 
-      <p>The term <em>edge case</em> is one of the most misused and abused terms in software development. Edge case refers to a use case that is characterized by an extreme operating parameter, i.e. <em>boundary condition</em>. The term makes no assertions regarding the likelihood of occurrence of such a use case.</p>
+      <p>The idea of self-documenting code is simple, enticing, and elusive. The idea of self-documenting code is that, the written code is so self-explanatory; instead of translating its behavior into a natural language (which is inevitably more imprecise), the code itself serves as its own documentation.</p>
 
-      <p>Consider one of the most famous edge case, <abbr title="Year 2000 problem">Y2K</abbr>. In later part of the 20th century, when computer hardware resource was rather limited, the year in software products was represented by a two-digit number in order to conserve storage and memory spaces. Number <code>70</code> signified year <code>1970</code>, number <code>84</code> signified <code>1984</code>, etc. Of course, the handling of <code>0</code> in the year <code>2000</code> was often undefined by these systems, because <code>0</code> was an extreme operating parameter. Alas, this famous edge case was not rare after all. Year 2000 did indeed happen to every single system operating during year 2000.</p>
+      <p>If you joined a software development house in 1990's, they were dominated by waterfall method of software development. In those days, we started with the requirements analysis document, functional specification, and technical specification before even coding started. This was then followed by technical support document (runbook). The idea of self-documenting code was often discussed as a preferred alternative while the demand of ever changing requirements and code made the management of these documentations an odious task.</p>
 
-      <p>The term edge case is often used in conjunction with the term <em><abbr tabindex="-1" title="minimum viable product">MVP</abbr></em> in order to justify the lack of consideration by some who design software products. Their flawed argument is that, to be agile, you must first deliver most valuable features (which is true), and that edge cases do not warrant any considerations (which is false).</p>
+      <p>In the age of agile software development, the value of documentation was largely forgotten, and with it, the idea of self-documenting code. Despite the fact that <a href="https://agilemanifesto.org">Manifesto for Agile Software Development</a> clearly states that documentations <em>do have value</em>; many software developers eagerly embraced the notion that it was acceptable to have little to no documentation in the name of Agile, without providing any alternative solutions.</p>
 
-      <p>In our example of students missing an exam, some may argue that this is a rare condition, because it happens less frequently than when all students are present for any given exam. It is, however, not at all a rare condition over a course of, say, a semester. Had we decided to de-scope the handling of absentee scores from our <code>average</code> function in our <abbr tabindex="-1" title="minimum viable product">MVP</abbr>, we might have accidentally rolled out a product that was capable of handling <em>only</em> a rare condition as a whole, where all students are present at all exams across all classes through the entire semester. So much for product being <em>viable</em>.</p>
-
-      <p>Let us emphasize that "edge case" is a "use case" that happens at extreme operating parameters. It is not to be discarded simply because it deals with boundary conditions. They should be <em>considered</em> when designing a system, and it is the software developers' responsibility to <em>document</em> the prevailing behaviors of the software, even when the expected behavior is undefined.</p>
+      <p>The unit test scripts provided by the developer manages to document both the expected and prevailing behavior of the software as they are written. Automated unit testing scripts, whether they are developed through the adoption of test-driven methods or written post hoc, start to fill some of the gap left by this lack of documentation in the post-waterfall era.</p>
 
       <p>For example, the developer working on our example program might have realized that they did not know how to handle the situation when all students missed a particular exam. They went to talk to the product owner, and with deadline looming, they decided that they did not have the time to design and implement the system behavior covering this use case.</p>
 
@@ -128,18 +127,6 @@ it("does not handle the condition where no scores exist", () => {
       <p>Then what benefit does this unit test case offer, is expected behavior is not even known? One benefit here is that the system is less likely to crash when this eventually happens; at least, not while calling the <code>average</code> function. The report generated using this function might look a little strange, but the rest of the reports will likely work just as intended. This is an example of something being good enough is good enough.</p>
 
       <p>Another benefit is that this unit test case, while it does not document the <em>expected</em> behavior, still manages to document the <em>prevailing</em> behavior of the code. The person who maintains this program in the future may not have been involved in the original discussions with the product team, but in reviewing the unit test script and the code comment, they can find out what the code <em>does</em> when this happens, and learn that this part of the system is incomplete.</p>
-
-      <h3>Unit test scripts and self-documenting code</h3>
-
-      <p>The idea of self-documenting code is simple, enticing, and elusive. The idea of self-documenting code is that, the written code is so self-explanatory; instead of translating its behavior into a natural language (which is inevitably more imprecise), the code itself serves as its own documentation.</p>
-
-      <p>If you joined a software development house in 1990's, they were dominated by waterfall method of software development. In those days, we started with the requirements analysis document, functional specification, and technical specification before even coding started. This was then followed by technical support document (runbook). The idea of self-documenting code was often discussed as a preferred alternative while the demand of ever changing requirements and code made the management of these documentations an odious task.</p>
-
-      <p>In the age of agile software development, the value of documentation was largely forgotten, and with it, the idea of self-documenting code. Despite the fact that <a href="https://agilemanifesto.org">Manifesto for Agile Software Development</a> clearly states that documentations <em>do have value</em>; many software developers eagerly embraced the notion that it was acceptable to have little to no documentation in the name of Agile, without providing any alternative solutions.</p>
-
-      <p>As discussed previously, the unit test scripts provided by the developer manages to document both the expected and prevailing behavior of the software as they are written. Automated unit testing scripts, whether they are developed through the adoption of test-driven methods or written post hoc, start to fill some of the gap left by this lack of documentation in the post-waterfall era.</p>
-
-      <p>Technical specification document in the days of waterfall used to give developers a chance to think through the behavior of the code they intended to write; which is analogous to test scripts provided prior to the writing of product code in test-driven methodology. A crucial difference being that, while technical specification is written only for human readers, test scripts are written for both humans and machines, and the execution of the unit test scripts can be automated.</p>
 
       <h3>How edge cases are relevant to secure software development</h3>
 

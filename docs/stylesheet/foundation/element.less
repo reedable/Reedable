@@ -1,7 +1,14 @@
 .Reedable {
 
+  [id]:target {
+    background-color: var(--color-highlight);
+    outline: 0.25rem solid var(--color-highlight);
+    border-radius: 0.25rem;
+    transition: 1s;
+  }
+
   p {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   code {
@@ -34,51 +41,59 @@
     }
 
     &:focus {
-      transition: 0.25s;
-      font-size: 125%;
+      transition: 0.2s;
     }
   }
 
   h2 {
     margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 
   h3 {
     margin-top: 1.75rem;
+    margin-bottom: 0.875rem;
   }
 
   h4 {
     margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   h5 {
     margin-top: 1.25rem;
+    margin-bottom: 0.625rem;
   }
 
   h6 {
     margin-top: 1.125rem;
+    margin-bottom: 0.5625rem;
   }
 
   dl {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     dt {
-      margin-top: 1rem;
+      margin-bottom: 0.25rem;
     }
 
     dd {
-      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
       margin-left: 1rem;
     }
   }
 
   ol,
   ul {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     margin-left: 2rem;
 
     li {
-      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    ul {
+      margin-bottom: 0; //nested lists doe not have top margin
     }
   }
 

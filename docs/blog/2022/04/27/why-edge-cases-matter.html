@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="Reedable">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reedable Blog | Why edge cases matter</title>
+  <link rel="shortcut icon" type="image/png" href="../../../../images/Reedable-128.png" />
+  <link type="text/css" rel="stylesheet" href="../../../../stylesheet/theme/light.css" media="screen and (prefers-color-scheme: light)">
+  <link type="text/css" rel="stylesheet" href="../../../../stylesheet/theme/dark.css" media="screen and (prefers-color-scheme: dark)">
+  <link type="text/css" rel="stylesheet" href="../../../../stylesheet/index.css">
+</head>
+
+<body>
+  <div>
+
+    <header>
+      <h1>
+        <div class="Tag">Draft</div>
+        Why edge cases matter
+        <div class="SubHeading">Designing a viable system</div>
+      </h1>
+      <div class="Byline">
+        By <address><a rel="author" href="mailto:reedable@oinklet.com">Abraham Reed</a></address> on
+        <time is="localized-datetime" pubdate datetime="2022-04-27 Z-400">4/27/2022</time>
+      </div>
+    </header>
+
+    <nav>
+      <div id="startOfMenu" class="SR">Start of menu</div>
+      <a class="SkipLink" href="#endOfMenu">Skip to end of menu</a>
+      <ul>
+        <li><a href="../../../../">Home</a></li>
+        <li><a href="../../../../blog.html">Blog</a></li>
+      </ul>
+      <a class="SkipLink" href="#startOfMenu">Skip to start of menu</a>
+      <div id="endOfMenu" class="SR">End of menu</div>
+    </nav>
+
+    <main>
+
+      <p>The term <em>edge case</em> is one of the most misused, and even abused, terms in software development, especially in conjunction with the term <em><abbr title="minimum viable product">MVP</abbr></em>. We will talk about what these terms really mean, and the potentially dangerous conclusions software designers may arrive, if we are not careful.</p>
+
+      <ul>
+        <li>TODO Decide based on value, not just based on frequency.</li>
+      </ul>
+
+      <h2>Edge case <em>is</em> a use case</h2>
+
+      <p>Edge case is a <em>use case</em> that is characterized by an <em>extreme operating parameter</em>. Before we delve into precisely what these words mean, we need to take a step back and talk about <em>user story</em>.</p>
+
+      <p>Suppose we wish to design a software, which administers quizzes online for our remote learning school. All quizzes must be multiple choice. Each question is followed by an immediate feedback, and at the end of the quiz, the test taker is presented with the summary. One of the user stories for such a system might read something like this:</p>
+
+      <ul>
+        <li>Given a student logs into our Quiz site successfully,</li>
+        <li>The student sees a list of quizzes to which he is assigned.</li>
+        <li>Each quiz is accompanied by its
+          <ul>
+            <li>Completion status</li>
+            <li>Due date</li>
+            <li>Completion date</li>
+          </ul>
+        </li>
+        <li>Overdue items are shown with an alert icon.</li>
+        <li>Completed items are shown with a checkmark icon.</li>
+        <!-- li>By default, the overdue items are sorted to the top and the completed items are sorted to the bottom.</li -->
+      </ul>
+
+      <p>User stories are typically written from the perspective of a user, and describes how the user interacts with the system. It usually does not describe everything a user does with a system, and it focuses on a one particular aspect of the user's journey through the system. In this example, the user story describes what the user experiences upon successfully logging into our newly designed system.</p>
+
+      <p>Suppose, when a student logs into the system successfully, the student has ten quizzes assigned to them. Five are not completed, out of which one is overdue. The five remaining items are completed. How will the screen look like, compared to, when a student logs into the system successfully, and the student has no quizzes assigned? Once we start asking these questions and start identifying different scenarios, we are now starting to talk about use cases, instead of user stories. Each scenario potentially describes a use case, and with each use case, there is a particular outcome.</p>
+
+      <p>Let's list some use cases for our user story,</p>
+
+      <ol>
+        <li id="uc1">User sees <localized-number>5</localized-number> pending items (1 overdue) and <localized-number>5</localized-number> completed items.</li>
+        <li id="uc2">User has no assigned items.</li>
+        <li id="uc3">User sees <localized-number>99</localized-number> completed items and <localized-number>1</localized-number> overdue item.</li>
+      </ol>
+
+      <p>Soon we realize that there are certain parameters that define each scenario. In this example, we see that the number of pending/overdue items is one parameter, number of completed items is another parameter. We will refer to these parameters as <em>operating parameters</em>.</p>
+
+      <p>It also becomes quickly apparent that it is not practical to list all possible combinations of all operating parameters to describe all use cases exhaustively. Therefore, when we examine use cases for our user story, we start focusing on typical use cases as well as its <em>boundary conditions</em>.</p>
+
+      <p>In our example, <a href="#uc1" aria-describedby="uc1"> use case #1</a> is the most typical use case that the product owner likely thought of. <a href="#uc2" aria-describedby="uc2">Use case #2</a>, on the other hand, is probably not the most typical case, and it happens at an extreme operating parameter, i.e. number of pending/overdue and completed items are all 0. <a href="#uc3" aria-describedby="uc3">Use case #3</a> is also a result of extreme operating parameter, in a sense that the number of completed items is unusually large.</p>
+
+      <p>When a use cases are characterized by extreme operating parameters such as these, they are said to be <em>edge cases</em>.</p>
+
+      <h2>Edge cases are not always rare</h2>
+
+      <p>One of the most common and false assertions made in using the term edge case is that edge cases are rare occurrences.</p>
+
+      <p>For the sake of argument, let us assume that each student can have only up to <localized-number>100</localized-number> quizzes assigned to him at any given moment, including the completed items. Any completed quizzes beyond that are archived starting with the oldest items first. In addition to the extreme operating parameter of <localized-number>0</localized-number> identified earlier, this also defines another extreme operating parameter, <localized-number>100</localized-number>.</p>
+
+      <p>When one considers the frequency of any operating parameters between <localized-number>0</localized-number> and <localized-number>100</localized-number> (inclusive), what does our intuition tell us? What values are most likely, and which values are least likely? This will all depend on the real life situation. Has this school in operation for a number of years, and there is historical data to migrate? Is this school just starting up and no one has enrolled yet?</p>
+
+      <p>If we have historical data, we should start our research there. It is not going to be perfect (e.g. not all teachers kept meticulous records of all quiz scores for all students all these years, and many instructors would have left the school by now, and the data will be incomplete. But we at least have an approximate starting point.</p>
+
+      <p>If we lack historical data, and we cannot get our hands on comparable data set, we need to estimate the numbers through deduction. I strongly suggest not to use intuition when estimating numbers, because we tend to fall into one of two traps:</p>
+
+      <ul>
+        <li>Assuming that the numbers are distributed roughly uniformly, or</li>
+        <li>Assuming that the numbers are distributed following normal distribution.</li>
+      </ul>
+
+      <p>Had we followed the assumption that all numbers are roughly uniformly distributed, we would have calculated that <math>
+          <mn>2</mn>
+          <mo>&divide;</mo>
+          <mn>101</mn>
+          <mo>=</mo>
+          <mn>0.0198</mn>
+          <mo>&asymp;</mo>
+          <mn>2%</mn>
+        </math>, or <localized-number>24</localized-number> out of <localized-number>1200</localized-number> students.</p>
+
+      <p>Someone remembering the statistics class from high school might naively suggest that normal distribution, not uniform distribution, is a better method of estimation. Most students cluster around <localized-number>50</localized-number> quizzes assigned to them, and as we move toward <localized-number>0</localized-number> or <localized-number>100</localized-number>, the numbers predictably decrease. After all, is it more likely that just as many people have <localized-number>0</localized-number> quizzes assigned as people who have <localized-number>10</localized-number> or <localized-number>20</localized-number> quizzes assigned? There is some truth to this argument, which makes this even more dangerous than the one before, because by this assumption, the number of students meeting the boundary conditions of <localized-number>0</localized-number> or <localized-number>100</localized-number> are even lower than that of uniform distribution. Some may estimate that the fraction of students meeting one of the boundary conditions to be roughly <localized-number data-style="percent" data-minimum-fraction-digits="1">0.003</localized-number>, or only <localized-number>4</localized-number> students out of <localized-number>1200</localized-number>.</p>
+
+      <p>With these assumptions and calculations, which we demonstrate to be faulty, we may conclude that, for the first month or so of going live with this new system, handling these edge cases manually is acceptable, and investment into designing the system for such rare use cases are not warranted.</p>
+
+      <!--
+      <p>What our intuition tells us does not always reflect reality. Our intuition tells us that the boundary conditions are rare, or at the least, infrequent.</p>
+      -->
+
+      <p>Imagine, however, that our school enrolls <localized-number>300</localized-number> new students every year, and the program is a four-year program. Quizzes are administered every week and there are <localized-number>36</localized-number> weeks of instructions per academic year. Out of <localized-number>1200</localized-number> students in this scenario, for the first week of the academic year, <localized-number data-style="percent">0.25</localized-number> of the students (all of the first-years) fall into the <a href="#uc2">boundary condition of 0</a>.</p>
+
+      <p>Now, let's talk about the other <a href="#uc3">boundary condition of 100</a>. Each student receives roughly <localized-number>36</localized-number> quizzes per year. After three years in the program, most students would have exceeded that boundary condition, i.e. <math>
+          <mn>36</mn>
+          <mo>&times;</mo>
+          <mn>3</mn>
+          <mo>=</mo>
+          <mn>108</mn>
+        </math>. This implies, that at any given moment, roughly <localized-number data-style="percent">0.25</localized-number> of the students meet the boundary condition of <localized-number>100</localized-number> through the entire year. This is certainly an edge case, but, again not an insignificant one, and unlike the boundary condition of <localized-number>0</localized-number> that lasts only one week, this condition is ever present.</p>
+
+      <p>For both boundary conditions, we see that our earlier intuition of uniform distribution and normal distribution betrayed us. The number of students affected by the <a href="#uc2">use case 2</a> (all <localized-number>300</localized-number> first-year students) and <a href="#uc3">use case 3</a> (all <localized-number>300</localized-number> fourth-year students) appear to be significantly higher than <localized-number>24</localized-number> estimated based on uniform distribution, or <localized-number>2</localized-number> estimated based on normal distribution. The combined value is more like <localized-number data-style="percent">0.5</localized-number> of the entire population.</p>
+
+      <h2>Frequency is not the only deciding factor</h2>
+
+      <p>Consider one of the most famous edge cases in the history of computing, <abbr title="Year 2000 problem">Y2K</abbr>. In later part of the 20th century, when computer hardware resource was rather limited, the year in software products was represented by a two-digit number in order to conserve storage and memory spaces. Number <code>70</code> signified year <time>1970</time>, number <code>84</code> signified <time>1984</time>, etc. Of course, the handling of <code>0</code> was often undefined by these systems, because <code>0</code> was an extreme operating parameter. Some systems treated it as <time>1900</time>, others treated it as <time>2000</time>, and yet some used this value as a <em>magic value</em>, a value with special meaning, such as the lack of value. Alas, the rarity of this edge case did not spare any systems from encountering this boundary condition after all. Year <time>2000</time> did indeed come to every single computer system operating during year <time>2000</time>.</p>
+
+      <!--<p>Was year <time>2000</time> something that happened frequently? No. It only happened to once, and will not happen again.</p>-->
+
+      <p>Similar thing can be said about the <a href="#uc2" aria-describedby="uc2">use case #2</a> in our example, where a student has no assigned quizzes upon logging in. <localized-number data-style="percent">0.25</localized-number> of the students encounter this condition. If someone argues that this is rare, I can be persuaded, because this condition is valid only for the first week of the academic year. However, there is something else to consider, which is, how likely is it that anyone encounters this particular condition?</p>
+
+      <p>Just like <abbr tabindex="-1" title="Year 2000 problem">Y2K</abbr> happened to every one, most students, if not all, ever enrolled into our school will go through that first week of <a href="#uc2">boundary condition</a>. What does the instructor do during the first week of school to make sure that every student has access to the quiz system <em>before</em> it is time to administer the first quiz? Common sense dictates that they will want to have the students log into the system to make sure they are able to access the system, so that if any students have problems logging in, these logistical problems can be addressed before the first quiz is administered. Had our product designers decided to de-scope the handling of this edge case, then the first impression every student encounters using the system is that of unhandled, undefined behavior of the system. Great way to build confidence in the system that they are expected to use for the next four years.</p>
+
+      <h2>Frequency, likelihood, and value</h2>
+
+      <p>The term edge case is often used in conjunction with the term <em><abbr tabindex="-1" title="minimum viable product">MVP</abbr></em> in order to justify the lack of consideration by some who design software products. Their flawed argument is that, to be agile, you must first deliver most valuable features (which is true), and that such system should not be designed for edge cases (which is false).</p>
+
+      <p>Let us emphasize that "edge case" is a "use case" that happens at extreme operating parameters. It is not to be discarded simply because it deals with boundary conditions. They should be <em>considered</em> when designing a system, and it is the software developers' responsibility to <em>document</em> the prevailing behaviors of the software, even when the expected behavior is undefined.</p>
+
+    </main>
+
+    <footer>
+      <hr>
+      <small>
+        Copyright &copy; 2021-2022 RBLD. All rights reserved.
+      </small>
+    </footer>
+  </div>
+
+  <script type="module" src="../../../../script/index.js"></script>
+</body>
+
+</html>

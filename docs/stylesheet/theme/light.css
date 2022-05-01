@@ -7,7 +7,8 @@
   --color-light: #444444;
   --color-lighter: #555555;
   --color-lightest: #666666;
-  --color-alert: #ff0000;
+  --color-highlight: #ffff00;
+  --color-alert: #ee0000;
   --color-link: #0000ff;
   --color-link-visited: #880088;
   --color-hr: #bbbbbb;

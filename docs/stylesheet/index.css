@@ -4,7 +4,7 @@
   border: 0;
   outline: 0;
   vertical-align: baseline;
-  background: transparent;
+  background: var(--background-color);
 }
 :root {
   --xs-font-size: 15px;
@@ -34,8 +34,14 @@
     font-size: var(--xl-font-size);
   }
 }
+.Reedable [id]:target {
+  background-color: var(--color-highlight);
+  outline: 0.25rem solid var(--color-highlight);
+  border-radius: 0.25rem;
+  transition: 1s;
+}
 .Reedable p {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .Reedable code {
   font-family: "Courier New", Courier, Monospace;
@@ -62,42 +68,50 @@
   border-bottom: 0.125rem solid;
 }
 .Reedable a:focus {
-  transition: 0.25s;
-  font-size: 125%;
+  transition: 0.2s;
 }
 .Reedable h2 {
   margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 .Reedable h3 {
   margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
 }
 .Reedable h4 {
   margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 .Reedable h5 {
   margin-top: 1.25rem;
+  margin-bottom: 0.625rem;
 }
 .Reedable h6 {
   margin-top: 1.125rem;
+  margin-bottom: 0.5625rem;
 }
 .Reedable dl {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .Reedable dl dt {
-  margin-top: 1rem;
+  margin-bottom: 0.25rem;
 }
 .Reedable dl dd {
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   margin-left: 1rem;
 }
 .Reedable ol,
 .Reedable ul {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   margin-left: 2rem;
 }
 .Reedable ol li,
 .Reedable ul li {
-  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.Reedable ol ul,
+.Reedable ul ul {
+  margin-bottom: 0;
 }
 .Reedable abbr[title] {
   text-decoration: none;
@@ -198,6 +212,7 @@
   font-size: 0.375em;
   font-weight: bolder;
   color: var(--color-alert);
+  text-transform: uppercase;
 }
 .Reedable h1 .SubHeading {
   font-size: 0.5em;
@@ -209,7 +224,7 @@
   font-size: 0.875rem;
 }
 .Reedable nav ul {
-  margin: 1rem 0 0 0;
+  margin: 1rem 0;
   border-bottom: 0.0625rem solid var(--color-hr);
 }
 .Reedable nav ul li {
@@ -230,6 +245,14 @@
 .Reedable nav ul li a:focus {
   border-bottom: 2px solid var(--color-link);
 }
+.SR {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 .Reedable a.SkipLink {
   padding: 1rem;
   border: 0.125rem solid var(--color-link);
@@ -249,8 +272,10 @@
   width: auto;
   height: auto;
 }
+.Reedable .PictureFrame {
+  margin: 1rem 0;
+}
 .Reedable .PictureFrame img {
-  margin-top: 1rem;
   box-shadow: 0 0.1875rem 0.625rem black;
   border-radius: 0.25rem;
 }
