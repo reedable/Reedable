@@ -1,0 +1,73 @@
+<html lang="en" class="Reedable">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reedable | About this site</title>
+  <link rel="shortcut icon" type="image/png" href="image/Reedable-128.png" />
+  <link type="text/css" rel="stylesheet" href="stylesheet/theme/light.css" media="screen and (prefers-color-scheme: light)">
+  <link type="text/css" rel="stylesheet" href="stylesheet/theme/dark.css" media="screen and (prefers-color-scheme: dark)">
+  <link type="text/css" rel="stylesheet" href="stylesheet/index.css">
+</head>
+
+<body>
+  <div>
+
+    <header>
+      <h1>
+        <div class="Tag">Draft</div>
+        About this site
+        <div class="SubHeading"></div>
+      </h1>
+    </header>
+
+    <nav>
+      <div id="startOfMenu" class="SR">Start of menu</div>
+      <a class="SkipLink" href="#endOfMenu">Skip to end of menu</a>
+      <ul>
+        <li><a href=".">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <a class="SkipLink" href="#startOfMenu">Skip to start of menu</a>
+      <div id="endOfMenu" class="SR">End of menu</div>
+    </nav>
+
+    <main>
+
+      <h2>How this site is made</h2>
+
+      <p>This site is built accessibility first, mobile first, blah, blah, blah...</p>
+
+      <h3>Number format</h3>
+
+      <ul>
+        <li><localized-number>123456</localized-number></li>
+        <li><localized-number>123456.7899</localized-number></li>
+        <li><localized-number lang="en-IN">123456.7899</localized-number></li>
+        <li><localized-number data-minimum-fraction-digits="3">0.7899</localized-number></li>
+        <li><localized-number data-maximum-fraction-digits="2">0.7899</localized-number></li>
+        <li><localized-number data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
+        <li><localized-number lang="ar-EG" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
+      </ul>
+
+      <h3>Date format</h3>
+
+      <ul>
+        <li><time is="localized-datetime" datetime="2022-04-01 Z-400">4/1/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-01 Z-400" lang="en-IN">4/1/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-01 Z-400" lang="ar-EG">4/1/2022</time></li>
+      </ul>
+
+    </main>
+
+    <footer>
+      <hr>
+      <small>
+        Copyright &copy; 2021-2022 RBLD. All rights reserved.
+      </small>
+    </footer>
+  </div>
+
+  <script type="module" src="script/index.js"></script>
+</body>
+
+</html>

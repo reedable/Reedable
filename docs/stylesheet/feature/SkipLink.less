@@ -1,0 +1,28 @@
+.Reedable {
+
+  a.SkipLink {
+    padding: 1rem;
+    border: 0.125rem solid var(--color-link);
+    background-color: var(--background-color);
+
+    // Hide when not in focus
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+
+    &:visited {
+      color: var(--color-link);
+    }
+
+    &:focus {
+
+      // Show when in focus
+      position: static;
+      width: auto;
+      height: auto;
+    }
+  }
+}

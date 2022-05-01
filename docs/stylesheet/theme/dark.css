@@ -1,0 +1,15 @@
+:root {
+  --background-color: #111111;
+  --color-darkest: #ffffff;
+  --color-darker: #ffffff;
+  --color-dark: #eeeeee;
+  --color: #dddddd;
+  --color-light: #cccccc;
+  --color-lighter: #bbbbbb;
+  --color-lightest: #aaaaaa;
+  --color-highlight: #006666;
+  --color-alert: #ff0000;
+  --color-link: #ffff00;
+  --color-link-visited: #00ff00;
+  --color-hr: #999999;
+}

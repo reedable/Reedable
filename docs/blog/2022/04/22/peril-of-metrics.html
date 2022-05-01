@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="Reedable">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reedable Blog | Peril of metrics: Changing role of automated unit testing over SDLC</title>
+  <link rel="shortcut icon" type="image/png" href="../../../../images/Reedable-128.png" />
+  <link type="text/css" rel="stylesheet" href="../../../../stylesheet/theme/light.css" media="screen and (prefers-color-scheme: light)">
+  <link type="text/css" rel="stylesheet" href="../../../../stylesheet/theme/dark.css" media="screen and (prefers-color-scheme: dark)">
+  <link type="text/css" rel="stylesheet" href="../../../../stylesheet/index.css">
+</head>
+
+<body>
+  <div>
+
+    <header>
+      <h1>
+        <div class="Tag">Draft</div>
+        Peril of metrics
+        <div class="SubHeading">Changing role of automated unit testing over SDLC</div>
+      </h1>
+      <div class="Byline">
+        By <address><a rel="author" href="mailto:reedable@oinklet.com">Abraham Reed</a></address> on
+        <time is="localized-datetime" pubdate datetime="2022-04-22 Z-400">4/22/2022</time>
+      </div>
+    </header>
+
+    <nav>
+      <div id="startOfMenu" class="SR">Start of menu</div>
+      <a class="SkipLink" href="#endOfMenu">Skip to end of menu</a>
+      <ul>
+        <li><a href="../../../../">Home</a></li>
+        <li><a href="../../../../blog.html">Blog</a></li>
+      </ul>
+      <a class="SkipLink" href="#startOfMenu">Skip to start of menu</a>
+      <div id="endOfMenu" class="SR">End of menu</div>
+    </nav>
+
+    <main>
+
+      <p>Test-driven software development methodology has numerous benefits to the delivery and maintenance of a software product, i.e. <em>software</em>. However, failure to recognize the changing needs of the software over its <abbr title="software development lifecycle">SDLC</abbr>, in conjunction with naive and metric-focused adoption of unit-driven methods can have a negative impact on the maintainability, performance, and robustness and security of the software.</p>
+
+      <p>In this article, we examine the case for and against test-driven development methods in context. We no longer see unit test coverage and complexity metrics in black-and-white, but we recognize more nuanced effects of automated unit tests at different levels of maturity of the software. Understanding the changing role of automated unit tests at different points in <abbr tabindex="-1" title="software development lifecycle">SDLC</abbr> is the key to successful implementation of this methodology.</p>
+
+      <h2>The case for test-driven software development</h2>
+
+      <p>Test-driven software development is a software development practice in which tests are scripted in tandem with, or even prior to, the development of a software product.</p>
+
+      <ul>
+        <li>Writing unit test cases ahead of software implementation encourages identification of boundary conditions earlier in the development cycle,</li>
+        <li>Unit test cases document not only the expected behavior of the code but also its prevailing behavior, and</li>
+        <li>Unit testable code is modular and often stateless.</li>
+      </ul>
+
+      <h3>Early identification of boundary conditions</h3>
+      
+      <p>Test-driven software methodology is more a way of thinking than a strictly defined set of procedures. Let us illustrate this idea through a hypothetical example.</p>
+
+      <p>Suppose we wish to calculate an average exam score of a classroom. There are six students in our class, and each student receives a number grade that is between 0 and 100. There are four classrooms in total. The administrator wishes to compare the performance of students over time based on the summary data we provide in a report.</p>
+
+      <p>Most typical approach to this problem is to start writing the code that does exactly what it is described to do in a form of user story, and once the code is written, the developer deploys the code in test environment, puts test data through it to confirm that he solved the problem correctly. There is nothing wrong with this approach, and for many years, numerous lines of code had been written in this way.</p>
+
+      <p>Test-driven method, however, reverses this cycle. Instead of implementing the code first and then testing it, the developer is asked to script the testing ahead of writing the code.</p>
+
+      <pre><code>
+import {average} from "./average";
+
+describe("average function", function () {
+
+    it("averages numbers", () => {
+        const result = average([10, 20, 30]);
+        expect(result).toBe(20);
+    });
+});</code></pre>
+
+      <p>Most developers will start with a test script that looks like this, and then realize something. In the original user story they received, there were six students assigned to a classroom. The developer, inadvertently, scripted a test case in which there are only three students. This is because it was easier to work out the expected outcome for this use case in their head than the one described by their user story.</p>
+
+      <p>By pivoting the way we approach the problem, we encourage the developers to start thinking in terms of <em>boundary conditions</em>, instead of the most obvious documented use cases.</p>
+
+      <p>It is a matter of time until the developer realizes that, even though there are six students in the classroom today, the number may grow to seven next year. Their implementation of <code>average</code> function should, at least, accommodate some of these variations in order to be forward compatible. They might even start asking, what if there are six students, but one student was absent and did not take the exam, thus having no score associated with them?</p>
+
+      <pre><code>
+it("averages five numbers", () => {
+    const result = average([10, 20, 30, 40, 50]);
+    expect(result).toBe(30);
+});
+
+it("ignores missing scores", () => {
+    const result = average([10, 20, null, 40, 50]);
+    expect(result).toBe(30);
+});</code></pre>
+
+      <p>Keep in mind that the developer has not yet even implemented the <code>average</code> function itself. These are therefore not after-thoughts, but now decidedly a foresight. The developer is starting to make an effort to understand what real-life use cases may lie ahead, and what might break his code. The developer should now be asking questions to product owners about these boundary conditions, so these use cases are not neglected.</p>
+
+      <p>Without this foresight, it is entirely possible that the system would have crashed the moment one student missed a single exam, which could have resulted in a late-night phone call to the author of the program from an angry boss. Or worse, the program may have exhibited an unexpected behavior instead of crashing, such as treating <code>null</code> as <code>0</code>, resulting in artificially low exam averages during a flu season. Administrators reviewing the reports generated by such system may falsely conclude that the instructors active during spring time are more effective than those during the winter time, potentially making decisions with financial consequences.</p>
+
+      <p>Thanks to the test-driven approach to the software development, the developer has a chance to think through the boundary conditions before the code is committed, making the system more robust in real-life usage. Test-driven approach can also provide the development team with a opportunity to better define what <abbr title="minimum viable product">MVP</abbr> really means for this system.</p>
+
+      <h3>Unit test scripts and self-documenting code</h3>
+
+      <p>The idea of self-documenting code is simple, enticing, and elusive. The idea of self-documenting code is that, the written code is so self-explanatory; instead of translating its behavior into a natural language (which is inevitably more imprecise), the code itself serves as its own documentation.</p>
+
+      <p>If you joined a software development house in 1990's, they were dominated by waterfall method of software development. In those days, we started with the requirements analysis document, functional specification, and technical specification before even coding started. This was then followed by technical support document (runbook). The idea of self-documenting code was often discussed as a preferred alternative while the demand of ever changing requirements and code made the management of these documentations an odious task.</p>
+
+      <p>In the age of agile software development, the value of documentation was largely forgotten, and with it, the idea of self-documenting code. Despite the fact that <a href="https://agilemanifesto.org">Manifesto for Agile Software Development</a> clearly states that documentations <em>do have value</em>; many software developers eagerly embraced the notion that it was acceptable to have little to no documentation in the name of Agile, without providing any alternative solutions.</p>
+
+      <p>The unit test scripts provided by the developer manages to document both the expected and prevailing behavior of the software as they are written. Automated unit testing scripts, whether they are developed through the adoption of test-driven methods or written post hoc, start to fill some of the gap left by this lack of documentation in the post-waterfall era.</p>
+
+      <p>For example, the developer working on our example program might have realized that they did not know how to handle the situation when all students missed a particular exam. They went to talk to the product owner, and with deadline looming, they decided that they did not have the time to design and implement the system behavior covering this use case.</p>
+
+      <pre><code>
+it("does not handle the condition where no scores exist", () => {
+
+    const result = average([
+        null, null, null, null, null, null
+    ]);
+
+    // TODO Define the expected behavior.
+    // 22-Apr-2022 - This use case was discussed with the product
+    // team, but we de-scoped this from MVP. We should update this
+    // unit test when we have the design.
+    expect(result).toBe(null);
+});</code></pre>
+
+      <p>The example code above shows that this use case was considered, but no decision had been made with respect to the expected behavior. The script expects <code>null</code> as an outcome, but we actually do not know whether this is the correct expectation or not, because the rest of the system was not yet designed to handle this output.</p>
+
+      <p>Then what benefit does this unit test case offer, is expected behavior is not even known? One benefit here is that the system is less likely to crash when this eventually happens; at least, not while calling the <code>average</code> function. The report generated using this function might look a little strange, but the rest of the reports will likely work just as intended. This is an example of something being good enough is good enough.</p>
+
+      <p>Another benefit is that this unit test case, while it does not document the <em>expected</em> behavior, still manages to document the <em>prevailing</em> behavior of the code. The person who maintains this program in the future may not have been involved in the original discussions with the product team, but in reviewing the unit test script and the code comment, they can find out what the code <em>does</em> when this happens, and learn that this part of the system is incomplete.</p>
+
+      <h3>How edge cases are relevant to secure software development</h3>
+
+      <h2>Case against test-driven software development</h2>
+
+      <ul>
+        <li>TODO Hinderance to refactoring</li>
+        <li>TODO Changing or previously less-understood requirements</li>
+        <li>TODO Premature optimization</li>
+      </ul>
+
+      <h2>Understanding the role of automated unit testing at different points in <abbr tabindex="-1" title="software development lifecycle">SDLC</abbr></h2>
+
+      <ul>
+        <li>TODO Introduce the metrics under consideration</li>
+        <li>TODO Describe metrics-focus adoption</li>
+        <li>TODO Greedy algorithm </li>
+      </ul>
+    </main>
+
+    <footer>
+      <hr>
+      <small>
+        Copyright &copy; 2021-2022 RBLD. All rights reserved.
+      </small>
+    </footer>
+  </div>
+</body>
+
+</html>
