@@ -4,7 +4,7 @@
   border: 0;
   outline: 0;
   vertical-align: baseline;
-  background: var(--background-color);
+  background: transparent;
 }
 :root {
   --xs-font-size: 15px;
@@ -37,7 +37,7 @@
 .Reedable [id]:target {
   background-color: var(--color-highlight);
   outline: 0.25rem solid var(--color-highlight);
-  border-radius: 0.25rem;
+  border-radius: 0.125rem;
   transition: 1s;
 }
 .Reedable p {
@@ -50,7 +50,8 @@
 }
 .Reedable pre {
   overflow-x: auto;
-  padding: 0 0 0.5rem 0;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
 }
 .Reedable pre code {
   margin: 0;
@@ -65,6 +66,7 @@
 }
 .Reedable a:hover,
 .Reedable a:focus {
+  margin-bottom: -0.125rem;
   border-bottom: 0.125rem solid;
 }
 .Reedable a:focus {
@@ -111,7 +113,8 @@
 }
 .Reedable ol ul,
 .Reedable ul ul {
-  margin-bottom: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 .Reedable abbr[title] {
   text-decoration: none;
@@ -126,7 +129,7 @@
   content: " (" attr(title) ")";
 }
 .Reedable hr {
-  border-top: 0.0625rem solid var(--color-hr);
+  border-top: var(--border-thin) solid var(--border-color-darkest);
   margin: 1rem 0;
 }
 .Reedable address {
@@ -206,6 +209,18 @@
   }
   .Reedable body > div main {
     column-count: 2;
+    column-gap: 3rem;
+    column-rule: var(--border-thin) solid var(--border-color);
+  }
+}
+@media only screen and (min-width: 1921px) {
+  .Reedable body > div {
+    max-width: 1920px;
+  }
+  .Reedable body > div main {
+    column-count: 3;
+    column-gap: 3rem;
+    column-rule: var(--border-thin) solid var(--border-color);
   }
 }
 .Reedable h1 .Tag {
@@ -220,22 +235,26 @@
   font-style: italic;
 }
 .Reedable .Byline {
-  margin-top: 1rem;
+  margin: 0.75rem 0 0.25rem 0;
   font-size: 0.875rem;
 }
 .Reedable nav ul {
-  margin: 1rem 0;
-  border-bottom: 0.0625rem solid var(--color-hr);
+  margin: 0 0 1rem 0;
+  border-bottom: var(--border-thin) solid var(--border-color-darkest);
 }
 .Reedable nav ul li {
+  margin: 0;
   display: inline-block;
-  margin-left: 1rem;
-  padding-bottom: 0.25rem;
 }
-.Reedable nav ul li:first-child {
-  margin-left: 0;
+.Reedable nav ul li:first-child a {
+  padding-left: 0;
 }
 .Reedable nav ul li a {
+  display: inline-block;
+  min-width: 44px;
+  max-width: 44px;
+  padding: 0.5rem 0.5rem;
+  text-align: center;
   text-decoration: none;
 }
 .Reedable nav ul li a:visited {
@@ -245,32 +264,9 @@
 .Reedable nav ul li a:focus {
   border-bottom: 2px solid var(--color-link);
 }
-.SR {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.Reedable a.SkipLink {
-  padding: 1rem;
-  border: 0.125rem solid var(--color-link);
-  background-color: var(--background-color);
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.Reedable a.SkipLink:visited {
-  color: var(--color-link);
-}
-.Reedable a.SkipLink:focus {
-  position: static;
-  width: auto;
-  height: auto;
+.Reedable localized-number,
+.Reedable span[is=localized-number] {
+  background-color: inherit;
 }
 .Reedable .PictureFrame {
   margin: 1rem 0;
@@ -287,6 +283,34 @@
 }
 .Reedable .QuestionAndAnswer dd:before {
   content: "Answer: ";
+}
+.Reedable a.SkipLink {
+  border: none;
+  outline: 0.5rem solid var(--background-color);
+  box-shadow: 0 0 0 0.5rem var(--background-color), 0 0 0 0.625rem var(--color-link);
+  background-color: var(--background-color);
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.Reedable a.SkipLink:visited {
+  color: var(--color-link);
+}
+.Reedable a.SkipLink:focus {
+  position: static;
+  width: auto;
+  height: auto;
+}
+.SR {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .Reedable {
   color: var(--color);

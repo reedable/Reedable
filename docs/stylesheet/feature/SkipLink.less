@@ -1,8 +1,12 @@
 .Reedable {
 
   a.SkipLink {
-    padding: 1rem;
-    border: 0.125rem solid var(--color-link);
+    border: none;
+    outline: 0.5rem solid var(--background-color);
+    box-shadow:
+      0 0 0 0.5rem var(--background-color),
+      0 0 0 0.625rem var(--color-link)
+      ;
     background-color: var(--background-color);
 
     // Hide when not in focus

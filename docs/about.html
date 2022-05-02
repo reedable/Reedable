@@ -1,4 +1,4 @@
-<html lang="en" class="Reedable">
+<html lang="en-US" class="Reedable">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +26,7 @@
       <ul>
         <li><a href=".">Home</a></li>
         <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
       <a class="SkipLink" href="#startOfMenu">Skip to start of menu</a>
       <div id="endOfMenu" class="SR">End of menu</div>
@@ -35,7 +36,7 @@
 
       <h2>How this site is made</h2>
 
-      <p>This site is built accessibility first, mobile first, blah, blah, blah...</p>
+      <p>This site is built accessibility first, mobile first, blah, blah, blah... I'd like to tell you about how this site was made, but I just do not have the time to do it. So, for now, I am just using it to test of the code I have written here. Feel free to use your developer tools to investigate.</p>
 
       <h3>Number format</h3>
 
@@ -49,12 +50,25 @@
         <li><localized-number lang="ar-EG" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
       </ul>
 
+      <ul lang="ar-EG">
+        <li><localized-number>123456.7899</localized-number></li>
+        <li><localized-number lang="en-US" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
+      </ul>
+
       <h3>Date format</h3>
 
       <ul>
-        <li><time is="localized-datetime" datetime="2022-04-01 Z-400">4/1/2022</time></li>
-        <li><time is="localized-datetime" datetime="2022-04-01 Z-400" lang="en-IN">4/1/2022</time></li>
-        <li><time is="localized-datetime" datetime="2022-04-01 Z-400" lang="ar-EG">4/1/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400">4/23/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ja-JP">4/23/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="en-IN">4/23/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ar-EG">4/23/2022</time></li>
+      </ul>
+
+      <ul lang="ar-EG">
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400">4/23/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ja-JP">4/23/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="en-IN">4/23/2022</time></li>
+        <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ar-EG">4/23/2022</time></li>
       </ul>
 
     </main>

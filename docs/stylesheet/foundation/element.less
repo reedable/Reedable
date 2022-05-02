@@ -3,7 +3,7 @@
   [id]:target {
     background-color: var(--color-highlight);
     outline: 0.25rem solid var(--color-highlight);
-    border-radius: 0.25rem;
+    border-radius: 0.125rem;
     transition: 1s;
   }
 
@@ -19,7 +19,8 @@
 
   pre {
     overflow-x: auto;
-    padding: 0 0 0.5rem 0;
+    margin-top: -1rem; // We have a leading line break in <pre> textContent
+    margin-bottom: 1rem;
 
     code {
       margin: 0;
@@ -37,6 +38,9 @@
 
     &:hover,
     &:focus {
+      // When a link is a block element, we do not want the border-bottom
+      // to cause the layout to go out of whack when hovering over it.
+      margin-bottom: -0.125rem;
       border-bottom: 0.125rem solid;
     }
 
@@ -93,7 +97,8 @@
     }
 
     ul {
-      margin-bottom: 0; //nested lists doe not have top margin
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
     }
   }
 
@@ -119,7 +124,7 @@
   }
 
   hr {
-    border-top: 0.0625rem solid var(--color-hr);
+    border-top: var(--border-thin) solid var(--border-color-darkest);
     margin: 1rem 0;
   }
 
