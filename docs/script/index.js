@@ -1,3 +1,12 @@
+function getLang(el) {
+  if (el && typeof el.closest === "function") {
+    const node = el.closest("[lang]");
+    var lang = node.getAttribute("lang");
+  }
+
+  return lang || navigator.language;
+}
+
 class LocalizedNumber extends HTMLElement { //HTMLSpanElement {
 
   constructor() {
@@ -6,7 +15,7 @@ class LocalizedNumber extends HTMLElement { //HTMLSpanElement {
     const textContent = this.textContent;
 
     if (textContent && !isNaN(textContent)) {
-      const lang = this.getAttribute("lang") || navigator.language;
+      const lang = getLang(this);
       const dataset = this.dataset;
       const options = Object.assign({}, dataset);
 
@@ -27,7 +36,7 @@ class LocalizedDateTime extends HTMLTimeElement {
     const textContent = this.getAttribute("datetime");
 
     if (textContent) {
-      const lang = this.getAttribute("lang") || navigator.language;
+      const lang = getLang(this);
       const dataset = this.dataset;
       const options = Object.assign({}, dataset);
 

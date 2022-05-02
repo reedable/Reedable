@@ -38,7 +38,22 @@
         max-width: @lg-max;
 
         main {
-          column-count: 2
+          column-count: 2;
+          column-gap: 3rem;
+          column-rule: var(--border-thin) solid var(--border-color);
+        }
+      }
+    }
+
+    @media only screen and (min-width: @xxl-min) {
+
+      &>div {
+        max-width: @xl-max;
+
+        main {
+          column-count: 3;
+          column-gap: 3rem;
+          column-rule: var(--border-thin) solid var(--border-color);
         }
       }
     }

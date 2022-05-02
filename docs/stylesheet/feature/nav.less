@@ -3,19 +3,26 @@
   nav {
 
     ul {
-      margin: 1rem 0;
-      border-bottom: 0.0625rem solid var(--color-hr);
+      margin: 0 0 1rem 0;
+      border-bottom: var(--border-thin) solid var(--border-color-darkest);
 
       li {
+        margin: 0;
         display: inline-block;
-        margin-left: 1rem;
-        padding-bottom: 0.25rem;
 
         &:first-child {
-          margin-left: 0;
+
+          a {
+            padding-left: 0;
+          }
         }
 
         a {
+          display: inline-block;
+          min-width: 44px; // WCAG 2.5.5: Target Size
+          max-width: 44px; // WCAG 2.5.5: Target Size
+          padding: 0.5rem 0.5rem;
+          text-align: center;
           text-decoration: none;
 
           &:visited {
