@@ -25,19 +25,17 @@
       </div>
     </header>
 
-    <nav>
-      <div id="startOfMenu" class="SR">Start of menu</div>
-      <a class="SkipLink" href="#endOfMenu">Skip to end of menu</a>
+    <nav id="NavMenu" class="NavMenu">
+      <a class="SkipLink" href="#Content">Skip to content</a>
       <ul>
         <li><a href="../../../../">Home</a></li>
         <li><a href="../../../../blog.html">Blog</a></li>
         <li><a href="../../../../about.html">About</a></li>
       </ul>
-      <a class="SkipLink" href="#startOfMenu">Skip to start of menu</a>
-      <div id="endOfMenu" class="SR">End of menu</div>
+      <a class="SkipLink" href="#NavMenu">Skip to navigation menu</a>
     </nav>
 
-    <main>
+    <main id="Content">
 
       <p>The term <em>edge case</em> is one of the most misused, and even abused, terms in software development, especially in conjunction with the term <em><abbr title="minimum viable product">MVP</abbr></em>. We will talk about what these terms really mean, and the potentially dangerous conclusions software designers may arrive, if we are not careful.</p>
 
@@ -73,9 +71,9 @@
       <p>Let's list some use cases for our user story,</p>
 
       <ol>
-        <li id="uc1">User sees <localized-number>5</localized-number> pending items (1 overdue) and <localized-number>5</localized-number> completed items.</li>
-        <li id="uc2">User has no assigned items.</li>
-        <li id="uc3">User sees <localized-number>99</localized-number> completed items and <localized-number>1</localized-number> overdue item.</li>
+        <li id="uc1" class="Note">User sees <localized-number>5</localized-number> pending items (1 overdue) and <localized-number>5</localized-number> completed items.</li>
+        <li id="uc2" class="Note">User has no assigned items.</li>
+        <li id="uc3" class="Note">User sees <localized-number>99</localized-number> completed items and <localized-number>1</localized-number> overdue item.</li>
       </ol>
 
       <p>Soon we realize that there are certain parameters that define each scenario. In this example, we see that the number of pending/overdue items is one parameter, number of completed items is another parameter. We will refer to these parameters as <em>operating parameters</em>.</p>

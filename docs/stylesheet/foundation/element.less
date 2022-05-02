@@ -1,6 +1,6 @@
 .Reedable {
 
-  [id]:target {
+  [id].Note:target {
     background-color: var(--color-highlight);
     outline: 0.25rem solid var(--color-highlight);
     border-radius: 0.125rem;
@@ -47,6 +47,19 @@
     &:focus {
       transition: 0.2s;
     }
+  }
+
+  header {
+    margin-bottom: 1rem;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  h1 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 
   h2 {

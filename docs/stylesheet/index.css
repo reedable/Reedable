@@ -34,7 +34,7 @@
     font-size: var(--xl-font-size);
   }
 }
-.Reedable [id]:target {
+.Reedable [id].Note:target {
   background-color: var(--color-highlight);
   outline: 0.25rem solid var(--color-highlight);
   border-radius: 0.125rem;
@@ -71,6 +71,16 @@
 }
 .Reedable a:focus {
   transition: 0.2s;
+}
+.Reedable header {
+  margin-bottom: 1rem;
+}
+.Reedable header h1 {
+  margin: 0;
+}
+.Reedable h1 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 .Reedable h2 {
   margin-top: 2rem;
@@ -185,15 +195,11 @@
   display: flex;
   justify-content: center;
 }
-.Reedable body header {
-  padding: 1rem 1rem 0 1rem;
-}
+.Reedable body header,
 .Reedable body nav,
-.Reedable body main {
-  padding: 0 1rem;
-}
+.Reedable body main,
 .Reedable body footer {
-  padding: 0 1rem 1rem 1rem;
+  margin: 1rem;
 }
 .Reedable body > div {
   width: 100%;
@@ -223,50 +229,35 @@
     column-rule: var(--border-thin) solid var(--border-color);
   }
 }
-.Reedable h1 .Tag {
-  font-size: 0.375em;
-  font-weight: bolder;
-  color: var(--color-alert);
-  text-transform: uppercase;
-}
-.Reedable h1 .SubHeading {
-  font-size: 0.5em;
-  font-weight: normal;
-  font-style: italic;
-}
 .Reedable .Byline {
-  margin: 0.75rem 0 0.25rem 0;
+  margin: 0.75rem 0 0rem 0;
   font-size: 0.875rem;
 }
-.Reedable nav ul {
+.Reedable nav.NavMenu ul {
+  display: flex;
   margin: 0 0 1rem 0;
   border-bottom: var(--border-thin) solid var(--border-color-darkest);
 }
-.Reedable nav ul li {
+.Reedable nav.NavMenu ul li {
   margin: 0;
   display: inline-block;
 }
-.Reedable nav ul li:first-child a {
+.Reedable nav.NavMenu ul li:first-child a {
   padding-left: 0;
 }
-.Reedable nav ul li a {
+.Reedable nav.NavMenu ul li a {
   display: inline-block;
   min-width: 44px;
-  max-width: 44px;
-  padding: 0.5rem 0.5rem;
+  padding: 0.25rem 0.25rem;
   text-align: center;
   text-decoration: none;
 }
-.Reedable nav ul li a:visited {
+.Reedable nav.NavMenu ul li a:visited {
   color: var(--color-link);
 }
-.Reedable nav ul li a:hover,
-.Reedable nav ul li a:focus {
+.Reedable nav.NavMenu ul li a:hover,
+.Reedable nav.NavMenu ul li a:focus {
   border-bottom: 2px solid var(--color-link);
-}
-.Reedable localized-number,
-.Reedable span[is=localized-number] {
-  background-color: inherit;
 }
 .Reedable .PictureFrame {
   margin: 1rem 0;
@@ -311,6 +302,21 @@
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+.Reedable .SubHeading {
+  font-size: 0.5em;
+  font-weight: normal;
+  font-style: italic;
+}
+.Reedable .Tag {
+  font-size: 0.375em;
+  font-weight: bolder;
+  color: var(--color-alert);
+  text-transform: uppercase;
+}
+.Reedable localized-number,
+.Reedable span[is=localized-number] {
+  background-color: inherit;
 }
 .Reedable {
   color: var(--color);
