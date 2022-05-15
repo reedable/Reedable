@@ -322,6 +322,9 @@
 .Reedable span[is=localized-number] {
   background-color: inherit;
 }
+/*
+ * Styles defined in this file depends on font-awesome
+ */
 .Reedable {
   color: var(--color);
   background-color: var(--background-color);

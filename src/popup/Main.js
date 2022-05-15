@@ -4,6 +4,7 @@ import {Controller} from "../../modules/Reedable-core/ui/Controller";
 import {FontOverrideAccordion} from "./FontOverrideAccordion";
 import {TextSpacingAccordion} from "./TextSpacingAccordion";
 import {FocusIndicatorAccordion} from "./FocusIndicatorAccordion";
+import {LinkInformationAccordion} from "./LinkInformationAccordion";
 
 export class Main extends Controller {
 
@@ -14,19 +15,26 @@ export class Main extends Controller {
             [fontOverrideAccordion],
             [textSpacingAccordion],
             [focusIndicatorAccordion],
+            [linkInformationAccordion]
         ] = this.connect({
             // Since ES6, this should execute in insertion order except
             // for number like keys (which would not be a valid selector).
             "#fontOverride.Accordion": (n) => new FontOverrideAccordion(n),
             "#textSpacing.Accordion": (n) => new TextSpacingAccordion(n),
             "#focusIndicator.Accordion": (n) => new FocusIndicatorAccordion(n),
+            "#linkInformation.Accordion": (n) => new LinkInformationAccordion(n),
             ".AccordionGroup": (n) => new AccordionGroup(n, {
                 "isSinglePanelMode": true,
             }),
         });
 
         chrome.storage.sync.get(["reedable"], async ({reedable}) => {
-            const {fontOverride, textSpacing, focusIndicator} = reedable;
+            const {
+                fontOverride,
+                textSpacing,
+                focusIndicator,
+                linkInformation
+            } = reedable;
 
             if (fontOverride && fontOverride.isExpanded) {
                 await fontOverrideAccordion.expand();
@@ -38,6 +46,10 @@ export class Main extends Controller {
 
             if (focusIndicator && focusIndicator.isExpanded) {
                 await focusIndicatorAccordion.expand();
+            }
+
+            if (linkInformation && linkInformation.isExpanded) {
+                await linkInformation.expand();
             }
         });
 

@@ -1,9 +1,10 @@
-import {DOM} from "../../modules/Reedable-core/ui/DOM";
-import {Engine} from "../../modules/Reedable-core/content/Engine";
+import { DOM } from "../../modules/Reedable-core/ui/DOM";
+import { Engine } from "../../modules/Reedable-core/content/Engine";
 
 export class TextSpacingEngine extends Engine {
 
     static getInstance() {
+
         if (!this.instance) {
             this.instance = new TextSpacingEngine();
         }
@@ -17,10 +18,8 @@ export class TextSpacingEngine extends Engine {
 
     _filterNode(node) {
         return (
-            super._filterNode(node) ||
-            node.tagName === "PRE"
-        ) && (
-            node.tagName !== "CODE"
+            (super._filterNode(node) || node.tagName === "PRE") &&
+            (node.tagName !== "CODE")
         );
     }
 
@@ -45,18 +44,13 @@ export class TextSpacingEngine extends Engine {
 
         //FIXME Why did I make this async?
         return (async () => {
-            const {
-                lineHeight,
-                marginTop,
-                letterSpacing,
-                wordSpacing,
-                textAlign
-            } = node.style;
 
+            const { lineHeight, marginTop, letterSpacing, wordSpacing, textAlign } = node.style;
             const computedStyle = getComputedStyle(node);
             const computedFontSize = computedStyle.fontSize || "";
 
             function getLineHeight() {
+
                 const computedLineHeight = computedStyle.lineHeight || "";
 
                 if (computedLineHeight === "normal") {
@@ -74,41 +68,36 @@ export class TextSpacingEngine extends Engine {
             }
 
             function getMarginTop() {
+
                 // FIXME Are there non-semantic way to mark-up paragraphs?
                 if (node.tagName === "P") {
+
                     const computedMarginTop = computedStyle.marginTop;
 
                     if (parseFloat(computedMarginTop) <
-                        DOM.parseLength(
-                            enginePref.afterParagraph,
-                            computedStyle)) {
-
+                        DOM.parseLength(enginePref.afterParagraph, computedStyle)) {
                         return enginePref.afterParagraph;
                     }
                 }
             }
 
             function getLetterSpacing() {
+
                 const computedLetterSpacing = computedStyle.letterSpacing;
 
                 if (computedLetterSpacing === "normal") {
                     return enginePref.letterSpacing;
                 }
 
-                const estimatedLetterSpacing =
-                    parseFloat(computedLetterSpacing) /
-                    parseFloat(computedFontSize);
+                const estimatedLetterSpacing = parseFloat(computedLetterSpacing) / parseFloat(computedFontSize);
 
-                if (estimatedLetterSpacing <
-                    DOM.parseLength(
-                        enginePref.letterSpacing,
-                        computedStyle)) {
-
+                if (estimatedLetterSpacing < DOM.parseLength(enginePref.letterSpacing, computedStyle)) {
                     return enginePref.letterSpacing;
                 }
             }
 
             function getWordSpacing() {
+
                 const computedWordSpacing = computedStyle.wordSpacing;
 
                 if (computedWordSpacing === "normal") {
@@ -116,15 +105,9 @@ export class TextSpacingEngine extends Engine {
                 }
 
                 const computedFontSize = computedStyle.fontSize;
-                const estimatedLetterSpacing =
-                    parseFloat(computedWordSpacing) /
-                    parseFloat(computedFontSize);
+                const estimatedLetterSpacing = parseFloat(computedWordSpacing) / parseFloat(computedFontSize);
 
-                if (estimatedLetterSpacing <
-                    DOM.parseLength(
-                        enginePref.wordSpacing,
-                        computedStyle)) {
-
+                if (estimatedLetterSpacing < DOM.parseLength(enginePref.wordSpacing, computedStyle)) {
                     return enginePref.wordSpacing;
                 }
             }
@@ -156,6 +139,7 @@ export class TextSpacingEngine extends Engine {
 
         // FIXME Why did I made this async? Consider performance implications
         return (async () => {
+
             const {
                 reedableLineHeight,
                 reedableMarginTop,

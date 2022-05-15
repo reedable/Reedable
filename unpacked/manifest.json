@@ -40,7 +40,13 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "/thirdparty/OpenDyslexic-Regular.otf"
+        "/thirdparty/OpenDyslexic-Regular.otf",
+        "/thirdparty/fontawesome-free-6.1.1-web/webfonts/fa-brands-400.ttf",
+        "/thirdparty/fontawesome-free-6.1.1-web/webfonts/fa-brands-400.woff2",
+        "/thirdparty/fontawesome-free-6.1.1-web/webfonts/fa-regular-400.ttf",
+        "/thirdparty/fontawesome-free-6.1.1-web/webfonts/fa-regular-400.woff2",
+        "/thirdparty/fontawesome-free-6.1.1-web/webfonts/fa-solid-900.ttf",
+        "/thirdparty/fontawesome-free-6.1.1-web/webfonts/fa-solid-900.woff2"
       ],
       "matches": [
         "<all_urls>"

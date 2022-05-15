@@ -1,9 +1,10 @@
-import {Engine} from "../../modules/Reedable-core/content/Engine";
-import {DOM} from "../../modules/Reedable-core/ui/DOM";
+import { Engine } from "../../modules/Reedable-core/content/Engine";
+import { DOM } from "../../modules/Reedable-core/ui/DOM";
 
 export class FocusIndicatorEngine extends Engine {
 
     static getInstance() {
+
         if (!this.instance) {
             this.instance = new FocusIndicatorEngine();
         }
@@ -16,7 +17,9 @@ export class FocusIndicatorEngine extends Engine {
     }
 
     _onFocusIn(event) {
+
         const node = event.target;
+
         const {
             borderRadius,
             boxShadow,
@@ -42,7 +45,9 @@ export class FocusIndicatorEngine extends Engine {
     }
 
     _onFocusOut(event) {
+
         const node = event.target;
+
         const {
             reedableBorderRadius,
             reedableBoxShadow,
@@ -63,9 +68,12 @@ export class FocusIndicatorEngine extends Engine {
     }
 
     async start(documentFragment) {
+
         await DOM.when(documentFragment).ready;
+
         this._onFocusIn = this._onFocusIn.bind(this);
         documentFragment.addEventListener("focusin", this._onFocusIn);
+
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
                 this.start(node.shadowRoot);
@@ -74,8 +82,11 @@ export class FocusIndicatorEngine extends Engine {
     }
 
     async stop(documentFragment) {
+
         await DOM.when(documentFragment).ready;
+
         documentFragment.removeEventListener("focusin", this._onFocusIn);
+
         documentFragment.querySelectorAll("*").forEach((node) => {
             if (node.shadowRoot) {
                 this.stop(node.shadowRoot);

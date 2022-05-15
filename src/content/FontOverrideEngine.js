@@ -1,5 +1,5 @@
-import {DOM} from "../../modules/Reedable-core/ui/DOM";
-import {Engine} from "../../modules/Reedable-core/content/Engine";
+import { DOM } from "../../modules/Reedable-core/ui/DOM";
+import { Engine } from "../../modules/Reedable-core/content/Engine";
 
 /**
  * Injected <style> tag content CSS text loads packaged font files.
@@ -7,7 +7,7 @@ import {Engine} from "../../modules/Reedable-core/content/Engine";
  * The loaded font files must be declared in the manifest.js under
  * web_accessible_resources.
  *
- * https://developer.chrome.com/docs/extensions/reference/i18n/
+ * https://developer.chrome.com/documentFragments/extensions/reference/i18n/
  */
 const FONT_FACE_CSS = `
         @font-face {
@@ -29,26 +29,29 @@ export class FontOverrideEngine extends Engine {
         super("fontOverride");
     }
 
-    async start(doc) {
-        await super.start(doc);
+    async start(documentFragment) {
 
-        if (doc) {
-            let style = doc.querySelector("#reedableFontOverride");
+        await super.start(documentFragment);
+
+        if (documentFragment) {
+
+            let style = documentFragment.querySelector("#reedableFontOverride");
 
             if (!style) {
-                style = doc.createElement("style");
+                style = documentFragment.createElement("style");
                 style.id = "reedableFontOverride";
-                style.appendChild(doc.createTextNode(FONT_FACE_CSS));
-                (doc.head || doc).appendChild(style);
+                style.appendChild(documentFragment.createTextNode(FONT_FACE_CSS));
+                (documentFragment.head || documentFragment).appendChild(style);
             }
         }
     }
 
-    async stop(doc) {
-        await super.stop(doc);
+    async stop(documentFragment) {
 
-        if (doc) {
-            const style = doc.querySelector("#reedableFontOverride");
+        await super.stop(documentFragment);
+
+        if (documentFragment) {
+            const style = documentFragment.querySelector("#reedableFontOverride");
 
             if (style) {
                 style.remove();
@@ -57,6 +60,7 @@ export class FontOverrideEngine extends Engine {
     }
 
     async _processNode(node, fontOverride) {
+
         const {
             reedableFontSize,
             reedableFontFamily
@@ -69,6 +73,7 @@ export class FontOverrideEngine extends Engine {
         }
 
         return (async () => {
+
             const {
                 fontSize,
                 fontFamily
@@ -78,30 +83,24 @@ export class FontOverrideEngine extends Engine {
             const computedFontSize = computedStyle.fontSize || "";
 
             function getFontSize() {
-                const fontSizeMinPx = DOM.parseLength(
-                    fontOverride.fontSizeMin, computedStyle);
+
+                const fontSizeMinPx = DOM.parseLength(fontOverride.fontSizeMin, computedStyle);
                 let reedableFontSizeMag = node.dataset.reedableFontSizeMag;
                 let fontSizeTargetPx;
 
                 if (!reedableFontSizeMag) {
-                    const reedableFontSizeMagNode =
-                        node.closest("[data-reedable-font-size-mag]");
+                    const reedableFontSizeMagNode = node.closest("[data-reedable-font-size-mag]");
 
                     if (reedableFontSizeMagNode) {
-                        reedableFontSizeMag =
-                            reedableFontSizeMagNode.dataset.reedableFontSizeMag;
+                        reedableFontSizeMag = reedableFontSizeMagNode.dataset.reedableFontSizeMag;
                     } else {
                         node.dataset.reedableFontSizeMag = fontOverride.fontSizeMag;
                     }
                 }
 
                 if (reedableFontSizeMag !== fontOverride.fontSizeMag) {
-                    fontSizeTargetPx =
-                        parseFloat(computedFontSize) *
-                        Number(fontOverride.fontSizeMag) / 100;
-
-                    node.dataset.reedableFontSizeMag =
-                        fontOverride.fontSizeMag;
+                    fontSizeTargetPx = parseFloat(computedFontSize) * Number(fontOverride.fontSizeMag) / 100;
+                    node.dataset.reedableFontSizeMag = fontOverride.fontSizeMag;
                 } else {
                     fontSizeTargetPx = parseFloat(computedStyle.fontSize);
                 }
@@ -115,6 +114,7 @@ export class FontOverrideEngine extends Engine {
 
             // FIXME This should return a list. https://www.w3schools.com/cssref/pr_font_font-family.asp
             function getFontFamily() {
+
                 const computedFontFamily = computedStyle.fontFamily;
 
                 if (computedFontFamily !== fontOverride.fontFamily) {
@@ -133,7 +133,9 @@ export class FontOverrideEngine extends Engine {
     }
 
     async _restoreNode(node) {
+
         return (async () => {
+
             const {
                 reedableFontSize,
                 reedableFontFamily
