@@ -31,7 +31,7 @@ fi
 # Make sure we have the latest from remote.
 #
 
-git pull orign "${current_branch}"
+git pull origin "${current_branch}"
 
 #++
 # Get the version number in the manifest.json

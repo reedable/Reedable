@@ -1,7 +1,7 @@
 {
   "name": "Reedable",
   "description": "Make the web more readable.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "manifest_version": 3,
   "background": {
     "service_worker": "/scripts/background.bundle.js"
