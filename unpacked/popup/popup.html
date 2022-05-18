@@ -4,7 +4,7 @@
 <head>
   <title>Index | Reedable</title>
   <link type="text/css" rel="stylesheet" href="popup.css">
-  <link type="text/css" rel="stylesheet" href="../thirdparty/font-awesome-4.7.0/css/font-awesome.css">
+  <link type="text/css" rel="stylesheet" href="../thirdparty/fontawesome-free-6.1.1-web/css/all.css">
   <script type="module" src="../scripts/popup.bundle.js"></script>
 </head>
 
@@ -19,8 +19,8 @@
           <input id="fontOverride-isEnabled" type="checkbox" aria-labelledby="fontOverride-heading">
           <button id="fontOverride-heading" aria-expanded="false" aria-controls="fontOverride-panel">
             <span>Font override</span>
-            <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
           </button>
         </div>
         <div id="fontOverride-panel" role="region" aria-labelledby="fontOverride-heading">
@@ -75,8 +75,8 @@
           <input id="textSpacing-isEnabled" type="checkbox" aria-labelledby="textSpacing-heading">
           <button id="textSpacing-heading" aria-expanded="false" aria-controls="textSpacing-panel">
             <span>Text spacing</span>
-            <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
           </button>
         </div>
         <div id="textSpacing-panel" role="region" aria-labelledby="textSpacing-heading">
@@ -106,8 +106,8 @@
           <input id="focusIndicator-isEnabled" type="checkbox" aria-labelledby="focusIndicator-heading">
           <button id="focusIndicator-heading" aria-expanded="false" aria-controls="focusIndicator-panel">
             <span>Focus indicator</span>
-            <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
           </button>
         </div>
         <div id="focusIndicator-panel" role="region" aria-labelledby="focusIndicator-heading">
@@ -133,15 +133,19 @@
           <input id="linkInformation-isEnabled" type="checkbox" aria-labelledby="linkInformation-heading">
           <button id="linkInformation-heading" aria-expanded="false" aria-controls="linkInformation-panel">
             <span>Link Information</span>
-            <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
           </button>
         </div>
         <div id="linkInformation-panel" role="region" aria-labelledby="linkInformation-heading">
           <fieldset>
             <div class="Field">
-              <label for="linkInformation-boxShadow">Box shadow</label>
-              <textarea id="linkInformation-boxShadow" rows="2"></textarea>
+              <input id="linkInformation-showTitle" type="checkbox">
+              <label for="linkInformation-showTitle">Show title</label>
+            </div>
+            <div class="Field">
+              <input id="linkInformation-showIcon" type="checkbox">
+              <label for="linkInformation-showIcon">Show icon</label>
             </div>
           </fieldset>
         </div>

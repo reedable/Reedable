@@ -13,14 +13,14 @@
   <div>
 
     <header>
-      <h1>
+      <h1 id="Header" tabindex="-1">
         <div class="Tag">Draft</div>
         About this site
         <div class="SubHeading"></div>
       </h1>
     </header>
 
-    <nav id="NavMenu" class="NavMenu">
+    <nav class="NavMenu" id="NavMenu" tabindex="-1">
       <a class="SkipLink" href="#Content">Skip to content</a>
       <ul>
         <li><a href=".">Home</a></li>
@@ -30,27 +30,45 @@
       <a class="SkipLink" href="#NavMenu">Skip to navigation menu</a>
     </nav>
 
-    <main id="Content">
+    <main>
 
-      <h2>How this site is made</h2>
+      <h2 id="Content" tabindex="-1">How this site is made</h2>
 
       <p>This site is built accessibility first, mobile first, blah, blah, blah... I'd like to tell you about how this site was made, but I just do not have the time to do it. So, for now, I am just using it to test of the code I have written here. Feel free to use your developer tools to investigate.</p>
 
       <h3>Number format</h3>
 
       <ul>
-        <li><localized-number>123456</localized-number></li>
-        <li><localized-number>123456.7899</localized-number></li>
-        <li><localized-number lang="en-IN">123456.7899</localized-number></li>
-        <li><localized-number data-minimum-fraction-digits="3">0.7899</localized-number></li>
-        <li><localized-number data-maximum-fraction-digits="2">0.7899</localized-number></li>
-        <li><localized-number data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
-        <li><localized-number lang="ar-EG" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
+        <li>
+          <localized-number>123456</localized-number>
+        </li>
+        <li>
+          <localized-number>123456.7899</localized-number>
+        </li>
+        <li>
+          <localized-number lang="en-IN">123456.7899</localized-number>
+        </li>
+        <li>
+          <localized-number data-minimum-fraction-digits="3">0.7899</localized-number>
+        </li>
+        <li>
+          <localized-number data-maximum-fraction-digits="2">0.7899</localized-number>
+        </li>
+        <li>
+          <localized-number data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number>
+        </li>
+        <li>
+          <localized-number lang="ar-EG" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number>
+        </li>
       </ul>
 
       <ul lang="ar-EG">
-        <li><localized-number>123456.7899</localized-number></li>
-        <li><localized-number lang="en-US" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number></li>
+        <li>
+          <localized-number>123456.7899</localized-number>
+        </li>
+        <li>
+          <localized-number lang="en-US" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number>
+        </li>
       </ul>
 
       <h3>Date format</h3>
@@ -69,32 +87,43 @@
         <li><time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ar-EG">4/23/2022</time></li>
       </ul>
 
+      <h3>Anchors</h3>
+
       <ul>
-          <li><a href="#">HASH</a></li>
-          <li><a href="https:">HTTPS</a></li>
-          <li><a href="https:" title="Title">HTTPS</a></li>
-          <li><a href="https:" title="Title"></a></li>
-          <li><a href="https://example.com"></a></li>
-          <li><a href="http:">HTTP</a></li>
-          <li><a href="sftp:">SFTP</a></li>
-          <li><a href="ftp:">FTP</a></li>
-          <li><a href="mailto:">MAILTO</a></li>
-          <li><a href="tel:">TEL</a></li>
-          <li><a href="wtai:">WTAI</a></li>
-          <li><a href="bitcoin:">BITCOIN</a></li>
-          <li><a href="geo:">GEO</a></li>
-          <li><a href="im:">IM</a></li>
-          <li><a href="irc:">IRC</a></li>
-          <li><a href="ircs:">IRCS</a></li>
-          <li><a href="xmpp:">XMPP</a></li>
-          <li><a href="magnet:">MAGNET</a></li>
-          <li><a href="urn:">URN</a></li>
-          <li><a href="news:">NEWS</a></li>
-          <li><a href="nntp:">NNTP</a></li>
-          <li><a href="sms:">SMS</a></li>
-          <li><a href="smsto:">SMSTO</a></li>
-          <li><a href="ssh:">SSH</a></li>
-          <li><a href="webcal:">WEBCAL</a></li>
+        <li><a id="anchor-id"></a></li>
+        <li><a name="anchor-name"></a></li>
+        <li><a id="anchor-id-2" title="Anchor ID 2"></a></li>
+        <li><a name="anchor-name" title="Anchor Name"></a></li>
+      </ul>
+
+      <h3>Links</h3>
+
+      <ul>
+        <li><a href="#">HASH</a></li>
+        <li><a href="https:">HTTPS</a></li>
+        <li><a href="https:" title="Title">HTTPS</a></li>
+        <li><a href="https:" title="Title"></a></li>
+        <li><a href="https://example.com"></a></li>
+        <li><a href="http:">HTTP</a></li>
+        <li><a href="sftp:">SFTP</a></li>
+        <li><a href="ftp:">FTP</a></li>
+        <li><a href="mailto:">MAILTO</a></li>
+        <li><a href="tel:">TEL</a></li>
+        <li><a href="wtai:">WTAI</a></li>
+        <li><a href="bitcoin:">BITCOIN</a></li>
+        <li><a href="geo:">GEO</a></li>
+        <li><a href="im:">IM</a></li>
+        <li><a href="irc:">IRC</a></li>
+        <li><a href="ircs:">IRCS</a></li>
+        <li><a href="xmpp:">XMPP</a></li>
+        <li><a href="magnet:">MAGNET</a></li>
+        <li><a href="urn:">URN</a></li>
+        <li><a href="news:">NEWS</a></li>
+        <li><a href="nntp:">NNTP</a></li>
+        <li><a href="sms:">SMS</a></li>
+        <li><a href="smsto:">SMSTO</a></li>
+        <li><a href="ssh:">SSH</a></li>
+        <li><a href="webcal:">WEBCAL</a></li>
       </ul>
 
     </main>

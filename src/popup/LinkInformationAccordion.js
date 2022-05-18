@@ -1,15 +1,15 @@
-import {Accordion,} from "../../modules/Reedable-core/ui/widgets/Accordion";
-import {Debounce,} from "../../modules/Reedable-core/Debounce";
+import { Accordion, } from "../../modules/Reedable-core/ui/widgets/Accordion";
+import { Debounce, } from "../../modules/Reedable-core/Debounce";
 
 export class LinkInformationAccordion extends Accordion {
 
     constructor(node, opts) {
+
         super(node, opts);
 
         const isEnabledCheckbox = node.querySelector("#linkInformation-isEnabled");
-        const boxShadowInput = node.querySelector("#linkInformation-boxShadow");
-        const borderRadiusInput = node.querySelector("#linkInformation-borderRadius");
-        const transitionInput = node.querySelector("#linkInformation-transition");
+        const showTitleCheckbox = node.querySelector("#linkInformation-showTitle");
+        const showIconCheckbox = node.querySelector("#linkInformation-showIcon");
 
         const onChangeCheckbox = Debounce.trailing(async () => {
             if (isEnabledCheckbox.checked) {
@@ -20,13 +20,12 @@ export class LinkInformationAccordion extends Accordion {
         }, 400);
 
         const onChangeInput = Debounce.trailing(async () => {
-            chrome.storage.sync.get(["linkInformation"], async ({linkInformation}) => {
+            chrome.storage.sync.get(["linkInformation"], async ({ linkInformation }) => {
                 chrome.storage.sync.set({
-                    // "linkInformation": Object.assign(linkInformation, {
-                    //     "boxShadow": boxShadowInput.value,
-                    //     "borderRadius": borderRadiusInput.value,
-                    //     "transition": transitionInput.value
-                    // })
+                    "linkInformation": Object.assign(linkInformation, {
+                        "showTitle": showTitleCheckbox.checked,
+                        "showIcon": showIconCheckbox.checked
+                    })
                 });
 
                 await onChangeCheckbox();
@@ -34,26 +33,25 @@ export class LinkInformationAccordion extends Accordion {
         }, 400);
 
         this.$(isEnabledCheckbox).addEventListener("change", onChangeCheckbox);
-        this.$(boxShadowInput).addEventListener("input", onChangeInput);
-        this.$(borderRadiusInput).addEventListener("input", onChangeInput);
-        this.$(transitionInput).addEventListener("input", onChangeInput);
+        this.$(showTitleCheckbox).addEventListener("change", onChangeInput);
+        this.$(showIconCheckbox).addEventListener("change", onChangeInput);
 
-        chrome.storage.sync.get(["linkInformation"], ({linkInformation}) => {
+        chrome.storage.sync.get(["linkInformation"], ({ linkInformation }) => {
             isEnabledCheckbox.checked = linkInformation.isEnabled;
-            // boxShadowInput.value = linkInformation.boxShadow;
-            // borderRadiusInput.value = linkInformation.borderRadius;
-            // transitionInput.value = linkInformation.transition;
+            showTitleCheckbox.checked = linkInformation.showTitle;
+            showIconCheckbox.checked = linkInformation.showIcon;
         });
     }
 
     async start() {
+
         const [tab] = await chrome.tabs.query({
             "active": true,
             "currentWindow": true
         });
 
         chrome.scripting.executeScript({
-            "target": {"tabId": tab.id},
+            "target": { "tabId": tab.id },
             "func": function () {
                 // See ../content/content.js
                 // eslint-disable-next-line no-undef
@@ -68,13 +66,14 @@ export class LinkInformationAccordion extends Accordion {
     }
 
     async stop() {
+
         const [tab] = await chrome.tabs.query({
             "active": true,
             "currentWindow": true
         });
 
         chrome.scripting.executeScript({
-            "target": {"tabId": tab.id},
+            "target": { "tabId": tab.id },
             "func": function () {
                 // See ../content/content.js
                 // eslint-disable-next-line no-undef

@@ -34,22 +34,58 @@ const FONT_FACE_CSS = `
 
 const LINK_INFORMATION = `
 
-        /* No content, no title. Show href if available */
-        a:not([title])[href]:empty::after {
-            content: "\\00a0" attr(href);
-        }
+    /*
+        Anchors are identified by
 
-        /* Content and title are both available. Show the title in parentheses. */
-        a[title]::after {
-            font-size: max(0.875em, 0.875rem);
-            content: "\\00a0(" attr(title) ")";
-        }
+            a:not([href])[id]
+            a:not([href])[name]
+    */
 
-        /* No content but title is provided. Show the title without parentheses. */
-        a[title]:empty::after {
-            font-size: inherit;
-            content: "\\00a0" attr(title);
-        }
+    a:not([href])[id][title][data-reedable-link-information-show-title]::after,
+    a:not([href])[name][title][data-reedable-link-information-show-title]::after {
+        font-size: max(0.875em, 0.875rem);
+        content: "\\00a0(" attr(title) ")";
+    }
+
+    a:not([href])[id]:empty[title][data-reedable-link-information-show-title]::after,
+    a:not([href])[name]:empty[title][data-reedable-link-information-show-title]::after {
+        font-size: inherit;
+        content: "\\00a0" attr(title);
+    }
+
+    a:not([href])[id]:empty:not([title])[data-reedable-link-information-show-title]::after {
+        font-size: inherit;
+        content: "\\00a0" attr(id);
+    }
+
+    a:not([href])[name]:empty:not([title])[data-reedable-link-information-show-title]::after {
+        font-size: inherit;
+        content: "\\00a0" attr(name);
+    }
+
+    /*
+        Link are identified by
+        
+            a[href]
+    */
+
+    /* Content and title are both available. Show the title in parentheses. */
+    a[href][title][data-reedable-link-information-show-title]::after {
+        font-size: max(0.875em, 0.875rem);
+        content: "\\00a0(" attr(title) ")";
+    }
+
+    /* No content but title is provided. Show the title without parentheses. */
+    a[href]:empty[title][data-reedable-link-information-show-title]::after {
+        font-size: inherit;
+        content: "\\00a0" attr(title);
+    }
+
+    /* No content, no title. Show href if available */
+    a[href]:empty:not([title])[data-reedable-link-information-show-title]::after {
+        font-size: inherit;
+        content: "\\00a0" attr(href);
+    }
 `;
 
 const LINK_INFORMATION_ON_HOVER_TOOLTIP = `
@@ -76,10 +112,6 @@ const LINK_INFORMATION_ON_HOVER_TOOLTIP = `
 
 const LINK_INFORMATION_ON_HOVER_INLINE = `
     
-    a[href] {
-        transition: all .3s ease;
-    }
-
     a[href]:focus::after,
     a[href]:hover::after {
         content: "\\00a0" attr(title) " [" attr(href) "]";
@@ -92,73 +124,84 @@ const LINK_INFORMATION_ON_HOVER_INLINE = `
 
 const LINK_INFORMATION_ICON = `
 
-    a[href]::before {
+    /* ++ Anchor */
+
+    a:not([href])[id][data-reedable-link-information-show-icon]::before,
+    a:not([href])[name][data-reedable-link-information-show-icon]::before {
+        font-family: "Reedable FA6 Regular", "Reedable FA6 Solid", "Reedable FA6 Brands";
+        font-style: normal;
+        font-size: 0.875em;
+        content: "\\f13d"; /* fa-anchor */
+    }
+
+    /* ++ Link */
+
+    a[data-reedable-link-information-show-icon][href]::before {
         font-family: "Reedable FA6 Regular", "Reedable FA6 Solid", "Reedable FA6 Brands";
         font-style: normal;
         font-size: 0.875em;
     }
 
-    a[href^="#"]::before {
+    a[data-reedable-link-information-show-icon][href^="#"]::before {
         content: "\\23\\00a0"; /* fa-hashtag */
     }
 
-    a[href^="http:"]::before,
-    a[href^="https:"]::before {
+    a[data-reedable-link-information-show-icon][href^="http:"]::before,
+    a[data-reedable-link-information-show-icon][href^="https:"]::before {
         content: "\\f0c1\\00a0"; /* fa-link */
     }
 
-    a[href^="ftp:"]::before,
-    a[href^="sftp:"]::before {
+    a[data-reedable-link-information-show-icon][href^="ftp:"]::before,
+    a[data-reedable-link-information-show-icon][href^="sftp:"]::before {
         content: "\\f15b\\00a0"; /* fa-file */
     }
 
-    a[href^="mailto:"]::before {
+    a[data-reedable-link-information-show-icon][href^="mailto:"]::before {
         content: "\\f0e0\\00a0"; /* fa-envelope */
     }
 
-    a[href^="tel:"]::before,
-    a[href^="wtai:"]::before {
+    a[data-reedable-link-information-show-icon][href^="tel:"]::before,
+    a[data-reedable-link-information-show-icon][href^="wtai:"]::before {
         content: "\\f095\\00a0"; /* fa-phone */
     }
 
-    a[href^="bitcoin:"]::before {
+    a[data-reedable-link-information-show-icon][href^="bitcoin:"]::before {
         content: "\\f379\\00a0"; /* fa-bitcoin */
     }
 
-    a[href^="geo:"]::before {
+    a[data-reedable-link-information-show-icon][href^="geo:"]::before {
         content: "\\f14e\\00a0"; /* fa-compass */
     }
 
-    a[href^="im:"]::before,
-    a[href^="irc:"]::before,
-    a[href^="ircs:"]::before,
-    a[href^="xmpp:"]::before {
+    a[data-reedable-link-information-show-icon][href^="im:"]::before,
+    a[data-reedable-link-information-show-icon][href^="irc:"]::before,
+    a[data-reedable-link-information-show-icon][href^="ircs:"]::before,
+    a[data-reedable-link-information-show-icon][href^="xmpp:"]::before {
         content: "\\f4ad\\00a0"; /* fa-comment-dots */
     }
 
-    a[href^="magnet:"]::before,
-    a[href^="urn:"]::before {
+    a[data-reedable-link-information-show-icon][href^="magnet:"]::before,
+    a[data-reedable-link-information-show-icon][href^="urn:"]::before {
         content: "\\f15b\\00a0"; /* fa-file */
     }
     
-    a[href^="news:"]::before,
-    a[href^="nntp:"]::before {
+    a[data-reedable-link-information-show-icon][href^="news:"]::before,
+    a[data-reedable-link-information-show-icon][href^="nntp:"]::before {
         content: "\\f086\\00a0"; /* fa-comments */
     }
 
-    a[href^="sms:"]::before,
-    a[href^="smsto:"]::before {
+    a[data-reedable-link-information-show-icon][href^="sms:"]::before,
+    a[data-reedable-link-information-show-icon][href^="smsto:"]::before {
         content: "\\f7cd\\00a0"; /* fa-comment-sms */
     }
 
-    a[href^="ssh:"]::before {
+    a[data-reedable-link-information-show-icon][href^="ssh:"]::before {
         content: "\\f120\\00a0"; /* fa-terminal */
     }
 
-    a[href^="webcal:"]::before {
+    a[data-reedable-link-information-show-icon][href^="webcal:"]::before {
         content: "\\f133\\00a0"; /* fa-calendar */
     }
-    */
 `;
 
 export class LinkInformationEngine extends Engine {
@@ -182,21 +225,15 @@ export class LinkInformationEngine extends Engine {
 
         if (documentFragment) {
 
-            let style = documentFragment.querySelector("#reedableFontAwesome");
+            let style = documentFragment.querySelector("#reedableLinkInformationStyle");
 
             if (!style) {
 
                 style = documentFragment.createElement("style");
-                style.id = "reedableFontAwesome";
+                style.id = "reedableLinkInformationStyle";
 
-                // Include when linkInformation is enabled
-                style.appendChild(documentFragment.createTextNode(LINK_INFORMATION));
-
-                // Include when onHover/onFocus feature is enabled
-                //style.appendChild(documentFragment.createTextNode(LINK_INFORMATION_ON_HOVER_INLINE));
-
-                // Include when icon is enabled
                 style.appendChild(documentFragment.createTextNode(FONT_FACE_CSS));
+                style.appendChild(documentFragment.createTextNode(LINK_INFORMATION));
                 style.appendChild(documentFragment.createTextNode(LINK_INFORMATION_ICON));
 
                 (documentFragment.head || documentFragment).appendChild(style);
@@ -210,11 +247,35 @@ export class LinkInformationEngine extends Engine {
 
         if (documentFragment) {
 
-            const style = documentFragment.querySelector("#reedableFontAwesome");
+            const style = documentFragment.querySelector("#reedableLinkInformationStyle");
 
             if (style) {
                 style.remove();
             }
         }
+    }
+
+    _filterNode(node) {
+        return (node.tagName === "A");
+    }
+
+    async _processNode(node, linkInformation) {
+
+        if (linkInformation.showTitle) {
+            node.dataset.reedableLinkInformationShowTitle = "";
+        } else {
+            delete node.dataset.reedableLinkInformationShowTitle;
+        }
+
+        if (linkInformation.showIcon) {
+            node.dataset.reedableLinkInformationShowIcon = "";
+        } else {
+            delete node.dataset.reedableLinkInformationShowIcon;
+        }
+    }
+
+    async _restoreNode(node) {
+        delete node.dataset.reedableLinkInformationShowTitle;
+        delete node.dataset.reedableLinkInformationShowIcon;
     }
 }

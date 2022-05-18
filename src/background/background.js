@@ -42,7 +42,9 @@ chrome.runtime.onInstalled.addListener(async () => {
     };
 
     const default_linkInformation = {
-        "isEnabled": true
+        "isEnabled": true,
+        "showTitle": true,
+        "showIcon": true
     };
 
     const v1_2 = await Sync.get(
@@ -199,7 +201,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
             "func": function () {
                 // See ../content/content.js
                 // eslint-disable-next-line no-undef
-                //TODO Reedable.LinkInformationEngine.getInstance().start(document);
+                Reedable.LinkInformationEngine.getInstance().start(document);
             }
         });
     } else {
@@ -208,7 +210,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
             "func": function () {
                 // See ../content/content.js
                 // eslint-disable-next-line no-undef
-                //TODO Reedable.LinkInformationEngine.getInstance().stop(document);
+                Reedable.LinkInformationEngine.getInstance().stop(document);
             }
         });
     }

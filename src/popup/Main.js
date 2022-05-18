@@ -49,7 +49,7 @@ export class Main extends Controller {
             }
 
             if (linkInformation && linkInformation.isExpanded) {
-                await linkInformation.expand();
+                await linkInformationAccordion.expand();
             }
         });
 

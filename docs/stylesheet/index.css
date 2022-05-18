@@ -57,19 +57,19 @@
   margin: 0;
   font-size: 75%;
 }
-.Reedable a {
+.Reedable a[href] {
   color: var(--color-link);
   text-decoration: none;
 }
-.Reedable a:visited {
+.Reedable a[href]:visited {
   color: var(--color-link-visited);
 }
-.Reedable a:hover,
-.Reedable a:focus {
+.Reedable a[href]:hover,
+.Reedable a[href]:focus {
   margin-bottom: -0.125rem;
   border-bottom: 0.125rem solid;
 }
-.Reedable a:focus {
+.Reedable a[href]:focus {
   transition: 0.2s;
 }
 .Reedable header {
@@ -322,9 +322,6 @@
 .Reedable span[is=localized-number] {
   background-color: inherit;
 }
-/*
- * Styles defined in this file depends on font-awesome
- */
 .Reedable {
   color: var(--color);
   background-color: var(--background-color);

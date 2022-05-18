@@ -18,6 +18,7 @@ const FONT_FACE_CSS = `
 export class FontOverrideEngine extends Engine {
 
     static getInstance() {
+
         if (!this.instance) {
             this.instance = new FontOverrideEngine();
         }
@@ -35,11 +36,11 @@ export class FontOverrideEngine extends Engine {
 
         if (documentFragment) {
 
-            let style = documentFragment.querySelector("#reedableFontOverride");
+            let style = documentFragment.querySelector("#reedableFontOverrideStyle");
 
             if (!style) {
                 style = documentFragment.createElement("style");
-                style.id = "reedableFontOverride";
+                style.id = "reedableFontOverrideStyle";
                 style.appendChild(documentFragment.createTextNode(FONT_FACE_CSS));
                 (documentFragment.head || documentFragment).appendChild(style);
             }
@@ -51,7 +52,7 @@ export class FontOverrideEngine extends Engine {
         await super.stop(documentFragment);
 
         if (documentFragment) {
-            const style = documentFragment.querySelector("#reedableFontOverride");
+            const style = documentFragment.querySelector("#reedableFontOverrideStyle");
 
             if (style) {
                 style.remove();
@@ -61,10 +62,7 @@ export class FontOverrideEngine extends Engine {
 
     async _processNode(node, fontOverride) {
 
-        const {
-            reedableFontSize,
-            reedableFontFamily
-        } = node.dataset;
+        const { reedableFontSize, reedableFontFamily } = node.dataset;
 
         if (typeof reedableFontSize !== "undefined" ||
             typeof reedableFontFamily !== "undefined") {
@@ -74,10 +72,7 @@ export class FontOverrideEngine extends Engine {
 
         return (async () => {
 
-            const {
-                fontSize,
-                fontFamily
-            } = node.style;
+            const { fontSize, fontFamily } = node.style;
 
             const computedStyle = getComputedStyle(node);
             const computedFontSize = computedStyle.fontSize || "";
@@ -136,10 +131,7 @@ export class FontOverrideEngine extends Engine {
 
         return (async () => {
 
-            const {
-                reedableFontSize,
-                reedableFontFamily
-            } = node.dataset;
+            const { reedableFontSize, reedableFontFamily } = node.dataset;
 
             delete node.dataset.reedableFontSize;
             delete node.dataset.reedableFontFamily;
