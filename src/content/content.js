@@ -1,18 +1,16 @@
-import {TextSpacingEngine} from "./TextSpacingEngine";
-import {FontOverrideEngine} from "./FontOverrideEngine";
-import {FocusIndicatorEngine} from "./FocusIndicatorEngine";
-import {Sync} from "../../modules/Reedable-core/Storage";
+import { Sync } from "../../modules/Reedable-core/Storage";
+import { TextSpacingEngine } from "./TextSpacingEngine";
+import { FontOverrideEngine } from "./FontOverrideEngine";
+import { FocusIndicatorEngine } from "./FocusIndicatorEngine";
+import { LinkInformationEngine } from "./LinkInformationEngine";
 
-window.Reedable = {
-    TextSpacingEngine,
-    FontOverrideEngine,
-    FocusIndicatorEngine
-};
+window.Reedable = { TextSpacingEngine, FontOverrideEngine, FocusIndicatorEngine, LinkInformationEngine };
 
-Sync.get("textSpacing", "fontOverride", "focusIndicator").then(
-    ({textSpacing, fontOverride, focusIndicator}) => {
+Sync.get("textSpacing", "fontOverride", "focusIndicator", "linkInformation").then(
 
-        console.log({textSpacing, fontOverride, focusIndicator});
+    ({ textSpacing, fontOverride, focusIndicator, linkInformation }) => {
+
+        console.log({ textSpacing, fontOverride, focusIndicator, linkInformation });
 
         if (textSpacing.isEnabled) {
             TextSpacingEngine.getInstance().start(document);
@@ -30,6 +28,12 @@ Sync.get("textSpacing", "fontOverride", "focusIndicator").then(
             FocusIndicatorEngine.getInstance().start(document);
         } else {
             FocusIndicatorEngine.getInstance().stop(document);
+        }
+
+        if (linkInformation.isEnabled) {
+            LinkInformationEngine.getInstance().start(document);
+        } else {
+            LinkInformationEngine.getInstance().stop(document);
         }
     }
 );

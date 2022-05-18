@@ -1,132 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Index | Reedable</title>
   <link type="text/css" rel="stylesheet" href="popup.css">
-  <link type="text/css" rel="stylesheet" href="../thirdparty/font-awesome-4.7.0/css/font-awesome.css">
+  <link type="text/css" rel="stylesheet" href="../thirdparty/fontawesome-free-6.1.1-web/css/all.css">
   <script type="module" src="../scripts/popup.bundle.js"></script>
 </head>
+
 <body class="Reedable">
-<main>
-  <h1>Reedable</h1>
+  <main>
+    <h1>Reedable</h1>
 
-  <div id="viewPreference" class="AccordionGroup">
+    <div id="viewPreference" class="AccordionGroup">
 
-    <div id="fontOverride" class="Accordion">
-      <div role="heading" aria-level="2">
-        <input id="fontOverride-isEnabled" type="checkbox" aria-labelledby="fontOverride-heading">
-        <button id="fontOverride-heading" aria-expanded="false" aria-controls="fontOverride-panel">
-          <span>Font override</span>
-          <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-          <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
-        </button>
+      <div id="fontOverride" class="Accordion">
+        <div role="heading" aria-level="2">
+          <input id="fontOverride-isEnabled" type="checkbox" aria-labelledby="fontOverride-heading">
+          <button id="fontOverride-heading" aria-expanded="false" aria-controls="fontOverride-panel">
+            <span>Font override</span>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
+          </button>
+        </div>
+        <div id="fontOverride-panel" role="region" aria-labelledby="fontOverride-heading">
+          <fieldset>
+            <div class="Field">
+              <label for="fontOverride-fontSizeMin">Minimum font size</label>
+              <input id="fontOverride-fontSizeMin" type="text">
+            </div>
+            <div class="Field">
+              <label for="fontOverride-fontSizeMag">% Font magnification</label>
+              <input id="fontOverride-fontSizeMag" type="number">
+            </div>
+            <div class="Field">
+              <label for="fontOverride-fontFamily">Font family</label>
+              <select id="fontOverride-fontFamily">
+                <option value="">Page default</option>
+                <option value="OpenDyslexic Regular">OpenDyslexic Regular</option>
+
+                <optgroup label="Sans-serif">
+                  <option value="sans-serif">sans-serif</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Helvetica">Helvetica</option>
+                  <option value="Tahoma">Tahoma</option>
+                  <option value="Trebuchet MS">Trebuchet MS</option>
+                  <option value="Verdana">Verdana</option>
+                </optgroup>
+
+                <optgroup label="Serif">
+                  <option value="serif">serif</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Garamond">Garamond</option>
+                </optgroup>
+
+                <optgroup label="Monospace">
+                  <option value="monospace">monospace</option>
+                  <option value="Courier New">Courier New</option>
+                </optgroup>
+
+                <optgroup label="Cursive">
+                  <option value="cursive">cursive</option>
+                  <option value="Brush Script MT">Brush Script MT</option>
+                </optgroup>
+              </select>
+            </div>
+          </fieldset>
+        </div>
       </div>
-      <div id="fontOverride-panel" role="region" aria-labelledby="fontOverride-heading">
-        <fieldset>
-          <div class="Field">
-            <label for="fontOverride-fontSizeMin">Minimum font size</label>
-            <input id="fontOverride-fontSizeMin" type="text">
-          </div>
-          <div class="Field">
-            <label for="fontOverride-fontSizeMag">% Font magnification</label>
-            <input id="fontOverride-fontSizeMag" type="number">
-          </div>
-          <div class="Field">
-            <label for="fontOverride-fontFamily">Font family</label>
-            <select id="fontOverride-fontFamily">
-              <option value="">Page default</option>
-              <option value="OpenDyslexic Regular">OpenDyslexic Regular</option>
 
-              <optgroup label="Sans-serif">
-                <option value="sans-serif">sans-serif</option>
-                <option value="Arial">Arial</option>
-                <option value="Helvetica">Helvetica</option>
-                <option value="Tahoma">Tahoma</option>
-                <option value="Trebuchet MS">Trebuchet MS</option>
-                <option value="Verdana">Verdana</option>
-              </optgroup>
+      <div id="textSpacing" class="Accordion">
+        <div role="heading" aria-level="2">
+          <input id="textSpacing-isEnabled" type="checkbox" aria-labelledby="textSpacing-heading">
+          <button id="textSpacing-heading" aria-expanded="false" aria-controls="textSpacing-panel">
+            <span>Text spacing</span>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
+          </button>
+        </div>
+        <div id="textSpacing-panel" role="region" aria-labelledby="textSpacing-heading">
+          <fieldset>
+            <div class="Field">
+              <label for="textSpacing-lineHeight">Line height</label>
+              <input id="textSpacing-lineHeight" type="text">
+            </div>
+            <div class="Field">
+              <label for="textSpacing-afterParagraph">After paragraph</label>
+              <input id="textSpacing-afterParagraph" type="text">
+            </div>
+            <div class="Field">
+              <label for="textSpacing-letterSpacing">Letter spacing</label>
+              <input id="textSpacing-letterSpacing" type="text">
+            </div>
+            <div class="Field">
+              <label for="textSpacing-wordSpacing">Word spacing</label>
+              <input id="textSpacing-wordSpacing" type="text">
+            </div>
+          </fieldset>
+        </div>
+      </div>
 
-              <optgroup label="Serif">
-                <option value="serif">serif</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Garamond">Garamond</option>
-              </optgroup>
+      <div id="focusIndicator" class="Accordion">
+        <div role="heading" aria-level="2">
+          <input id="focusIndicator-isEnabled" type="checkbox" aria-labelledby="focusIndicator-heading">
+          <button id="focusIndicator-heading" aria-expanded="false" aria-controls="focusIndicator-panel">
+            <span>Focus indicator</span>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
+          </button>
+        </div>
+        <div id="focusIndicator-panel" role="region" aria-labelledby="focusIndicator-heading">
+          <fieldset>
+            <div class="Field">
+              <label for="focusIndicator-boxShadow">Box shadow</label>
+              <textarea id="focusIndicator-boxShadow" rows="2"></textarea>
+            </div>
+            <div class="Field">
+              <label for="focusIndicator-borderRadius">Border radius</label>
+              <input id="focusIndicator-borderRadius" type="text">
+            </div>
+            <div class="Field">
+              <label for="focusIndicator-transition">Transition</label>
+              <input id="focusIndicator-transition" type="text">
+            </div>
+          </fieldset>
+        </div>
+      </div>
 
-              <optgroup label="Monospace">
-                <option value="monospace">monospace</option>
-                <option value="Courier New">Courier New</option>
-              </optgroup>
-
-              <optgroup label="Cursive">
-                <option value="cursive">cursive</option>
-                <option value="Brush Script MT">Brush Script MT</option>
-              </optgroup>
-            </select>
-          </div>
-        </fieldset>
+      <div id="linkInformation" class="Accordion">
+        <div role="heading" aria-level="2">
+          <input id="linkInformation-isEnabled" type="checkbox" aria-labelledby="linkInformation-heading">
+          <button id="linkInformation-heading" aria-expanded="false" aria-controls="linkInformation-panel">
+            <span>Link Information</span>
+            <i aria-hidden="true" class="Accordion-icon-expand fa fa-chevron-down"></i>
+            <i aria-hidden="true" class="Accordion-icon-collapse fa fa-chevron-up"></i>
+          </button>
+        </div>
+        <div id="linkInformation-panel" role="region" aria-labelledby="linkInformation-heading">
+          <fieldset>
+            <div class="Field">
+              <input id="linkInformation-showTitle" type="checkbox">
+              <label for="linkInformation-showTitle">Show title</label>
+            </div>
+            <div class="Field">
+              <input id="linkInformation-showIcon" type="checkbox">
+              <label for="linkInformation-showIcon">Show icon</label>
+            </div>
+          </fieldset>
+        </div>
       </div>
     </div>
 
-    <div id="textSpacing" class="Accordion">
-      <div role="heading" aria-level="2">
-        <input id="textSpacing-isEnabled" type="checkbox" aria-labelledby="textSpacing-heading">
-        <button id="textSpacing-heading" aria-expanded="false" aria-controls="textSpacing-panel">
-          <span>Text spacing</span>
-          <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-          <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
-        </button>
-      </div>
-      <div id="textSpacing-panel" role="region" aria-labelledby="textSpacing-heading">
-      <fieldset>
-        <div class="Field">
-          <label for="textSpacing-lineHeight">Line height</label>
-          <input id="textSpacing-lineHeight" type="text">
-        </div>
-        <div class="Field">
-          <label for="textSpacing-afterParagraph">After paragraph</label>
-          <input id="textSpacing-afterParagraph" type="text">
-        </div>
-        <div class="Field">
-          <label for="textSpacing-letterSpacing">Letter spacing</label>
-          <input id="textSpacing-letterSpacing" type="text">
-        </div>
-        <div class="Field">
-          <label for="textSpacing-wordSpacing">Word spacing</label>
-          <input id="textSpacing-wordSpacing" type="text">
-        </div>
-      </fieldset>
-    </div>
-    </div>
-
-    <div id="focusIndicator" class="Accordion">
-      <div role="heading" aria-level="2">
-        <input id="focusIndicator-isEnabled" type="checkbox" aria-labelledby="focusIndicator-heading">
-        <button id="focusIndicator-heading" aria-expanded="false" aria-controls="focusIndicator-panel">
-          <span>Focus indicator</span>
-          <i aria-hidden="true" class="Accordion-icon-expand fa fa-plus"></i>
-          <i aria-hidden="true" class="Accordion-icon-collapse fa fa-minus"></i>
-        </button>
-      </div>
-      <div id="focusIndicator-panel" role="region" aria-labelledby="focusIndicator-heading">
-      <fieldset>
-        <div class="Field">
-          <label for="focusIndicator-boxShadow">Box shadow</label>
-          <textarea id="focusIndicator-boxShadow" rows="2"></textarea>
-        </div>
-        <div class="Field">
-          <label for="focusIndicator-borderRadius">Border radius</label>
-          <input id="focusIndicator-borderRadius" type="text">
-        </div>
-        <div class="Field">
-          <label for="focusIndicator-transition">Transition</label>
-          <input id="focusIndicator-transition" type="text">
-        </div>
-      </fieldset>
-    </div>
-    </div>
-  </div>
-
-</main>
+  </main>
 </body>
+
 </html>

@@ -64,6 +64,7 @@ export class Accordion extends Controller {
         headerNode.setAttribute("aria-expanded", "true");
         panelNode.removeAttribute("hidden");
 
+
         this.node$.dispatchEvent(new CustomEvent("expand", {
             "bubbles": true
         }));

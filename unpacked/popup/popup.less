@@ -17,7 +17,9 @@
 
     .Field {
 
-      input[type="text"], input[type=number], textarea {
+      input[type="text"],
+      input[type=number],
+      textarea {
         color: #dddddd;
         background-color: #555555;
         border: 0;
@@ -41,25 +43,29 @@ html {
     margin: 1em;
   }
 
-  h1, [role=heading][aria-level="1"] {
+  h1,
+  [role=heading][aria-level="1"] {
     font-size: 2rem;
     font-weight: 700;
     margin: 0.5em 0;
   }
 
-  h2, [role=heading][aria-level="2"] {
+  h2,
+  [role=heading][aria-level="2"] {
     font-size: 1.6rem;
     font-weight: 700;
     margin: 0.5em 0;
   }
 
-  h3, [role=heading][aria-level="3"] {
+  h3,
+  [role=heading][aria-level="3"] {
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0.5em 0;
   }
 
-  h4, [role=heading][aria-level="4"] {
+  h4,
+  [role=heading][aria-level="4"] {
     font-size: 1rem;
     font-weight: 700;
     margin: 0.5em 0;
@@ -81,7 +87,7 @@ html {
         border-bottom: 0;
       }
 
-      & > [role=heading] {
+      &>[role=heading] {
         align-items: baseline;
         display: flex;
         margin: 0;
@@ -119,12 +125,14 @@ html {
         }
       }
 
-      & > [role=region] {
-      }
+      &>[role=region] {}
     }
   }
 
   .Field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     margin: 1em 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -133,11 +141,24 @@ html {
     label {
       display: block;
       margin: 0 0 0.5em 0;
-
     }
 
-    input[type=text], input[type=number] {
+    textarea {
+      width: 96.875%;
+    }
+
+    input[type=text],
+    input[type=number] {
       width: inherit;
+    }
+
+    input[type=checkbox] {
+      display: block;
+
+      & + label {
+        display: block;
+        margin: 0 0 0 0.5em;
+      }
     }
   }
 }

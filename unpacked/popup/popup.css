@@ -95,6 +95,9 @@ html {
   display: none;
 }
 .Reedable .Field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   margin: 1em 0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -104,8 +107,17 @@ html {
   display: block;
   margin: 0 0 0.5em 0;
 }
+.Reedable .Field textarea {
+  width: 96.875%;
+}
 .Reedable .Field input[type=text],
 .Reedable .Field input[type=number] {
   width: inherit;
 }
-/*# sourceMappingURL=popup.css.map */
+.Reedable .Field input[type=checkbox] {
+  display: block;
+}
+.Reedable .Field input[type=checkbox] + label {
+  display: block;
+  margin: 0 0 0 0.5em;
+}
