@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US" class="Reedable">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reedable</title>
+  <link rel="shortcut icon" type="image/png" href="/Reedable/image/Reedable-128.png" />
+  <link type="text/css" rel="stylesheet" href="/Reedable/stylesheet/theme/light.css" media="screen and (prefers-color-scheme: light)">
+  <link type="text/css" rel="stylesheet" href="/Reedable/stylesheet/theme/dark.css" media="screen and (prefers-color-scheme: dark)">
+  <link type="text/css" rel="stylesheet" href="/Reedable/stylesheet/index.css">
+</head>
+
+<body>
+  <div>
+    <header>
+      <h1 id="Header" tabindex="-1">
+        <div class="Tag">Beta</div>
+        Reedable
+        <div class="SubHeading">Chrome Extension</div>
+      </h1>
+    </header>
+
+    <a class="SkipLink" href="#Content">Skip to content</a>
+
+    <nav class="NavMenu" id="NavMenu" tabindex="-1">
+      <ul>
+        <li><a href="/Reedable/index.html">Home</a></li>
+        <li><a href="/Reedable/blog.html">Blog</a></li>
+        <li><a href="/Reedable/about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <a class="SkipLink" href="#NavMenu">Skip to navigation menu</a>
+
+    <main id="Content" tabindex="-1">
+
+      <p>We declare a thumb war against the self-centered, self-absorbed, self-grrrrr-whatever web designers, and take back the world wide web for the rest of us.</p>
+
+      <p>Tiny fonts, tightly positioned text, elegant typeface that no one can see and read... If you have experienced any of these things, we are here to help.</p>
+
+      <p>Override the typeface. Tweak that text space. (Oh, I just rhymed.) Reedable Chrome Extension provides the reader (that's you) the freedom to choose.</p>
+
+      <h2>Getting started</h2>
+
+      <ol>
+        <li><a href="https://www.google.com/chrome/">Get Chrome web browser</a> if you do not have one yet.</li>
+        <li><a href="https://chrome.google.com/webstore/detail/reedable/pclaooilffnejdcfkkidelifcmmmehci">Install Reedable Chrome Extension</a> from Chrome Web Store.</li>
+        <li>Open the Reedable popup from the toolbar by clicking the Reedable icon to adjust your view preferences.</li>
+        <li>Surf the web like a pro.</li>
+      </ol>
+
+      <h3>Text spacing</h3>
+
+      <p>Enable your Text spacing view preferences by selecting the "Text spacing" checkbox in the popup panel.</p>
+
+      <div class="PictureFrame">
+        <img src="image/Reedable_demo_2_TextSpacing_cropped.png" alt="The popup shows Line height of 2, empty Letter spacing value, and Word spacing 0.4em.">
+      </div>
+
+      <p>You can tweak the preferences by changing the individual properties available in the Reedable popup. Line height value of "2" means "double space." If you find this too much, try "1.5", "1.25", etc.</p>
+
+      <p>Letter spacing adds extra space between letters. If you feel that the page is too crowded, and the letters are starting to run into each other, increase this value. You usually need less than 0.3em. Much more than that, you might start having difficulty identifying the word breaks.</p>
+
+      <p>If you can see the letters easily, but if you feel that the words are starting to run into each other, you can increase the Word spacing. You should not need much more than, say, 0.5em.</p>
+
+      <p>Line height has no unit, because it is always relative to the normal line height of 1. The Letter spacing and Word spacing can be specified in either absolute value or relative value. At present, only the following units are supported.</p>
+
+      <!-- TODO Update this list to reflect the implementation -->
+      <dl>
+        <dt>px</dt>
+        <dd>Number of pixels, regardless of the font size.</dd>
+        <dt>em</dt>
+        <dd>Relative to the width of capital letter M.</dd>
+      </dl>
+
+      <h3>Font override</h3>
+
+      <p>It is true. We included the capability to view any websites you visit in <a href="https://opendyslexic.org/">OpenDyslexic</a> font.</p>
+
+      <div class="PictureFrame">
+        <img src="image/Reedable_demo_3_FontOverride.png" alt="Substitute the typeface in Font override panel.">
+      </div>
+
+      <p>There are three input values supported by Font override panel.</p>
+
+      <div class="PictureFrame">
+        <img src="image/Reedable_demo_3_FontOverride_cropped.png" alt="Minimum font size, % Font magnification, and Font family.">
+      </div>
+
+      <p>To view the websites in OpenDyslexic, Make sure "Font override" checkbox is selected, and choose "OpenDyslexic Regular" option from the Font family dropdown.</p>
+
+      <p>Keep in mind, you can also use these view preferences in combination with each other. For example, you can view the pages in OpenDyslexic while increasing the Word spacing and Line height.</p>
+
+      <h3>Focus indicator</h3>
+
+      <p>Coming soon...</p>
+
+      <h2>Frequently asked questions</h2>
+
+      <dl class="QuestionAndAnswer">
+
+        <dt>"Dude, you misspelled 'Reedable'."</dt>
+        <dd>Yes.</dd>
+
+        <dt>"Who are you, and why are you doing this?"</dt>
+        <dd>We are RBLD. We come in peace. Take us to your leader.</dd>
+
+        <!-- TODO Link to the main branch instead -->
+        <dt>"How much does Reedable cost?"</dt>
+        <dd>It is <a href="https://github.com/reedable/Reedable/blob/develop/LICENSE" title="View software license">free</a>.</dd>
+
+        <dt>"How do you make money if it is free?"</dt>
+        <dd>We do not make any money off of this, but we are rather good at spending it. If you want to enable our exorbitant spending habits, feel free to <a href="#Donation-heading">send us some Dogecoin</a>, the woofficial currency of the Internet.</dd>
+
+        <dt>"Do you collect and sell my personal information?"</dt>
+        <dd>No, we do not collect or sell your personal information. Quite frankly, you do not seem all that interesting. We do, however, rely on third-party services like <a href="https://github.com">Github</a> and <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a> to maintain and distribute our work. If any personal information is being collected and/or sold in relationship to Reedable, it is by them, and not by us.</dd>
+
+        <dt>"How do I create a Reedable account?"</dt>
+        <dd>Did you read anything we wrote above? We really do not want your personal information, okay? There is no such thing as "account" here. There is no sign-up required for you to use Reedable.</dd>
+
+        <dt>"How do I sign up for your email newsletters?"</dt>
+        <dd>I'm glad you asked. For the last friggin' time, We DO NOT want your personal information. Seriously, people, just, just.. just stop giving away your email address to any random websites out there.</dd>
+
+        <dt>"Hey, something is borked. Can you fix it?"</dt>
+        <dd>Why don't you <a href="https://github.com/reedable/Reedable/issues/new" title="Create a support ticket on Github">tell us</a> what is borked, and if we feel like it, we will look into it.</dd>
+
+        <dt>"Hey, could you add something to Reedable?"</dt>
+        <dd>Why don't you <a href="https://github.com/reedable/Reedable/issues/new" title="Create a support ticket on Github">tell us</a> what that something is, and if we feel like it, we will look into it. </dd>
+
+        <dt>"I sent you a support request long time ago, and why have you not gotten back to me yet?" </dt>
+        <dd>Did we mention to you that we are doing this for <a href="https://github.com/reedable/Reedable/blob/develop/LICENSE" title="View software license">free</a>? Jeez! Relax, dude. We've got video games to play, TV shows to watch, comic books to read... We have life, you know. </dd>
+
+        <dt>"Why does your website look terrible?"</dt>
+        <dd>Good point. May I suggest using something like Reedable Chrome Extension to improve the readability of this site?</dd>
+      </dl>
+
+      <h2>Contact the developer</h2>
+
+      <p>Wait, what? You want to contact us? What for?</p>
+
+      <p>If something is broken, or, you have some smashing ideas about how to make this a better product, feel free to <a href="https://github.com/reedable/Reedable/issues/new">contact us on Github</a>. We do have an email, but we are not going to publish it here because some jerk is going to scrape it and abuse it. Besides, if you really, really want to find out our email address, it is easy. Just hop over to our <a href="https://github.com/reedable/Reedable">Github repository</a> and take a look at our <a href="https://raw.githubusercontent.com/reedable/Reedable/develop/public-keys/reedable%40oinklet.com.asc">public key</a>[<a class="Footnote" href="#footnote-1" aria-label="Footnote 1">1</a>].</p>
+
+      <h3 id="Donation-heading">Wow! Such support!</h3>
+
+      <p>As we mentioned earlier, Reedable is <a href="https://github.com/reedable/Reedable/blob/develop/LICENSE" title="View software license">free</a>. But if you are an eccentric millionaire who wants to buy us some pizza and beer, which fuels this project, we do accept donations.</p>
+
+      <p>We only accept donations in <a href="https://dogecoin.com/">Dogecoin</a>. If you want to support our efforts but have no Dogecoin, that's okay. Please do something nice to an arbitrary stranger, and that will be our payment. Wait an extra five seconds and hold a door for someone behind you. Step aside for a stranger on the sidewalk. Smile and say hello to a person you have not seen before. Wear a mask and get vaccinated during a pandemic (if your doctor recommends it)[<a class="Footnote" href="#footnote-2" aria-label="Footnote 2">2</a>]. You know, things that benefit everyone, not just you.</p>
+
+      <h4>Dogecoin address</h4>
+
+      <p>This is a doggie dog world. If you are going to insist on paying us, here's our Dogecoin address.</p>
+
+      <div class="PictureFrame Center">
+        <img style="width: 172px; height: 172px;" alt="QR code: D8ZRv33jaoBuk87aKCMKwoFPSLzVegjWX1" src="image/D8ZRv33jaoBuk87aKCMKwoFPSLzVegjWX1.png">
+      </div>
+
+      <p class="Center">
+        <span style="overflow-wrap: anywhere;"><code>D8ZRv33jaoBuk87aKCMKwoFPSLzVegjWX1</code></span>
+      </p>
+
+      <p>There is a <a href="/Reedable/image/D8ZRv33jaoBuk87aKCMKwoFPSLzVegjWX1.txt.asc">clearsigned text file</a> with our address. You can use our <a href="https://raw.githubusercontent.com/reedable/Reedable/develop/public-keys/reedable%40oinklet.com.asc">public key</a> to verify that the address is authentic. Of course, this is all a pointless exercise unless you can trust our public key in your possession, but that is a whole another level of paranoia. If someone forged a public key, tricked you into trusting it, hacked our site, posted their malicious address and signed it with their own key for a handful of Doge, that is more work than we ever did for Reedable Chrome Extension. Maybe they deserve some credit.</p>
+
+      <h2>Footnotes</h2>
+
+      <ol>
+        <li id="footnote-1" class="Note">Please encrypt responsibly.</li>
+        <li id="footnote-2" class="Note">If you are taking medical advice from people who never attended medical schools or took the Hippocratic Oath, you should reevaluate your life choices.</li>
+      </ol>
+    </main>
+
+    <footer>
+      <hr>
+      <small>
+        Copyright &copy; 2021-2022 RBLD. All rights reserved.
+      </small>
+    </footer>
+  </div>
+</body>
+
+</html>
