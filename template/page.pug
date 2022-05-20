@@ -32,23 +32,23 @@ html.Reedable(lang="en-US")
 
     header
       block header
-        h1#Header(tabindex="-1")
+        h1#header-h1(tabindex="-1")
           .Tag WTF
           | Hard hat area
           .SubHeading Proceed with caution
 
-    a.SkipLink(href="#Content") Skip to content
+    a.SkipLink(href="#main") Skip to content
 
-    nav#NavMenu.NavMenu(tabindex="-1")
+    nav#nav.NavMenu(tabindex="-1")
       block nav
         ul 
           li: a(href="/Reedable/index.html") Home
           li: a(href="/Reedable/blog.html") Blog
           li: a(href="/Reedable/about.html") About
 
-    a.SkipLink(href="#NavMenu") Skip to navigation menu
+    a.SkipLink(href="#nav") Skip to navigation menu
 
-    main#Content(tabindex="-1")
+    main#main(tabindex="-1")
       block content
         .PictureFrame.Center
           img(
@@ -61,12 +61,14 @@ html.Reedable(lang="en-US")
 
         p In the mean time, if you want to test drive our latest code, please head over to <a href="https://github.com/reedable/Reedable">Github</a>, where you can download the unpacked version of our code straight from our repository.
     
-    a.SkipLink(href="#NavMenu") Skip to navigation menu
+    a.SkipLink(href="#nav") Skip to navigation menu
 
     footer
       block footer 
         hr
         small Copyright &copy; 2021-2022 RBLD. All rights reserved.
+
+    a.SkipLink(href="#header-h1") Skip to header
 
     script(
         type="module"
