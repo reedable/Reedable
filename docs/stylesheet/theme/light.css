@@ -1,0 +1,27 @@
+:root {
+  --background-color: #ffffff;
+  --background-color-dark: #eeeeee;
+  --background-color-darker: #dddddd;
+  --background-color-darkest: #cccccc;
+  --color-darkest: #111111;
+  --color-darker: #222222;
+  --color-dark: #333333;
+  --color: #444444;
+  --color-light: #555555;
+  --color-lighter: #666666;
+  --color-lightest: #777777;
+  --color-alert: #ee0000;
+  --color-highlight: #ffff00;
+  --color-link: #0000ff;
+  --color-link-visited: #880088;
+  --border-color-darkest: #888888;
+  --border-color-darker: #999999;
+  --border-color-dark: #aaaaaa;
+  --border-color: #bbbbbb;
+  --border-color-light: #cccccc;
+  --border-color-lighter: #dddddd;
+  --border-color-lightest: #eeeeee;
+  --border-thin: 0.0625rem;
+  --border-medium: 0.125rem;
+  --border-thick: 0.1875rem;
+}

@@ -50,6 +50,7 @@
 }
 .Reedable pre {
   overflow-x: auto;
+  margin-top: -1rem;
   margin-bottom: 1rem;
 }
 .Reedable pre code {
@@ -84,32 +85,24 @@
 .Reedable h2 {
   margin-bottom: 1rem;
 }
-.Reedable h2:not(:first-child) {
-  margin-top: 2rem;
+* + .Reedable h2 {
+  margin-top: 20rem;
 }
 .Reedable h3 {
+  margin-top: 1.75rem;
   margin-bottom: 0.875rem;
 }
-.Reedable h3:not(:first-child) {
-  margin-top: 1.75rem;
-}
 .Reedable h4 {
+  margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
-.Reedable h4:not(:first-child) {
-  margin-top: 1.5rem;
-}
 .Reedable h5 {
+  margin-top: 1.25rem;
   margin-bottom: 0.625rem;
 }
-.Reedable h5:not(:first-child) {
-  margin-top: 1.25rem;
-}
 .Reedable h6 {
-  margin-bottom: 0.5625rem;
-}
-.Reedable h6:not(:first-child) {
   margin-top: 1.125rem;
+  margin-bottom: 0.5625rem;
 }
 .Reedable dl {
   margin-bottom: 1rem;
@@ -276,7 +269,6 @@
   border-radius: 0.25rem;
   width: auto;
   height: auto;
-  max-width: min(100vw, 100%);
   max-height: 100vh;
 }
 .Reedable .QuestionAndAnswer dt:before {

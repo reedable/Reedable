@@ -1,0 +1,79 @@
+extends template/page
+
+block title
+  | Reedable | About
+
+block header
+  h1#Header(tabindex="-1")
+    .Tag BETA
+    | About this site
+    .SubHeading This is where I needlessly talk about the site itself
+
+block content
+
+  h3 Number format
+
+  ul
+    li <localized-number>123456</localized-number>
+    li <localized-number>123456.7899</localized-number>
+    li <localized-number lang="en-IN">123456.7899</localized-number>
+    li <localized-number data-minimum-fraction-digits="3">0.7899</localized-number>
+    li <localized-number data-maximum-fraction-digits="2">0.7899</localized-number>
+    li <localized-number data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number>
+    li <localized-number lang="ar-EG" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number>
+
+  ul(lang="ar-EG")
+    li <localized-number>123456.7899</localized-number>
+    li <localized-number lang="en-US" data-minimum-fraction-digits="2" data-style="percent">0.7899</localized-number>
+
+  h3 Date format
+
+  ul
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400">4/23/2022</time>
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ja-JP">4/23/2022</time>
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400" lang="en-IN">4/23/2022</time>
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ar-EG">4/23/2022</time>
+  
+
+  ul(lang="ar-EG")
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400">4/23/2022</time>
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ja-JP">4/23/2022</time>
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400" lang="en-IN">4/23/2022</time>
+    li <time is="localized-datetime" datetime="2022-04-23 Z-400" lang="ar-EG">4/23/2022</time>
+      
+  h3 Anchors
+
+  ul
+    li: a(id="anchor-id")
+    li: a(name="anchor-name")
+    li: a(id="anchor-id-2" title="Anchor ID 2")
+    li: a(name="anchor-name" title="Anchor Name")
+
+  h3 Links
+
+  ul
+    li: a(href="#") HASH
+    li: a(href="https:") HTTPS
+    li: a(href="https:" title="Title") HTTPS
+    li: a(href="https:" title="Title")
+    li: a(href="https://example.com")
+    li: a(href="http:") HTTP
+    li: a(href="sftp:") SFTP
+    li: a(href="ftp:") FTP
+    li: a(href="mailto:") MAILTO
+    li: a(href="tel:") TEL
+    li: a(href="wtai:") WTAI
+    li: a(href="bitcoin:") BITCOIN
+    li: a(href="geo:") GEO
+    li: a(href="im:") IM
+    li: a(href="irc:") IRC
+    li: a(href="ircs:") IRCS
+    li: a(href="xmpp:") XMPP
+    li: a(href="magnet:") MAGNET
+    li: a(href="urn:") URN
+    li: a(href="news:") NEWS
+    li: a(href="nntp:") NNTP
+    li: a(href="sms:") SMS
+    li: a(href="smsto:") SMSTO
+    li: a(href="ssh:") SSH
+    li: a(href="webcal:") WEBCAL

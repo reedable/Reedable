@@ -1,0 +1,74 @@
+doctype html
+
+html.Reedable(lang="en-US")
+
+  head 
+    meta(
+      name="viewport"
+      content="width=device-width,initial-scale=1.0"
+    )
+    link(
+      type="text/css"
+      rel="stylesheet"
+      href="/Reedable/stylesheet/theme/light.css"
+      media="screen and (prefers-color-scheme: light)"
+    )
+    link(
+      type="text/css"
+      rel="stylesheet"
+      href="/Reedable/stylesheet/theme/dark.css"
+      media="screen and (prefers-color-scheme: dark)"
+    )
+    link(
+      type="text/css"
+      rel="stylesheet"
+      href="/Reedable/stylesheet/index.css"
+    )
+    title
+      block title
+        | Reedable
+
+  body: div
+
+    header
+      block header
+        h1#Header(tabindex="-1")
+          .Tag WTF
+          | Hard hat area
+          .SubHeading Proceed with caution
+
+    a.SkipLink(href="#Content") Skip to content
+
+    nav#NavMenu.NavMenu(tabindex="-1")
+      block nav
+        ul 
+          li: a(href="/Reedable/index.html") Home
+          li: a(href="/Reedable/blog.html") Blog
+          li: a(href="/Reedable/about.html") About
+
+    a.SkipLink(href="#NavMenu") Skip to navigation menu
+
+    main#Content(tabindex="-1")
+      block content
+        .PictureFrame.Center
+          img(
+            style="width: 50%;"
+            src="image/hard_hat_area.png"
+            alt="Danger. Hard hat area."
+          )
+
+        p Reedable is currently work-in-progress.
+
+        p In the mean time, if you want to test drive our latest code, please head over to <a href="https://github.com/reedable/Reedable">Github</a>, where you can download the unpacked version of our code straight from our repository.
+    
+    a.SkipLink(href="#NavMenu") Skip to navigation menu
+
+    footer
+      block footer 
+        hr
+        small Copyright &copy; 2021-2022 RBLD. All rights reserved.
+
+    script(
+        type="module"
+        src="script/index.js"
+    )

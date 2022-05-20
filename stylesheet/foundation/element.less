@@ -19,7 +19,6 @@
 
   pre {
     overflow-x: auto;
-    margin-top: -1rem; // We have a leading line break in <pre> textContent
     margin-bottom: 1rem;
 
     code {
@@ -63,28 +62,43 @@
   }
 
   h2 {
-    margin-top: 2rem;
     margin-bottom: 1rem;
+
+    &:not(:first-child) {
+        margin-top: 2rem;
+    }
   }
 
   h3 {
-    margin-top: 1.75rem;
     margin-bottom: 0.875rem;
+
+    &:not(:first-child) {
+        margin-top: 1.75rem;
+    }
   }
 
   h4 {
-    margin-top: 1.5rem;
     margin-bottom: 0.75rem;
+
+    &:not(:first-child) {
+        margin-top: 1.5rem;
+    }
   }
 
   h5 {
-    margin-top: 1.25rem;
     margin-bottom: 0.625rem;
+
+    &:not(:first-child) {
+        margin-top: 1.25rem;
+    }
   }
 
   h6 {
-    margin-top: 1.125rem;
     margin-bottom: 0.5625rem;
+
+    &:not(:first-child) {
+        margin-top: 1.125rem;
+    }
   }
 
   dl {
