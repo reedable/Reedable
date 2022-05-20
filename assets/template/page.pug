@@ -10,19 +10,19 @@ html.Reedable(lang="en-US")
     link(
       type="text/css"
       rel="stylesheet"
-      href="/Reedable/stylesheet/theme/light.css"
+      href="/Reedable/assets/stylesheet/theme/light.css"
       media="screen and (prefers-color-scheme: light)"
     )
     link(
       type="text/css"
       rel="stylesheet"
-      href="/Reedable/stylesheet/theme/dark.css"
+      href="/Reedable/assets/stylesheet/theme/dark.css"
       media="screen and (prefers-color-scheme: dark)"
     )
     link(
       type="text/css"
       rel="stylesheet"
-      href="/Reedable/stylesheet/index.css"
+      href="/Reedable/assets/stylesheet/index.css"
     )
     title
       block title
@@ -42,24 +42,19 @@ html.Reedable(lang="en-US")
     nav#nav.NavMenu(tabindex="-1")
       block nav
         ul 
-          li: a(href="/Reedable/index.html") Home
-          li: a(href="/Reedable/blog.html") Blog
-          li: a(href="/Reedable/about.html") About
+          li: a(href="/Reedable/") Home
+          li: a(href="/Reedable/docs") Docs
+          li: a(href="/Reedable/blog") Blog
+          li: a(href="/Reedable/about") About
 
     a.SkipLink(href="#nav") Skip to navigation menu
 
     main#main(tabindex="-1")
       block content
-        .PictureFrame.Center
-          img(
-            style="width: 50%;"
-            src="image/hard_hat_area.png"
-            alt="Danger. Hard hat area."
-          )
-
-        p Reedable is currently work-in-progress.
-
-        p In the mean time, if you want to test drive our latest code, please head over to <a href="https://github.com/reedable/Reedable">Github</a>, where you can download the unpacked version of our code straight from our repository.
+        p.
+            Reedable is currently work-in-progress.
+        p.
+            In the mean time, if you want to test drive our latest code, please head over to <a href="https://github.com/reedable/Reedable">Github</a>, where you can download the unpacked version of our code straight from our repository.
     
     a.SkipLink(href="#nav") Skip to navigation menu
 
@@ -72,5 +67,5 @@ html.Reedable(lang="en-US")
 
     script(
         type="module"
-        src="script/index.js"
+        src="/Reedable/assets/script/index.js"
     )
