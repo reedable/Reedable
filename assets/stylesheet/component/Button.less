@@ -1,0 +1,49 @@
+.Reedable {
+
+    a.button {
+        --transition-button-hover: 0.3s;
+
+        background-color: var(--background-color-button);
+        border: var(--border-thick) solid var(--border-color-button);
+        border-radius: 0.625rem;
+        color: var(--color-button);
+        display: inline-block;
+        line-height: ~"max(44px, 1rem)";
+        min-height: 44px; // WCAG SC 2.5.5 Target Size (AAA)
+        min-width: 44px; // WCAG SC 2.5.5 Target Size (AAA)
+        text-align: center;
+        transition: var(--transition-button-hover);
+
+        &::before {
+            content: "\00a0";
+            display: inline-block;
+            width: calc(0.5rem - var(--border-thin) * 2);
+        }
+
+        &::after {
+            content: "\00a0";
+            display: inline-block;
+            width: calc(0.5rem - var(--border-thin) * 2);
+        }
+
+        &:visited {
+            color: var(--color-button);
+        }
+
+        &:hover {
+            outline: var(--border-thick) solid var(--border-color-button);
+            text-decoration: none;
+            transition: var(--transition-button-hover);
+        }
+
+        &:focus {
+            outline: var(--border-thick) solid;
+            text-decoration: none;
+        }
+
+        &.Primary {
+            --background-color-button: var(--color-link);
+            --color-button: var(--background-color);
+        }
+    }
+}

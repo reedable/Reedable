@@ -1,161 +1,195 @@
 .Reedable {
 
-  [id].Note:target {
-    background-color: var(--color-highlight);
-    outline: 0.25rem solid var(--color-highlight);
-    border-radius: 0.125rem;
-    transition: 1s;
-  }
+    // TODO This does not belong here
+    [id].Note:target {
+        background-color: var(--background-color-highlight);
+        border-radius: 0.125rem;
+        outline: 0.25rem solid var(--background-color-highlight);
+        transition: 1s;
+    }
 
-  p {
-    margin-bottom: 1rem;
-  }
+    // Inline
 
-  code {
-    font-family: "Courier New", Courier, Monospace;
-    font-size: 87.5%;
-    color: var(--color-darker);
-  }
+    a[href] {
+        color: var(--color-link);
+        text-decoration: none;
 
-  pre {
-    overflow-x: auto;
-    margin-bottom: 1rem;
+        &:visited {
+            color: var(--color-link-visited);
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+
+        &:focus {
+            transition: 0.2s;
+        }
+    }
 
     code {
-      margin: 0;
-      font-size: 75%;
-    }
-  }
-
-  a[href] {
-    color: var(--color-link);
-    text-decoration: none;
-
-    &:visited {
-      color: var(--color-link-visited);
+        color: var(--color-darker);
+        font-family: var(--font-family-code);
+        font-size: var(--font-size-code);
     }
 
-    &:hover,
-    &:focus {
-      // When a link is a block element, we do not want the border-bottom
-      // to cause the layout to go out of whack when hovering over it.
-      margin-bottom: -0.125rem;
-      border-bottom: 0.125rem solid;
+    // Block
+    
+    p,
+    pre,
+    div {
+        margin-bottom: 1rem;
     }
 
-    &:focus {
-      transition: 0.2s;
+    p {
+        font-size: var(--font-size-p);
     }
-  }
 
-  header {
-    margin-bottom: 1rem;
+    pre {
+        overflow-x: auto;
+
+        code {
+            font-family: var(--font-family-pre-code);
+            font-size: var(--font-size-pre-code);
+            margin: 0;
+        }
+    }
+
+    figure {
+        break-inside: avoid;
+        margin: 1.5rem 0;
+
+        figcaption {
+            font-size: small;
+            font-style: italic;
+            font-weight: bold;
+            max-width: 24em;
+        }
+    }
+
+    header {
+        padding-top: 1.5rem;
+
+        h1 {
+            margin: 0;
+        }
+    }
 
     h1 {
-      margin: 0;
-    }
-  }
-
-  h1 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    margin-bottom: 1rem;
-
-    &:not(:first-child) {
+        break-after: avoid;
+        font-size: var(--font-size-h1);
+        margin-bottom: 1rem;
         margin-top: 2rem;
     }
-  }
 
-  h3 {
-    margin-bottom: 0.875rem;
+    h2 {
+        // If there is any margin or padding between h2 and the following p,
+        // break-after gets ignored. We will leave this here in case it works
+        // in the future.
+        break-after: avoid;
+        font-size: var(--font-size-h2);
+        margin-bottom: 1rem;
 
-    &:not(:first-child) {
-        margin-top: 1.75rem;
-    }
-  }
-
-  h4 {
-    margin-bottom: 0.75rem;
-
-    &:not(:first-child) {
-        margin-top: 1.5rem;
-    }
-  }
-
-  h5 {
-    margin-bottom: 0.625rem;
-
-    &:not(:first-child) {
-        margin-top: 1.25rem;
-    }
-  }
-
-  h6 {
-    margin-bottom: 0.5625rem;
-
-    &:not(:first-child) {
-        margin-top: 1.125rem;
-    }
-  }
-
-  dl {
-    margin-bottom: 1rem;
-
-    dt {
-      margin-bottom: 0.25rem;
+        &:not(:first-child) {
+            margin-top: 2rem;
+        }
     }
 
-    dd {
-      margin-bottom: 0.5rem;
-      margin-left: 1rem;
-    }
-  }
+    h3 {
+        break-after: avoid;
+        font-size: var(--font-size-h3);
+        margin-bottom: 0.875rem;
 
-  ol,
-  ul {
-    margin-bottom: 1rem;
-    margin-left: 2rem;
-
-    li {
-      margin-bottom: 0.25rem;
+        &:not(:first-child) {
+            margin-top: 1.75rem;
+        }
     }
 
+    h4 {
+        break-after: avoid;
+        font-size: var(--font-size-h4);
+        margin-bottom: 0.75rem;
+
+        &:not(:first-child) {
+            margin-top: 1.5rem;
+        }
+    }
+
+    h5 {
+        break-after: avoid;
+        font-size: var(--font-size-h5);
+        margin-bottom: 0.625rem;
+
+        &:not(:first-child) {
+            margin-top: 1.25rem;
+        }
+    }
+
+    h6 {
+        break-after: avoid;
+        font-size: var(--font-size-h6);
+        margin-bottom: 0.5625rem;
+
+        &:not(:first-child) {
+            margin-top: 1.125rem;
+        }
+    }
+
+    dl {
+        margin-bottom: 1rem;
+
+        dt {
+            margin-bottom: 0.25rem;
+        }
+
+        dd {
+            margin-bottom: 0.5rem;
+            margin-left: 1rem;
+        }
+    }
+
+    ol,
     ul {
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
+        margin-bottom: 1rem;
+        margin-left: 2rem;
+
+        li {
+            margin-bottom: 0.25rem;
+        }
+
+        ul {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
     }
-  }
 
-  abbr[title] {
-    text-decoration: none;
+    abbr[title] {
+        text-decoration: none;
 
-    // Non-clickable abbreviations show definition inline
-    &:not([tabindex])::after {
-      content: " (" attr(title) ")";
+        // Non-clickable abbreviations show definition inline
+        &:not([tabindex])::after {
+            content: " (" attr(title) ")";
+        }
+
+        // Clickable abbreviations show definition on focus
+        &[tabindex] {
+
+            &:hover {
+                border-bottom: 0.0625rem solid var(--color-link);
+            }
+
+            &:focus::after {
+                content: " (" attr(title) ")";
+            }
+        }
     }
 
-    // Clickable abbreviations show definition on focus
-    &[tabindex] {
-
-      &:hover {
-        border-bottom: 0.0625rem solid var(--color-link);
-      }
-
-      &:focus::after {
-        content: " (" attr(title) ")";
-      }
+    hr {
+        border-top: var(--border-thin) solid var(--border-color-darkest);
     }
-  }
 
-  hr {
-    border-top: var(--border-thin) solid var(--border-color-darkest);
-    margin: 1rem 0;
-  }
-
-  address {
-    display: inline-block;
-  }
+    address {
+        display: inline-block;
+    }
 }

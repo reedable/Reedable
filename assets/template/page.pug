@@ -24,6 +24,19 @@ html.Reedable(lang="en-US")
       rel="stylesheet"
       href="/Reedable/assets/stylesheet/index.css"
     )
+    link(
+      type="text/css"
+      rel="stylesheet"
+      href="/Reedable/assets/vendor/fontawesome-free-6.1.1-web/css/brands.min.css"
+    )
+    link(
+      type="text/css"
+      rel="stylesheet"
+      href="/Reedable/assets/vendor/fontawesome-free-6.1.1-web/css/all.min.css"
+    )
+    style
+      block style
+        | /* Page specific style */
     title
       block title
         | Reedable
@@ -33,13 +46,13 @@ html.Reedable(lang="en-US")
     header
       block header
         h1#header-h1(tabindex="-1")
-          .Tag WTF
+          .tag WTF
           | Hard hat area
-          .SubHeading Proceed with caution
+          .sub-heading Proceed with caution
 
-    a.SkipLink(href="#main") Skip to content
+    a.skip-link(href="#main") Skip to content
 
-    nav#nav.NavMenu(tabindex="-1")
+    nav#nav.nav-menu(tabindex="-1")
       block nav
         ul 
           li: a(href="/Reedable/") Home
@@ -47,23 +60,23 @@ html.Reedable(lang="en-US")
           li: a(href="/Reedable/blog") Blog
           li: a(href="/Reedable/about") About
 
-    a.SkipLink(href="#nav") Skip to navigation menu
+    a.skip-link(href="#nav") Skip to navigation menu
 
     main#main(tabindex="-1")
       block content
         p.
-            Reedable is currently work-in-progress.
+          Reedable is currently work-in-progress.
         p.
-            In the mean time, if you want to test drive our latest code, please head over to <a href="https://github.com/reedable/Reedable">Github</a>, where you can download the unpacked version of our code straight from our repository.
+          In the mean time, if you want to test drive our latest code, please head over to <a href="https://github.com/reedable/Reedable">Github</a>, where you can download the unpacked version of our code straight from our repository.
     
-    a.SkipLink(href="#nav") Skip to navigation menu
+    a.skip-link(href="#nav") Skip to navigation menu
 
-    footer
+    footer.page-footer
       block footer 
         hr
         small Copyright &copy; 2021-2022 RBLD. All rights reserved.
 
-    a.SkipLink(href="#header-h1") Skip to header
+    a.skip-link(href="#header-h1") Skip to header
 
     script(
         type="module"

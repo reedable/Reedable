@@ -1,60 +1,68 @@
 .Reedable * {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  vertical-align: baseline;
   background: transparent;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
 }
 :root {
-  --xs-font-size: 15px;
-  --sm-font-size: 17px;
-  --md-font-size: 18px;
-  --lg-font-size: 18px;
-  --xl-font-size: 18px;
-  font-size: var(--xs-font-size);
+  font-size: var(--rem-xs);
 }
-@media only screen and (min-width: 321px) {
+@media only screen and (min-width: 320px) {
   :root {
-    font-size: var(--sm-font-size);
+    font-size: var(--rem-sm);
   }
 }
-@media only screen and (min-width: 641px) {
+@media only screen and (min-width: 640px) {
   :root {
-    font-size: var(--md-font-size);
+    font-size: var(--rem-md);
   }
 }
-@media only screen and (min-width: 961px) {
+@media only screen and (min-width: 960px) {
   :root {
-    font-size: var(--lg-font-size);
+    font-size: var(--rem-lg);
   }
 }
-@media only screen and (min-width: 1281px) {
+@media only screen and (min-width: 1280px) {
   :root {
-    font-size: var(--xl-font-size);
+    font-size: var(--rem-xl);
   }
+}
+:root {
+  --rem-xs: 15px;
+  --rem-sm: 17px;
+  --rem-md: 18px;
+  --rem-lg: 18px;
+  --rem-xl: 18px;
+}
+:root {
+  --font-family-sans-serif: Helvetica, Arial, Arimo, sans-serif;
+  --font-family-serif: "Times New Roman", Times, Tinos, serif;
+  --font-family-monospace: "Lucida Console", "Monaco", "Courier New", Courier, monospace;
+  --font-family-pre-code: var(--font-family-monospace);
+  --font-family: var(--font-family-serif);
+  --font-size: 1rem;
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.325rem;
+  --font-size-h4: 1.25rem;
+  --font-size-h5: 1.125rem;
+  --font-size-h6: 1rem;
+  --font-size-p: var(--font-size);
+  --font-size-code: min(0.8125em, var(--font-size-p));
+  --font-size-pre-code: calc(var(--font-size-code) * 0.8125);
+}
+:root {
+  --border-thin: 0.0625rem;
+  --border-medium: 0.125rem;
+  --border-thick: 0.1875rem;
 }
 .Reedable [id].Note:target {
-  background-color: var(--color-highlight);
-  outline: 0.25rem solid var(--color-highlight);
+  background-color: var(--background-color-highlight);
   border-radius: 0.125rem;
+  outline: 0.25rem solid var(--background-color-highlight);
   transition: 1s;
-}
-.Reedable p {
-  margin-bottom: 1rem;
-}
-.Reedable code {
-  font-family: "Courier New", Courier, Monospace;
-  font-size: 87.5%;
-  color: var(--color-darker);
-}
-.Reedable pre {
-  overflow-x: auto;
-  margin-bottom: 1rem;
-}
-.Reedable pre code {
-  margin: 0;
-  font-size: 75%;
 }
 .Reedable a[href] {
   color: var(--color-link);
@@ -65,47 +73,89 @@
 }
 .Reedable a[href]:hover,
 .Reedable a[href]:focus {
-  margin-bottom: -0.125rem;
-  border-bottom: 0.125rem solid;
+  text-decoration: underline;
 }
 .Reedable a[href]:focus {
   transition: 0.2s;
 }
-.Reedable header {
+.Reedable code {
+  color: var(--color-darker);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-code);
+}
+.Reedable p,
+.Reedable pre,
+.Reedable div {
   margin-bottom: 1rem;
+}
+.Reedable p {
+  font-size: var(--font-size-p);
+}
+.Reedable pre {
+  overflow-x: auto;
+}
+.Reedable pre code {
+  font-family: var(--font-family-pre-code);
+  font-size: var(--font-size-pre-code);
+  margin: 0;
+}
+.Reedable figure {
+  break-inside: avoid;
+  margin: 1.5rem 0;
+}
+.Reedable figure figcaption {
+  font-size: small;
+  font-style: italic;
+  font-weight: bold;
+  max-width: 24em;
+}
+.Reedable header {
+  padding-top: 1.5rem;
 }
 .Reedable header h1 {
   margin: 0;
 }
 .Reedable h1 {
-  margin-top: 2rem;
+  break-after: avoid;
+  font-size: var(--font-size-h1);
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 .Reedable h2 {
+  break-after: avoid;
+  font-size: var(--font-size-h2);
   margin-bottom: 1rem;
 }
 .Reedable h2:not(:first-child) {
   margin-top: 2rem;
 }
 .Reedable h3 {
+  break-after: avoid;
+  font-size: var(--font-size-h3);
   margin-bottom: 0.875rem;
 }
 .Reedable h3:not(:first-child) {
   margin-top: 1.75rem;
 }
 .Reedable h4 {
+  break-after: avoid;
+  font-size: var(--font-size-h4);
   margin-bottom: 0.75rem;
 }
 .Reedable h4:not(:first-child) {
   margin-top: 1.5rem;
 }
 .Reedable h5 {
+  break-after: avoid;
+  font-size: var(--font-size-h5);
   margin-bottom: 0.625rem;
 }
 .Reedable h5:not(:first-child) {
   margin-top: 1.25rem;
 }
 .Reedable h6 {
+  break-after: avoid;
+  font-size: var(--font-size-h6);
   margin-bottom: 0.5625rem;
 }
 .Reedable h6:not(:first-child) {
@@ -149,76 +199,104 @@
 }
 .Reedable hr {
   border-top: var(--border-thin) solid var(--border-color-darkest);
-  margin: 1rem 0;
 }
 .Reedable address {
   display: inline-block;
 }
-.Reedable .Center {
+.Reedable .center {
   display: flex;
   justify-content: center;
 }
-@media only screen and (min-width: 321px) {
-  .Reedable .XS {
-    display: none;
+.Reedable .indent {
+  margin-left: 6.25%;
+}
+@media only screen and (min-width: 320px) {
+  .Reedable .hidden-sm-xxl {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 640px) {
+  .Reedable .hidden-md-xxl {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 960px) {
+  .Reedable .hidden-lg-xxl {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .Reedable .hidden-xl-xxl {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .Reedable .hidden-xxl {
+    display: none !important;
   }
 }
 @media only screen and (max-width: 320px) {
-  .Reedable .SM {
-    display: none;
-  }
-}
-@media only screen and (min-width: 641px) {
-  .Reedable .SM {
-    display: none;
+  .Reedable .hidden-xs {
+    display: none !important;
   }
 }
 @media only screen and (max-width: 640px) {
-  .Reedable .MD {
-    display: none;
-  }
-}
-@media only screen and (min-width: 961px) {
-  .Reedable .MD {
-    display: none;
+  .Reedable .hidden-xs-sm {
+    display: none !important;
   }
 }
 @media only screen and (max-width: 960px) {
-  .Reedable .LG {
-    display: none;
-  }
-}
-@media only screen and (min-width: 1281px) {
-  .Reedable .LG {
-    display: none;
+  .Reedable .hidden-xs-md {
+    display: none !important;
   }
 }
 @media only screen and (max-width: 1280px) {
-  .Reedable .XL {
-    display: none;
+  .Reedable .hidden-xs-lg {
+    display: none !important;
   }
 }
+@media only screen and (max-width: 1920px) {
+  .Reedable .hidden-xs-xl {
+    display: none !important;
+  }
+}
+/*
+ * Breakpoints
+ */
 .Reedable body {
-  width: 100%;
-  margin: 0;
   display: flex;
   justify-content: center;
-}
-.Reedable body header,
-.Reedable body nav,
-.Reedable body main,
-.Reedable body footer {
-  margin: 1rem;
-}
-.Reedable body > div {
+  margin: 0;
   width: 100%;
 }
-@media only screen and (min-width: 641px) {
+.Reedable body > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+.Reedable body > div header,
+.Reedable body > div nav,
+.Reedable body > div main,
+.Reedable body > div footer {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.Reedable body > div main {
+  flex-grow: 1;
+  margin: 1rem;
+}
+@media only screen and (min-width: 640px) {
   .Reedable body > div {
     max-width: 640px;
   }
 }
-@media only screen and (min-width: 1281px) {
+@media only screen and (min-width: 960px) {
+  .Reedable body > div {
+    max-width: 960px;
+  }
+}
+@media only screen and (min-width: 1280px) {
   .Reedable body > div {
     max-width: 1280px;
   }
@@ -228,7 +306,7 @@
     column-rule: var(--border-thin) solid var(--border-color);
   }
 }
-@media only screen and (min-width: 1921px) {
+@media only screen and (min-width: 1920px) {
   .Reedable body > div {
     max-width: 1920px;
   }
@@ -238,93 +316,144 @@
     column-rule: var(--border-thin) solid var(--border-color);
   }
 }
-.Reedable .Byline {
-  margin: 0.75rem 0 0rem 0;
-  font-size: 0.875rem;
-}
-.Reedable nav.NavMenu ul {
-  display: flex;
-  margin: 0 0 1rem 0;
-  border-bottom: var(--border-thin) solid var(--border-color-darkest);
-}
-.Reedable nav.NavMenu ul li {
-  margin: 0;
+.Reedable a.button {
+  --transition-button-hover: 0.3s;
+  background-color: var(--background-color-button);
+  border: var(--border-thick) solid var(--border-color-button);
+  border-radius: 0.625rem;
+  color: var(--color-button);
   display: inline-block;
+  line-height: max(44px, 1rem);
+  min-height: 44px;
+  min-width: 44px;
+  text-align: center;
+  transition: var(--transition-button-hover);
 }
-.Reedable nav.NavMenu ul li:first-child a {
+.Reedable a.button::before {
+  content: "\00a0";
+  display: inline-block;
+  width: calc(0.5rem - var(--border-thin) * 2);
+}
+.Reedable a.button::after {
+  content: "\00a0";
+  display: inline-block;
+  width: calc(0.5rem - var(--border-thin) * 2);
+}
+.Reedable a.button:visited {
+  color: var(--color-button);
+}
+.Reedable a.button:hover {
+  outline: var(--border-thick) solid var(--border-color-button);
+  text-decoration: none;
+  transition: var(--transition-button-hover);
+}
+.Reedable a.button:focus {
+  outline: var(--border-thick) solid;
+  text-decoration: none;
+}
+.Reedable a.button.Primary {
+  --background-color-button: var(--color-link);
+  --color-button: var(--background-color);
+}
+.Reedable .byline {
+  font-size: 0.875rem;
+  margin: 0;
+}
+.Reedable nav.nav-menu ul {
+  border-bottom: var(--border-thin) solid var(--border-color-darkest);
+  display: flex;
+  margin: 0;
+}
+.Reedable nav.nav-menu ul li {
+  display: inline-block;
+  margin: 0;
+}
+.Reedable nav.nav-menu ul li:first-child a {
   padding-left: 0;
 }
-.Reedable nav.NavMenu ul li a {
+.Reedable nav.nav-menu ul li a {
   display: inline-block;
-  min-width: 44px;
-  padding: 0.25rem 0.25rem;
+  font-size: 1rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
+  padding-top: max(0.25rem, calc(44px - 1.25em));
   text-align: center;
   text-decoration: none;
 }
-.Reedable nav.NavMenu ul li a:visited {
+.Reedable nav.nav-menu ul li a:visited {
   color: var(--color-link);
 }
-.Reedable nav.NavMenu ul li a:hover,
-.Reedable nav.NavMenu ul li a:focus {
-  border-bottom: 2px solid var(--color-link);
+.Reedable nav.nav-menu ul li a:hover,
+.Reedable nav.nav-menu ul li a:focus {
+  border-bottom: var(--border-thick) solid var(--color-link);
+  margin-bottom: calc(-1 * var(--border-thick));
+  text-decoration: none;
 }
-.Reedable .PictureFrame {
+.Reedable footer.page-footer {
+  padding-bottom: 1.5rem;
+}
+.Reedable footer.page-footer hr {
+  margin-bottom: 1rem;
+}
+.Reedable .picture-frame {
+  break-inside: avoid;
   margin: 1rem 0;
 }
-.Reedable .PictureFrame img {
+.Reedable .picture-frame img {
   box-shadow: 0 0.1875rem 0.625rem black;
   border-radius: 0.25rem;
-  width: auto;
   height: auto;
-  max-width: min(100vw, 100%);
   max-height: 100vh;
+  max-width: min(100vw, 100%);
+  width: auto;
 }
-.Reedable .QuestionAndAnswer dt:before {
-  content: "Question: ";
+.Reedable .question-and-answer dt:before {
+  content: "Q: ";
 }
-.Reedable .QuestionAndAnswer dd {
+.Reedable .question-and-answer dd {
   font-style: italic;
 }
-.Reedable .QuestionAndAnswer dd:before {
-  content: "Answer: ";
+.Reedable .question-and-answer dd:before {
+  content: "A: ";
 }
-.Reedable a.SkipLink {
-  border: none;
-  outline: 0.5rem solid var(--background-color);
-  box-shadow: 0 0 0 0.5rem var(--background-color), 0 0 0 0.625rem var(--color-link);
+.Reedable a.skip-link {
   background-color: var(--background-color);
-  position: absolute;
+  border: none;
+  box-shadow: 0 0 0 0.5rem var(--background-color), 0 0 0 0.625rem var(--color-link);
+  outline: 0.5rem solid var(--background-color);
+  height: 1px;
   left: -10000px;
+  overflow: hidden;
+  position: absolute;
   top: auto;
   width: 1px;
-  height: 1px;
-  overflow: hidden;
 }
-.Reedable a.SkipLink:visited {
+.Reedable a.skip-link:visited {
   color: var(--color-link);
 }
-.Reedable a.SkipLink:focus {
+.Reedable a.skip-link:focus {
+  height: auto;
   position: static;
   width: auto;
-  height: auto;
 }
-.SR {
-  position: absolute;
+.sr-only {
+  height: 1px;
   left: -10000px;
+  overflow: hidden;
+  position: absolute;
   top: auto;
   width: 1px;
-  height: 1px;
-  overflow: hidden;
 }
-.Reedable .SubHeading {
+.Reedable .sub-heading {
   font-size: 0.5em;
-  font-weight: normal;
   font-style: italic;
+  font-weight: normal;
 }
-.Reedable .Tag {
-  font-size: 0.375em;
-  font-weight: bolder;
+.Reedable .tag {
   color: var(--color-alert);
+  font-size: max(0.375em, 0.5rem);
+  font-weight: bolder;
   text-transform: uppercase;
 }
 .Reedable localized-number,
@@ -332,6 +461,6 @@
   background-color: inherit;
 }
 .Reedable {
-  color: var(--color);
   background-color: var(--background-color);
+  color: var(--color);
 }

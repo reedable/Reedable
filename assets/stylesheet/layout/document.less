@@ -1,52 +1,69 @@
-@import "../foundation/variables.less";
+@import "../foundation/breakpoints.less";
 
 .Reedable {
 
-  body {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
+    body {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        width: 100%;
 
-    header, nav, main, footer {
-      margin: 1rem;
-    }
+        &>div {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
 
-    &>div {
-      width: 100%;
-    }
+            header, nav, main, footer {
+                //outline: 1px solid cyan;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
 
-    @media only screen and (min-width: @md-min) {
-
-      &>div {
-        max-width: @sm-max;
-      }
-    }
-
-    @media only screen and (min-width: @xl-min) {
-
-      &>div {
-        max-width: @lg-max;
-
-        main {
-          column-count: 2;
-          column-gap: 3rem;
-          column-rule: var(--border-thin) solid var(--border-color);
+            main {
+                flex-grow: 1;
+                margin: 1rem;
+            }
         }
-      }
-    }
 
-    @media only screen and (min-width: @xxl-min) {
+        @media only screen and (min-width: @min-width-md) {
 
-      &>div {
-        max-width: @xl-max;
-
-        main {
-          column-count: 3;
-          column-gap: 3rem;
-          column-rule: var(--border-thin) solid var(--border-color);
+            &>div {
+                max-width: @max-width-sm;
+            }
         }
-      }
+
+        @media only screen and (min-width: @min-width-lg) {
+
+            &>div {
+                max-width: @max-width-md;
+            }
+        }
+
+        @media only screen and (min-width: @min-width-xl) {
+
+            &>div {
+                max-width: @max-width-lg;
+
+                main {
+                    column-count: 2;
+                    column-gap: 3rem;
+                    column-rule: var(--border-thin) solid var(--border-color);
+                }
+            }
+        }
+
+        @media only screen and (min-width: @min-width-xxl) {
+
+            &>div {
+                max-width: @max-width-xl;
+
+                main {
+                    column-count: 3;
+                    column-gap: 3rem;
+                    column-rule: var(--border-thin) solid var(--border-color);
+                }
+            }
+        }
     }
-  }
 }

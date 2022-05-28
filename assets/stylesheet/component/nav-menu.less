@@ -1,0 +1,47 @@
+.Reedable {
+
+    nav.nav-menu {
+
+        ul {
+            border-bottom: var(--border-thin) solid var(--border-color-darkest);
+            display: flex;
+            margin: 0;
+
+            li {
+                display: inline-block;
+                margin: 0;
+
+                &:first-child {
+
+                    a {
+                        padding-left: 0;
+                    }
+                }
+
+                a {
+                    display: inline-block;
+                    font-size: 1rem;
+                    padding-bottom: 0.25rem;
+                    padding-left: 0.375rem;
+                    padding-right: 0.375rem;
+                    padding-top: ~"max(0.25rem, calc(44px - 1.25em))"; // WCAG 2.5.5: Target Size 44px
+                    text-align: center;
+                    text-decoration: none;
+
+                    &:visited {
+                        color: var(--color-link);
+                    }
+
+                    &:hover,
+                    &:focus {
+                        // When a link is a block element, we do not want the border-bottom
+                        // to cause the layout to go out of whack when hovering over it.
+                        border-bottom: var(--border-thick) solid var(--color-link);
+                        margin-bottom: calc(-1 * var(--border-thick));
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}

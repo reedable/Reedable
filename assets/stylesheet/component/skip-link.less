@@ -1,0 +1,33 @@
+.Reedable {
+
+    a.skip-link {
+
+        // Display & Box Model
+        background-color: var(--background-color);
+        border: none;
+        box-shadow:
+            0 0 0 0.5rem var(--background-color),
+            0 0 0 0.625rem var(--color-link);
+        outline: 0.5rem solid var(--background-color);
+
+        // Hide when not in focus
+        height: 1px;
+        left: -10000px;
+        overflow: hidden;
+        position: absolute;
+        top: auto;
+        width: 1px;
+
+        &:visited {
+            color: var(--color-link);
+        }
+
+        &:focus {
+
+            // Show when in focus
+            height: auto;
+            position: static;
+            width: auto;
+        }
+    }
+}

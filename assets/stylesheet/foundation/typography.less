@@ -1,0 +1,37 @@
+:root {
+    --rem-xs: 15px;
+    --rem-sm: 17px;
+    --rem-md: 18px;
+    --rem-lg: 18px;
+    --rem-xl: 18px;
+}
+
+:root {
+    --font-family-sans-serif: Helvetica, Arial, Arimo, sans-serif;
+    --font-family-serif: "Times New Roman", Times, Tinos, serif;
+    --font-family-monospace: "Lucida Console", "Monaco", "Courier New", Courier, monospace;
+
+    --font-family-pre-code: var(--font-family-monospace);
+    --font-family: var(--font-family-serif);
+
+    --font-size: 1rem;
+    --font-size-h1: 2rem;
+    --font-size-h2: 1.5rem;
+    --font-size-h3: 1.325rem;
+    --font-size-h4: 1.25rem;
+    --font-size-h5: 1.125rem;
+    --font-size-h6: 1rem;
+    --font-size-p: var(--font-size);
+
+    // Inline code size should respond to the surrounding text
+    --font-size-code: ~"min(0.8125em, var(--font-size-p))";
+
+    // pre>code text should be relative to the standard p font-size
+    --font-size-pre-code: calc(var(--font-size-code) * 0.8125);    
+}
+
+:root {
+    --border-thin: 0.0625rem;
+    --border-medium: 0.125rem;
+    --border-thick: 0.1875rem;
+}

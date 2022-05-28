@@ -1,54 +1,81 @@
 .Reedable {
 
-  .Center {
-    display: flex;
-    justify-content: center;
-  }
-
-  .XS {
-
-    @media only screen and (min-width: @sm-min) {
-      display: none;
-    }
-  }
-
-  .SM {
-    
-    @media only screen and (max-width: @xs-max) {
-      display: none;
+    .center {
+        display: flex;
+        justify-content: center;
     }
 
-    @media only screen and (min-width: @md-min) {
-      display: none;
-    }
-  }
-
-  .MD {
-
-    @media only screen and (max-width: @sm-max) {
-      display: none;
+    .indent {
+        margin-left: 6.25%;
     }
 
-    @media only screen and (min-width: @lg-min) {
-      display: none;
-    }
-  }
+    .hidden-sm-xxl {
 
-  .LG {
-
-    @media only screen and (max-width: @md-max) {
-      display: none;
+        @media only screen and (min-width: @min-width-sm) {
+            display: none !important;
+        }
     }
 
-    @media only screen and (min-width: @xl-min) {
-      display: none;
-    }
-  }
+    .hidden-md-xxl {
 
-  .XL {
-
-    @media only screen and (max-width: @lg-max) {
-      display: none;
+        @media only screen and (min-width: @min-width-md) {
+            display: none !important;
+        }
     }
-  }
+
+    .hidden-lg-xxl {
+
+        @media only screen and (min-width: @min-width-lg) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xl-xxl {
+
+        @media only screen and (min-width: @min-width-xl) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xxl {
+
+        @media only screen and (min-width: @min-width-xxl) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xs {
+
+        @media only screen and (max-width: @max-width-xs) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xs-sm {
+
+        @media only screen and (max-width: @max-width-sm) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xs-md {
+
+        @media only screen and (max-width: @max-width-md) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xs-lg {
+
+        @media only screen and (max-width: @max-width-lg) {
+            display: none !important;
+        }
+    }
+
+    .hidden-xs-xl {
+
+        @media only screen and (max-width: @max-width-xl) {
+            display: none !important;
+        }
+    }
 }
