@@ -8,7 +8,7 @@ const ifn = process.argv[2];
 
 if (!ifn) {
     console.error(ifn);
-    return 100;
+    process.exit(100);
 }
 
 const ofn = ifn.replace(/\.[^\.]+$/, ".html");

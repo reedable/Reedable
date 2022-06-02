@@ -359,6 +359,16 @@
   font-size: 0.875rem;
   margin: 0;
 }
+.Reedable .card .tag {
+  margin-bottom: 0;
+}
+.Reedable ul.card {
+  margin-left: 0;
+}
+.Reedable ul.card li {
+  list-style-type: none;
+  margin-bottom: 1rem;
+}
 .Reedable nav.nav-menu ul {
   border-bottom: var(--border-thin) solid var(--border-color-darkest);
   display: flex;
@@ -446,7 +456,7 @@
   width: 1px;
 }
 .Reedable .sub-heading {
-  font-size: 0.5em;
+  font-size: max(0.5em, 0.5rem);
   font-style: italic;
   font-weight: normal;
 }

@@ -4,14 +4,15 @@ block title
   | Reedable | Blog
 
 block header
-  h1#header-h1(tabindex="-1")
+  h1#header-h1.card(tabindex="-1")
     .tag WTF
     | Reedable Blog
     .sub-heading Because everyone has one nowadays
 
 block content
 
-  ul
+  ul.card
     li
       .tag Release
       a(href="/Reedable/blog/2022/05/20/whats-new-in-v1-2-0.html") What's new in v1.2.0
+      .sub-heading <time is="localized-datetime" datetime="2022-05-20 Z-400">20-May-2022</time>

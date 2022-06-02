@@ -1,6 +1,11 @@
 {
-  "dependencies": {
-    "lessc": "^1.0.2",
-    "pug": "^3.0.2"
-  }
+    "scripts": {
+        "build": "npm run lessc && npm run pugc",
+        "lessc": "./tools/lessc.sh",
+        "pugc": "./tools/pugc.sh"
+    },
+    "dependencies": {
+        "lessc": "^1.0.2",
+        "pug": "^3.0.2"
+    }
 }
