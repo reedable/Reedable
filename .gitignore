@@ -4,3 +4,4 @@ node_modules/
 coverage/
 temp/
 .vscode
+workspace.code-workspace

@@ -44,22 +44,19 @@ const LINK_INFORMATION = `
     a:not([href])[id][title][data-reedable-link-information-show-title]::after,
     a:not([href])[name][title][data-reedable-link-information-show-title]::after {
         font-size: max(0.875em, 0.875rem);
+        width: auto;
         content: "\\00a0(" attr(title) ")";
     }
 
-    a:not([href])[id]:empty[title][data-reedable-link-information-show-title]::after,
-    a:not([href])[name]:empty[title][data-reedable-link-information-show-title]::after {
+    a:not([href])[id]:not([title])[data-reedable-link-information-show-title]::after {
         font-size: inherit;
-        content: "\\00a0" attr(title);
-    }
-
-    a:not([href])[id]:empty:not([title])[data-reedable-link-information-show-title]::after {
-        font-size: inherit;
+        width: auto;
         content: "\\00a0" attr(id);
     }
 
-    a:not([href])[name]:empty:not([title])[data-reedable-link-information-show-title]::after {
+    a:not([href])[name]:not([id]):not([title])[data-reedable-link-information-show-title]::after {
         font-size: inherit;
+        width: auto;
         content: "\\00a0" attr(name);
     }
 
@@ -72,19 +69,19 @@ const LINK_INFORMATION = `
     /* Content and title are both available. Show the title in parentheses. */
     a[href][title][data-reedable-link-information-show-title]::after {
         font-size: max(0.875em, 0.875rem);
+        width: auto;
         content: "\\00a0(" attr(title) ")";
     }
 
-    /* No content but title is provided. Show the title without parentheses. */
-    a[href]:empty[title][data-reedable-link-information-show-title]::after {
+    /* No content or title is provided. Show href if available. */
+    a[href]:not(:has(:not(:empty))):not([title])[data-reedable-link-information-show-title]::after {
         font-size: inherit;
-        content: "\\00a0" attr(title);
-    }
-
-    /* No content, no title. Show href if available */
-    a[href]:empty:not([title])[data-reedable-link-information-show-title]::after {
-        font-size: inherit;
-        content: "\\00a0" attr(href);
+        width: auto;
+        content: "\\00a0(" attr(href) ")";
+        max-width: 12em;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 
@@ -131,6 +128,7 @@ const LINK_INFORMATION_ICON = `
         font-family: "Reedable FA6 Regular", "Reedable FA6 Solid", "Reedable FA6 Brands";
         font-style: normal;
         font-size: 0.875em;
+        width: auto;
         content: "\\f13d"; /* fa-anchor */
     }
 
@@ -140,6 +138,11 @@ const LINK_INFORMATION_ICON = `
         font-family: "Reedable FA6 Regular", "Reedable FA6 Solid", "Reedable FA6 Brands";
         font-style: normal;
         font-size: 0.875em;
+        width: auto;
+    }
+
+    a[data-reedable-link-information-show-icon][href] * {
+        position: initial;
     }
 
     a[data-reedable-link-information-show-icon][href^="#"]::before {

@@ -10,8 +10,7 @@
   "scripts": {
     "test": "jest --coverage",
     "lessc": "build/script/lessc.sh",
-    "showdown": "build/script/showdown.sh",
-    "build": "npm run lessc && npm run showdown && npx webpack --config build/*.config.js",
+    "build": "npm run lessc && npx webpack --config build/*.config.js",
     "prerelease": "npm run build; ./release/prerelease.sh",
     "release": "./release/release.sh"
   },
