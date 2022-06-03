@@ -359,13 +359,25 @@
   font-size: 0.875rem;
   margin: 0;
 }
+.Reedable {
+  /* https://drafts.csswg.org/selectors-4/#relational
+    ul:has(> li.card) {
+        margin-left: 0;
+    }
+    */
+}
 .Reedable .card .tag {
   margin-bottom: 0;
 }
-.Reedable ul.card {
+.Reedable .card .sub-heading {
+  margin-bottom: 0;
+}
+.Reedable ul.card-list {
   margin-left: 0;
 }
-.Reedable ul.card li {
+.Reedable ul.card-list li.card {
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
   list-style-type: none;
   margin-bottom: 1rem;
 }

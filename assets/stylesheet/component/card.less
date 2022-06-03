@@ -9,14 +9,26 @@
         //.heading {
         //}
 
-        //.sub-heading {
-        //}
+        .sub-heading {
+            margin-bottom: 0;
+        }
     }
 
-    ul.card {
+    /* https://drafts.csswg.org/selectors-4/#relational
+
+    We need the separate card-list class due to lack of parent selector.
+    
+    ul:has(> li.card) {
+        margin-left: 0;
+    }
+    */
+
+    ul.card-list {
         margin-left: 0;
 
-        li {
+        li.card {
+            -webkit-column-break-inside: avoid;
+            break-inside: avoid;
             list-style-type: none;
             margin-bottom: 1rem;
         }
