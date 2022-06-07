@@ -351,7 +351,7 @@
   outline: var(--border-thick) solid;
   text-decoration: none;
 }
-.Reedable a.button.Primary {
+.Reedable a.button.primary {
   --background-color-button: var(--color-link);
   --color-button: var(--background-color);
 }
@@ -361,6 +361,9 @@
 }
 .Reedable {
   /* https://drafts.csswg.org/selectors-4/#relational
+
+    We need the separate card-list class due to lack of parent selector.
+    
     ul:has(> li.card) {
         margin-left: 0;
     }

@@ -1,0 +1,57 @@
+extends ../../assets/template/page
+
+block title
+    | Reedable | Docs | Test | Color
+
+block header
+    h1#header-h1.card(tabindex="-1")
+        .tag BETA
+        | Docs | Test | Color
+        .sub-heading This is where we test our color handling
+
+block content
+
+    .sr-only.
+        Sorry, guys. This is where we are testing the handling of colors for 
+        sighted people. I did not bother making this accessible because there 
+        is no content on this page that should be of interest, because... well,
+        there is really no real content here. Thanks for your understanding.
+
+    style.
+        ul.color-strip {
+            break-inside: avoid;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        ul.color-strip li {
+            display: inline-block;
+            height: 4rem;
+            margin: 1rem;
+            padding: 0;
+            width: 4rem;
+        }
+
+        .palette_1 {
+            break-inside: avoid;
+            posiition: relative;
+        }
+
+    .palette_1
+        ul.color-strip
+            li(style="background-color: hsl(0, 100%, 67%)") <!-- red -->
+            li(style="background-color: hsl(30, 100%, 42.5%)")
+            li(style="background-color: hsl(60, 100%, 26.5%)") <!-- yellow -->
+            li(style="background-color: hsl(90, 100%, 29.2%)")
+        ul.color-strip
+            li(style="background-color: hsl(120, 100%, 30.5%)") <!-- green -->
+            li(style="background-color: hsl(150, 100%, 30%)")
+            li(style="background-color: hsl(180, 100%, 28.8%)")
+            li(style="background-color: hsl(210, 100%, 53.8%)")
+        ul.color-strip
+            li(style="background-color: hsl(240, 100%, 73.3%)") <!-- blue -->
+            li(style="background-color: hsl(270, 100%, 69.7%)")
+            li(style="background-color: hsl(300, 100%, 63.3%)")
+            li(style="background-color: hsl(330, 100%, 65.3%)")
