@@ -16,6 +16,9 @@ chrome.runtime.onInstalled.addListener(async () => {
         },
         "linkInformation": {
             "isExpanded": false
+        },
+        "colorOverride": {
+            "isExpanded": false
         }
     };
 
@@ -46,6 +49,21 @@ chrome.runtime.onInstalled.addListener(async () => {
         "showTitle": true,
         "showIcon": true
     };
+
+    const default_colorOverride = {
+        "isEnabled": false, //FIXME set to false
+        "filterInvert": "1",
+        "filterContrast": "200%"
+    };
+
+    const v1_3 = await Sync.get(
+        "reedable",
+        "textSpacing",
+        "fontOverride",
+        "focusIndicator",
+        "linkInformation",
+        "colorOverride"
+    );
 
     const v1_2 = await Sync.get(
         "reedable",
@@ -80,29 +98,38 @@ chrome.runtime.onInstalled.addListener(async () => {
             default_reedable,
             v1_0.Reedable,
             v1_1.reedable,
-            v1_2.reedable
+            v1_2.reedable,
+            v1_3.reedable
         ),
         "textSpacing": Object.assign(
             default_textSpacing,
             v1_0.TextSpacing,
             v1_1.textSpacing,
-            v1_2.textSpacing
+            v1_2.textSpacing,
+            v1_3.textSpacing
         ),
         "fontOverride": Object.assign(
             default_fontOverride,
             v1_0.FontOverride,
             v1_1.fontOverride,
-            v1_2.fontOverride
+            v1_2.fontOverride,
+            v1_3.fontOverride
         ),
         "focusIndicator": Object.assign(
             default_focusIndicator,
             v1_0.FocusIndicator,
             v1_1.focusIndicator,
-            v1_2.focusIndicator
+            v1_2.focusIndicator,
+            v1_3.focusIndicator
         ),
         "linkInformation": Object.assign(
             default_linkInformation,
-            v1_2.linkInformation
+            v1_2.linkInformation,
+            v1_3.linkInformation
+        ),
+        "colorOverride": Object.assign(
+            default_colorOverride,
+            v1_3.colorOverride
         )
     });
 
@@ -119,12 +146,14 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
         focusIndicator,
         fontOverride,
         textSpacing,
-        linkInformation
+        linkInformation,
+        colorOverride
     } = await Sync.get(
         "focusIndicator",
         "fontOverride",
         "textSpacing",
-        "linkInformation"
+        "linkInformation",
+        "colorOverride"
     );
 
     console.log("tabId", activeInfo.tabId);
@@ -132,6 +161,7 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
     console.log("focusIndicator", focusIndicator.isEnabled);
     console.log("textSpacing", textSpacing.isEnabled);
     console.log("linkInformation", linkInformation.isEnabled);
+    console.log("colorOverride", colorOverride.isEnabled);
 
     const tabId = activeInfo.tabId;
 
@@ -211,6 +241,26 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
                 // See ../content/content.js
                 // eslint-disable-next-line no-undef
                 Reedable.LinkInformationEngine.getInstance().stop(document);
+            }
+        });
+    }
+
+    if (colorOverride.isEnabled) {
+        chrome.scripting.executeScript({
+            "target": { "tabId": tabId },
+            "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
+                Reedable.ColorOverrideEngine.getInstance().start(document);
+            }
+        });
+    } else {
+        chrome.scripting.executeScript({
+            "target": { "tabId": tabId },
+            "func": function () {
+                // See ../content/content.js
+                // eslint-disable-next-line no-undef
+                Reedable.ColorOverrideEngine.getInstance().stop(document);
             }
         });
     }

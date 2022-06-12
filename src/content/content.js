@@ -3,14 +3,33 @@ import { TextSpacingEngine } from "./TextSpacingEngine";
 import { FontOverrideEngine } from "./FontOverrideEngine";
 import { FocusIndicatorEngine } from "./FocusIndicatorEngine";
 import { LinkInformationEngine } from "./LinkInformationEngine";
+import { ColorOverrideEngine } from "./ColorOverrideEngine";
 
 window.Reedable = { TextSpacingEngine, FontOverrideEngine, FocusIndicatorEngine, LinkInformationEngine };
 
-Sync.get("textSpacing", "fontOverride", "focusIndicator", "linkInformation").then(
+Sync.get(
+    "textSpacing",
+    "fontOverride",
+    "focusIndicator",
+    "linkInformation",
+    "colorOverride"
+).then(
 
-    ({ textSpacing, fontOverride, focusIndicator, linkInformation }) => {
+    ({
+        textSpacing,
+        fontOverride,
+        focusIndicator,
+        linkInformation,
+        colorOverride
+    }) => {
 
-        console.log({ textSpacing, fontOverride, focusIndicator, linkInformation });
+        console.log({
+            textSpacing,
+            fontOverride,
+            focusIndicator,
+            linkInformation,
+            colorOverride
+        });
 
         if (textSpacing.isEnabled) {
             TextSpacingEngine.getInstance().start(document);
@@ -34,6 +53,12 @@ Sync.get("textSpacing", "fontOverride", "focusIndicator", "linkInformation").the
             LinkInformationEngine.getInstance().start(document);
         } else {
             LinkInformationEngine.getInstance().stop(document);
+        }
+
+        if (colorOverride.isEnabled) {
+            ColorOverrideEngine.getInstance().start(document);
+        } else {
+            ColorOverrideEngine.getInstance().stop(document);
         }
     }
 );

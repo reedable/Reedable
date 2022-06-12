@@ -4,13 +4,16 @@
   "description": "Reedable Chrome Extension",
   "private": true,
   "directories": {
-    "doc": "docs",
     "test": "src"
   },
   "scripts": {
     "test": "jest --coverage",
-    "lessc": "build/script/lessc.sh",
-    "build": "npm run lessc && npx webpack --config build/*.config.js",
+    "compile": "npm run compile-lessc",
+    "compile-lessc": "build/script/lessc.sh",
+    "prebuild": "npm run compile",
+    "build": "npx webpack --config build/*.config.js",
+    "export": "npm run export-macos",
+    "export-macos": "xcrun safari-web-extension-converter ./unpacked --project-location ./workspace --app-name Reedable --bundle-identifier io.github.reedable.Reedable.macos --swift",
     "prerelease": "npm run build; ./release/prerelease.sh",
     "release": "./release/release.sh"
   },
@@ -28,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/reedable/Reedable/issues"
   },
-  "homepage": "https://github.com/reedable/Reedable#readme",
+  "homepage": "https://reedable.github.io/Reedable/",
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.8",
     "@babel/plugin-transform-modules-commonjs": "^7.15.4",
@@ -38,7 +41,6 @@
     "eslint-plugin-jest": "^24.5.2",
     "jest": "^27.2.1",
     "less": "^4.1.2",
-    "showdown": "^2.1.0",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
   },
