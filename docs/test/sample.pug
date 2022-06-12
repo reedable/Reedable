@@ -1,0 +1,54 @@
+extends ../../assets/template/page
+
+block title
+    | Reedable | Docs | Test | Color
+
+block header
+    h1#header-h1.card(tabindex="-1")
+        .tag BETA
+        | Docs | Test | Color
+        .sub-heading This is where we test our color handling
+
+block content
+
+    h1 Test page for Reedable Chrome extension
+
+    p.
+        This page provides some sample HTML code to test the Reedable Chrome extension. There are also links to webpages that were used to test the extension during development.
+
+    h2 Text alignment
+
+    p(style="text-align: justify").
+        Text alignment, in particular, fully justified text is difficult to read by some people. The text should be justified in the direction the language is read. If the language is read from left-to-right, then left justified text is usually easier to read. Right-to-left language, right justification.
+
+    h3 Text align sample pages
+
+    ul
+        li:a(href="https://www.lipsum.com/") Lorem Ipsum - All the facts - Lipsum generator
+
+    h2 Placeholder text
+
+    p.
+        It turns out... placeholder text is impervious to inline styling.  We need to figure out how to adjust the placeholder text... and even rip the thing out and make it a label, if the label does not exist. Looks like we need to inject CSS, according to this page on stackoverflow titled "<a href="https://stackoverflow.com/questions/24545983/change-an-inputs-html5-placeholder-color-with-inline-css">html - Change an input's HTML5 placeholder color with inline CSS - Stack Overflow</a>".
+
+    <label for="placeholder-text-input-0">Greeting</label>
+    <input id="placeholder-text-input-0" type="text" placeholder="Hello, world!">
+
+    h2 Web components
+
+    p.
+        Web components styling is not affected by document's CSS, and their shadowDOM is not exposed to document.querySelectorAll(). We need to traverse shadowDOM with our script.
+
+    <!-- TODO Web component with shadowRoot -->
+
+    h2 Pages with !important DOM
+
+    p(style="line-height: 1 !important; text-align: justify;").
+        Some websites have such invasive CSS DOM that even the inline styling is overridden. (These sites usually use !important to accomplish this.) We need to find a way to identifiy this condition, and somehow
+
+    <!-- TODO link sample web pages ... engadget??? -->
+
+    h2 Tiny text
+
+    p(style="font-size: 6pt").
+        Some sites have this obsession with tiny fonts. Maybe it looks good to them, but many people find it difficult to read.
