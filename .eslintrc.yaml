@@ -19,3 +19,4 @@ extends:
 
 rules:
   import/no-default-export: 2
+  quotes: [2, "double"]

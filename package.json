@@ -7,7 +7,11 @@
     "test": "src"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "clean": "rm -fr reports",
+    "test": "jest",
+    "report": "npm run report-coverage && npm run report-complexity",
+    "report-complexity": "./node_modules/.bin/es6-plato -r -e ./eslintrc.yaml -d ./reports/complexity src",
+    "report-coverage": "jest --coverage",
     "compile": "npm run compile-lessc",
     "compile-lessc": "tools/script/lessc.sh",
     "prebuild": "npm run compile",
@@ -36,6 +40,7 @@
     "@babel/eslint-parser": "^7.15.8",
     "@babel/plugin-transform-modules-commonjs": "^7.15.4",
     "@jest/globals": "^27.2.1",
+    "es6-plato": "^1.2.3",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.5.2",
@@ -47,7 +52,5 @@
   "jest": {
     "testEnvironment": "jsdom",
     "coverageDirectory": "<rootDir>/reports/coverage/"
-  },
-  "dependencies": {
   }
 }
