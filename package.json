@@ -45,7 +45,8 @@
     "webpack-cli": "^4.8.0"
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "coverageDirectory": "<rootDir>/reports/coverage/"
   },
   "dependencies": {
   }
