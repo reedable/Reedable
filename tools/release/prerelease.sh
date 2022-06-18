@@ -7,7 +7,7 @@ target_branch=''
 #++
 # Go to the project root
 
-cd "${pathname}/.." || exit 100
+cd "${pathname}/../.." || exit 100
 
 #++
 # Get the current branch. If we are already on a release branch,
@@ -18,7 +18,7 @@ cd "${pathname}/.." || exit 100
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ "${current_branch}" == "release/"* ]]; then
+if [[ "${current_branch}" == "tools/release/"* ]]; then
     target_branch="${current_branch}"
     git pull origin "${current_branch}"
 fi
@@ -69,7 +69,7 @@ fi
 # be on develop branch, we need to create the new target branch.
 
 if [ -z "${target_branch}" ]; then
-    target_branch="release/${dstamp}"
+    target_branch="tools/release/${dstamp}"
 
     if git rev-parse "${target_branch}" > /dev/null 2>&1; then
         echo "${procname}: ${target_branch} already exists"

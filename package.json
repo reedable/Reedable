@@ -18,8 +18,8 @@
     "build": "npx webpack --config tools/build/*.config.js",
     "export": "npm run export-macos",
     "export-macos": "xcrun safari-web-extension-converter ./unpacked --project-location ./workspace --app-name Reedable --bundle-identifier io.github.reedable.Reedable.macos --swift",
-    "prerelease": "npm run build; ./release/prerelease.sh",
-    "release": "./release/release.sh"
+    "prerelease": "npm run build; ./tools/release/prerelease.sh",
+    "release": "./tools/release/release.sh"
   },
   "repository": {
     "type": "git",
