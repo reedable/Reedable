@@ -5,7 +5,7 @@ module.exports = {
     "entry": "./src/options/options.js",
     "output": {
         "filename": "options.bundle.js",
-        "path": path.join(__dirname, "../unpacked/scripts")
+        "path": path.join(__dirname, "../../unpacked/scripts")
     },
     "optimization": {
         "minimize": false

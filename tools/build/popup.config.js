@@ -5,7 +5,7 @@ module.exports = {
     "entry": "./src/popup/popup.js",
     "output": {
         "filename": "popup.bundle.js",
-        "path": path.join(__dirname, "../unpacked/scripts")
+        "path": path.join(__dirname, "../../unpacked/scripts")
     },
     "optimization": {
         "minimize": false

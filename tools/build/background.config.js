@@ -5,7 +5,7 @@ module.exports = {
     "entry": "./src/background/background.js",
     "output": {
         "filename": "background.bundle.js",
-        "path": path.join(__dirname, "../unpacked/scripts")
+        "path": path.join(__dirname, "../../unpacked/scripts")
     },
     "optimization": {
         "minimize": false
