@@ -9,9 +9,9 @@
   "scripts": {
     "test": "jest --coverage",
     "compile": "npm run compile-lessc",
-    "compile-lessc": "build/script/lessc.sh",
+    "compile-lessc": "tools/script/lessc.sh",
     "prebuild": "npm run compile",
-    "build": "npx webpack --config build/*.config.js",
+    "build": "npx webpack --config tools/build/*.config.js",
     "export": "npm run export-macos",
     "export-macos": "xcrun safari-web-extension-converter ./unpacked --project-location ./workspace --app-name Reedable --bundle-identifier io.github.reedable.Reedable.macos --swift",
     "prerelease": "npm run build; ./release/prerelease.sh",
