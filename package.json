@@ -7,28 +7,29 @@
     "test": "src"
   },
   "scripts": {
-    "clean": "rm -fr reports",
-    "test": "jest",
-    "report": "npm run report-complexity && npm run report-coverage",
-    "report-complexity": "./node_modules/.bin/es6-plato -r -e ./eslintrc.yaml -d ./dist/reports/complexity src",
-    "report-coverage": "jest --coverage",
+    "build": "npm run compile && npm run bundle",
+    "clean": "npx rimraf reports",
     "compile": "npm run compile-lessc",
-    "compile-lessc": "tools/script/lessc.sh",
-    "prebuild": "npm run compile",
-    "build": "npx webpack --config tools/build/*.config.js",
+    "compile-lessc": "npx lessc unpacked/popup/popup.less unpacked/popup/popup.css",
     "export": "npm run export-macos",
     "export-macos": "xcrun safari-web-extension-converter ./unpacked --project-location ./workspace --app-name Reedable --bundle-identifier io.github.reedable.Reedable.macos --swift",
-    "prerelease": "npm run build; ./tools/release/prerelease.sh",
-    "release": "./tools/release/release.sh"
+    "bundle": "npm run bundle-webpack",
+    "bundle-webpack": "npx webpack --config tools/package/*.config.js",
+    "prerelease": "npm run clean && npm run build && ./tools/release/prerelease.sh",
+    "release": "./tools/release/release.sh",
+    "report": "npm run report-complexity && npm run report-coverage",
+    "report-complexity": "npx es6-plato -r -e ./eslintrc.yaml -d ./dist/reports/complexity src",
+    "report-coverage": "npx jest --coverage",
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reedable/Reedable.git"
   },
   "keywords": [
-    "Accesibility",
+    "accessibility",
     "Chrome",
-    "Extension"
+    "extension"
   ],
   "author": "Abraham Reed",
   "license": "GPL-3.0",
@@ -46,6 +47,7 @@
     "eslint-plugin-jest": "^24.5.2",
     "jest": "^27.2.1",
     "less": "^4.1.2",
+    "rimraf": "^3.0.2",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0"
   },

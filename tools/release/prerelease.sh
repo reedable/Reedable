@@ -69,7 +69,7 @@ fi
 # be on develop branch, we need to create the new target branch.
 
 if [ -z "${target_branch}" ]; then
-    target_branch="tools/release/${dstamp}"
+    target_branch="release/${dstamp}"
 
     if git rev-parse "${target_branch}" > /dev/null 2>&1; then
         echo "${procname}: ${target_branch} already exists"
