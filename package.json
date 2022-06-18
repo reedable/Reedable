@@ -1,26 +1,29 @@
 {
   "name": "reedable",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Reedable Chrome Extension",
   "private": true,
   "directories": {
     "test": "src"
   },
   "scripts": {
-    "build": "npm run compile && npm run bundle",
-    "clean": "npx rimraf reports",
-    "compile": "npm run compile-lessc",
-    "compile-lessc": "npx lessc unpacked/popup/popup.less unpacked/popup/popup.css",
-    "export": "npm run export-macos",
-    "export-macos": "xcrun safari-web-extension-converter ./unpacked --project-location ./workspace --app-name Reedable --bundle-identifier io.github.reedable.Reedable.macos --swift",
-    "bundle": "npm run bundle-webpack",
-    "bundle-webpack": "npx webpack --config tools/package/*.config.js",
-    "prerelease": "npm run clean && npm run build && ./tools/release/prerelease.sh",
-    "release": "./tools/release/release.sh",
-    "report": "npm run report-complexity && npm run report-coverage",
-    "report-complexity": "npx es6-plato -r -e ./eslintrc.yaml -d ./dist/reports/complexity src",
-    "report-coverage": "npx jest --coverage",
-    "test": "npx jest"
+    "clean"   : "npx rimraf reports",
+    "test"    : "npx jest",
+    "compile" : "npm run compile-lessc",
+    "bundle"  : "npm run bundle-webpack",
+    "build"   : "npm run compile && npm run bundle",
+    "package" : "npm run clean && npm run build && ./tools/release/package.sh",
+    "release" : "./tools/release/release.sh",
+    "report"  : "npm run report-complexity && npm run report-coverage",
+    "export"  : "npm run export-macos",
+
+    "-- Keep the rest of the scripts sorted in alphabetical order --": "",
+
+    "bundle-webpack" : "npx webpack --config tools/bundle/*.config.js",
+    "compile-lessc" : "npx lessc unpacked/popup/popup.less unpacked/popup/popup.css",
+    "export-macos"  : "xcrun safari-web-extension-converter ./unpacked --project-location ./workspace --app-name Reedable --bundle-identifier io.github.reedable.Reedable.macos --swift",
+    "report-complexity" : "npx es6-plato -r -e ./eslintrc.yaml -d ./dist/reports/complexity src",
+    "report-coverage"   : "npx jest --coverage"
   },
   "repository": {
     "type": "git",
