@@ -13,7 +13,7 @@ cd "${pathname}/../.." || exit 100
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ ! "${current_branch}" == "tools/release/"* ]]; then
+if [[ ! "${current_branch}" == "release/"* ]]; then
     echo "${procname}: ${current_branch} is not a release branch"
     exit 210
 fi
