@@ -1,5 +1,5 @@
-import {Accordion} from "../../modules/Reedable-core/ui/widgets/Accordion";
-import {Debounce} from "../../modules/Reedable-core/Debounce";
+import {Accordion} from "../core/ui/widgets/Accordion";
+import {Debounce} from "../core/Debounce";
 
 export class FocusIndicatorAccordion extends Accordion {
 

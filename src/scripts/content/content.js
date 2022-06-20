@@ -1,4 +1,4 @@
-import { Sync } from "../../modules/Reedable-core/Storage";
+import { Sync } from "../core/Storage";
 import { TextSpacingEngine } from "./TextSpacingEngine";
 import { FontOverrideEngine } from "./FontOverrideEngine";
 import { FocusIndicatorEngine } from "./FocusIndicatorEngine";

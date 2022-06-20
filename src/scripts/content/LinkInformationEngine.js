@@ -1,5 +1,5 @@
-import { Engine } from "../../modules/Reedable-core/content/Engine";
-//import { DOM } from "../../modules/Reedable-core/ui/DOM";
+import { Engine } from "../core/content/Engine";
+//import { DOM } from "../core/ui/DOM";
 
 const FONT_FACE_CSS = `
     /* Load Font Awesome 6 in Reedable namespace to avoid collision. */

@@ -1,4 +1,4 @@
-import { Sync } from "../../modules/Reedable-core/Storage";
+import { Sync } from "../core/Storage";
 
 const manifest = chrome.runtime.getManifest();
 

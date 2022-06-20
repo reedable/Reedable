@@ -1,5 +1,5 @@
-import { Engine } from "../../modules/Reedable-core/content/Engine";
-import {Sync} from "../../modules/Reedable-core/Storage";
+import { Engine } from "../core/content/Engine";
+import {Sync} from "../core/Storage";
 
 export class ColorOverrideEngine extends Engine {
 

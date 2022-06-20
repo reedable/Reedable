@@ -2,10 +2,10 @@ const path = require("path");
 
 module.exports = {
     "mode": "none",
-    "entry": "./src/background/background.js",
+    "entry": "./src/scripts/background/background.js",
     "output": {
         "filename": "background.bundle.js",
-        "path": path.join(__dirname, "../../unpacked/scripts")
+        "path": path.join(__dirname, "../../target/scripts")
     },
     "optimization": {
         "minimize": false
