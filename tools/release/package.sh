@@ -18,7 +18,7 @@ cd "${pathname}/../.." || exit 100
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ "${current_branch}" == "tools/release/"* ]]; then
+if [[ "${current_branch}" == "release/"* ]]; then
     target_branch="${current_branch}"
     git pull origin "${current_branch}"
 fi
@@ -43,7 +43,7 @@ fi
 # Check to see if the version number in the manifest.json has been
 # updated.
 
-version=$(grep '"version"' unpacked/manifest.json |\
+version=$(grep '"version"' target/manifest.json |\
     sed -e 's/[",]//g' |\
     awk '{printf("v%s", $2)}')
 
@@ -60,7 +60,7 @@ package_version=$(grep '"version"' package.json |\
     awk '{printf("v%s", $2)}')
 
 if [ "${version}" != "${package_version}" ] ; then
-    echo "${procname}: unpacked/manifest.json and package.json version conflict"
+    echo "${procname}: target/manifest.json and package.json version conflict"
     exit 203
 fi
 
@@ -87,7 +87,7 @@ fi
 #
 
 mkdir -p dist
-zip -r "dist/Reedable-${dstamp}.zip" unpacked >/dev/null 2>&1
+zip -r "dist/Reedable-${dstamp}.zip" target >/dev/null 2>&1
 
 cat<<EOD
 
