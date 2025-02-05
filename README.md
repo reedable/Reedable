@@ -1,19 +1,19 @@
 # Reedable Chrome Extension
 
 We declare a thumb war against the self-centered, self-absorbed, 
-self-grrrrr-whatever web designers, and take back the world wide web for the
+self-grrrrr-whatever web designers, and take back the world-wide web for the
 rest of us.
 
 Tiny fonts, tightly positioned text, elegant typeface that no one can see and
 read... If you have experienced any of these things, we are here to help.
 
-Override the typeface. Tweak that text space. (Oh, I just rhymed.) Reedable
-Chrome Extension provides the reader (that's you) the freedom to choose.
+Override the typeface. Tweak that text space. (Oh, I just rhymed.) Reedable.
+Chrome Extension provides the reader (that's you) with the freedom to choose.
 
 
 ## Boring stuff...
 
-Reedable Chrome Extension is a Free and Open Source Software (FOSS), and its
+Reedable Chrome Extension is a free and open source software (FOSS), and its
 license is provided in the accompanying LICENSE file.
 
 Reedable Chrome Extension depends on the following third-party libraries, which
