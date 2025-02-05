@@ -13,7 +13,7 @@ Chrome Extension provides the reader (that's you) with the freedom to choose.
 
 ## Boring stuff...
 
-Reedable Chrome Extension is a free and open source software (FOSS), and its
+Reedable Chrome Extension is a free and open-source software (FOSS), and its
 license is provided in the accompanying LICENSE file.
 
 Reedable Chrome Extension depends on the following third-party libraries, which
@@ -23,12 +23,14 @@ and conditions do not override those of the third-party library licenses.
 What this means is that: Above all, do not be an asshole. Be respectful.
 Someone wasted their time, so you do not have to.
 
+
 ### Fontawesome
 
 Fontawesome is used to render icons on the extension's popup and options user
 interface, and governed by the following license.
 
 - https://fontawesome.com/v4.7/license/
+
 
 ### OpenDyslexic
 
@@ -61,6 +63,7 @@ https://reedable.github.io/Reedable/
 - TODO Consider adding minimum text color contrast feature
 - TODO Consider adding color inversion feature
 
+
 ### Popup
 
 - TODO Refactor the UI script code, so it is unit testable
@@ -68,9 +71,11 @@ https://reedable.github.io/Reedable/
 - TODO Decide whether preview panel should be added to the popup HTML?
 - TODO Decide whether to add error handling to popup form input.
 
+
 ### Options
 
 - TODO Add options panel to restore all values to the default.
+
 
 ### Testing, samples, and documentation
 
